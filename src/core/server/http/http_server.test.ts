@@ -93,7 +93,7 @@ beforeEach(() => {
     ssl: {
       enabled: true,
       certificate,
-      cipherSuites: ['cipherSuite'],
+      cipherSuites: ['TLS_AES_256_GCM_SHA384'],
       getSecureOptions: () => 0,
       key,
       redirectHttpFromPort: config.port + 1,
@@ -919,7 +919,7 @@ describe('conditional compression', () => {
         .expect(200);
 
       expect(response.header.connection).toBe('keep-alive');
-      expect(response.header['keep-alive']).toBe('timeout=100');
+      expect(response.header['keep-alive']).toBe('timeout=100, timeout=100');
     });
 
     it('default headers', async () => {
