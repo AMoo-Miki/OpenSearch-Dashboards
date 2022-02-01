@@ -30,7 +30,7 @@
  * GitHub history for details.
  */
 
-import uuid from 'uuid';
+import { v1 as uuidv1 } from 'uuid';
 import _ from 'lodash';
 import { newMetricAggFn } from './new_metric_agg_fn';
 import { STACKED_OPTIONS } from '../../visualizations/constants';
@@ -38,7 +38,7 @@ import { STACKED_OPTIONS } from '../../visualizations/constants';
 export const newSeriesFn = (obj = {}) => {
   return _.assign(
     {
-      id: uuid.v1(),
+      id: uuidv1(),
       color: '#68BC00',
       split_mode: 'everything',
       metrics: [newMetricAggFn()],

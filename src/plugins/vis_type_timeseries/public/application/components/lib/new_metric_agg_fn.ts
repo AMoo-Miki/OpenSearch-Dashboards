@@ -30,12 +30,12 @@
  * GitHub history for details.
  */
 
-import uuid from 'uuid';
+import { v1 as uuidv1 } from 'uuid';
 import { MetricsItemsSchema } from '../../../../common/types';
 
 export const newMetricAggFn = (): MetricsItemsSchema => {
   return {
-    id: uuid.v1(),
+    id: uuidv1(),
     type: 'count',
   };
 };

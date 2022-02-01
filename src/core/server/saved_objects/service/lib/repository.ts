@@ -31,7 +31,7 @@
  */
 
 import { omit } from 'lodash';
-import uuid from 'uuid';
+import { v1 as uuidv1 } from 'uuid';
 import {
   OpenSearchClient,
   DeleteDocumentResponse,
@@ -361,7 +361,7 @@ export class SavedObjectsRepository {
       const method = object.id && overwrite ? 'index' : 'create';
       const requiresNamespacesCheck = object.id && this._registry.isMultiNamespace(object.type);
 
-      if (object.id == null) object.id = uuid.v1();
+      if (object.id == null) object.id = uuidv1();
 
       return {
         tag: 'Right' as 'Right',
