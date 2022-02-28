@@ -32,7 +32,7 @@
 
 import { i18n } from '@osd/i18n';
 import { memoize, noop } from 'lodash';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import { FieldFormat, OSD_FIELD_TYPES, FIELD_FORMAT_IDS } from '../../../common';
 import { TextContextTypeConvert } from '../../../common/field_formats/types';
 

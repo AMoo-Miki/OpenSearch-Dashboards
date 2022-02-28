@@ -59,7 +59,7 @@ describe('timeTicks', () => {
         moment.tz.setDefault(tz);
       });
 
-      it('should return nice daily ticks', () => {
+      it(`should return nice daily ticks ${tz}`, () => {
         scale.domain([
           moment('2019-04-04 00:00:00').valueOf(),
           moment('2019-04-08 00:00:00').valueOf(),

@@ -52,6 +52,11 @@
   }
 }
 
+.euiButtonIcon--auto {
+  height: auto;
+  width: auto;
+}
+
 .euiButtonIcon--xSmall {
   height: $euiButtonHeightXSmall;
   width: $euiButtonHeightXSmall;

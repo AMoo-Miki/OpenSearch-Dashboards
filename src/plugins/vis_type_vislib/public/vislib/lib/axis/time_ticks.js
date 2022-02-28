@@ -30,7 +30,7 @@
  * GitHub history for details.
  */
 
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 export const timeTicks = (scale) => {
   // on a time domain shift it to have the buckets start at nice points in time (e.g. at the start of the day) in UTC

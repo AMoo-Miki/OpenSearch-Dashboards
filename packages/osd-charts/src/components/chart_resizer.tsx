@@ -20,7 +20,7 @@
 import React, { RefObject } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
-import ResizeObserver from 'resize-observer-polyfill';
+import ResizeObserver from '@4lolo/resize-observer-polyfill';
 import { debounce } from 'ts-debounce';
 
 import { updateParentDimensions } from '../state/actions/chart_settings';

@@ -30,7 +30,7 @@
  * GitHub history for details.
  */
 
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 // eslint-disable-next-line @osd/eslint/no-restricted-paths
 import { attachMetaData } from '../../../../src/core/server/legacy/logging/legacy_logging_server';

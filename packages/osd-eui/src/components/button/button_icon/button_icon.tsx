@@ -135,6 +135,7 @@ const sizeToClassNameMap = {
   xs: 'euiButtonIcon--xSmall',
   s: 'euiButtonIcon--small',
   m: 'euiButtonIcon--medium',
+  auto: 'euiButtonIcon--auto',
 };
 
 export type EuiButtonIconSizes = keyof typeof sizeToClassNameMap;

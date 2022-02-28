@@ -97,6 +97,10 @@ export default {
   testPathIgnorePatterns: [
     '<rootDir>/packages/osd-ui-framework/(dist|doc_site)/',
     '<rootDir>/packages/osd-pm/dist/',
+    '<rootDir>/packages/osd-eui/',
+    '<rootDir>/packages/osd-eui/(dist|es|lib|types|test-env)/',
+    '<rootDir>/packages/osd-charts/',
+    '<rootDir>/packages/osd-charts/(dist|integration)/',
     `${RESERVED_DIR_JEST_INTEGRATION_TESTS}/`,
   ],
   transform: {
