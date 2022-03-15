@@ -30,11 +30,11 @@
 
 import { findTestSubject } from '@elastic/eui/lib/test';
 import React from 'react';
+import SizeMe from 'react-sizeme';
 import { skip } from 'rxjs/operators';
 import { mount } from 'enzyme';
 import { I18nProvider } from '@osd/i18n/react';
-import sizeMe from 'react-sizeme';
-import { nextTick } from 'test_utils/enzyme_helpers';
+import { nextTick } from '@osd/test/jest';
 import { DashboardViewport, DashboardViewportProps } from './dashboard_viewport';
 import { DashboardContainer, DashboardContainerOptions } from '../dashboard_container';
 import { getSampleDashboardInput } from '../../test_helpers';
@@ -46,7 +46,7 @@ import { OpenSearchDashboardsContextProvider } from '../../../../../opensearch_d
 import { embeddablePluginMock } from 'src/plugins/embeddable/public/mocks';
 import { applicationServiceMock } from '../../../../../../core/public/mocks';
 
-sizeMe.noPlaceholders = true;
+SizeMe.noPlaceholders = true;
 
 let dashboardContainer: DashboardContainer | undefined;
 
