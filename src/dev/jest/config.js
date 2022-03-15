@@ -90,7 +90,7 @@ export default {
     '<rootDir>/src/plugins/maps_legacy',
     '<rootDir>/src/plugins/region_map',
   ],
-  testEnvironment: 'jest-environment-jsdom-thirteen',
+  testEnvironment: 'jest-environment-jsdom',
   testMatch: ['**/*.test.{js,mjs,ts,tsx}'],
   testPathIgnorePatterns: [
     '<rootDir>/packages/osd-ui-framework/(dist|doc_site)/',
@@ -107,6 +107,8 @@ export default {
     '<rootDir>/packages/osd-charts/',
     `${RESERVED_DIR_JEST_INTEGRATION_TESTS}/`,
   ],
+  // angular is not compatible with the default circus runner
+  testRunner: 'jest-jasmine2',
   transform: {
     '^.+\\.(js|tsx?)$': '<rootDir>/src/dev/jest/babel_transform.js',
     '^.+\\.txt?$': 'jest-raw-loader',

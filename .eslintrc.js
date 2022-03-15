@@ -542,7 +542,7 @@ module.exports = {
     {
       files: ['**/*.test.{js,mjs,ts,tsx}'],
       rules: {
-        'jest/valid-describe': 'error',
+        'jest/valid-describe-callback': 'error',
       },
     },
 
@@ -741,6 +741,13 @@ module.exports = {
             patterns: ['lodash/*', '!lodash/fp'],
           },
         ],
+      },
+    },
+    {
+      files: ['cypress/**/*.js'],
+      rules: {
+        'import/no-unresolved': 'off',
+        'no-undef': 'off',
       },
     },
   ],
