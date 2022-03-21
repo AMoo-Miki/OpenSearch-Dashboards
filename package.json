@@ -107,7 +107,7 @@
   "dependencies": {
     "@elastic/datemath": "5.0.3",
     "@elastic/elasticsearch": "7.10.0-rc.1",
-    "@elastic/eui": "29.3.2",
+    "@elastic/eui": "34.6.0",
     "@elastic/good": "^9.0.1-kibana3",
     "@elastic/numeral": "^2.5.0",
     "@elastic/request-crypto": "2.0.0",
@@ -206,12 +206,13 @@
     "yauzl": "^2.10.0"
   },
   "devDependencies": {
+    "@4lolo/resize-observer-polyfill": "^1.5.2",
     "@babel/core": "^7.16.5",
     "@babel/parser": "^7.16.6",
     "@babel/register": "^7.16.5",
     "@babel/types": "^7.16.0",
     "@elastic/apm-rum": "^5.6.1",
-    "@elastic/charts": "23.2.2",
+    "@elastic/charts": "31.1.0",
     "@elastic/ems-client": "7.10.0",
     "@elastic/eslint-config-kibana": "0.15.0",
     "@elastic/eslint-plugin-eui": "0.0.2",
@@ -425,7 +426,6 @@
     "redux": "^4.0.5",
     "regenerate": "^1.4.0",
     "reselect": "^4.0.0",
-    "resize-observer-polyfill": "^1.5.0",
     "sass-lint": "^1.12.1",
     "selenium-webdriver": "^4.0.0-alpha.7",
     "simple-git": "1.116.0",
