@@ -1,0 +1,16 @@
+{
+  "name": "lic-update",
+  "version": "1.0.0",
+  "description": "",
+  "main": "check.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "async": "^3.2.3",
+    "fs-extra": "^10.0.1"
+  }
+}
