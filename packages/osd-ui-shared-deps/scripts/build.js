@@ -91,7 +91,7 @@ run(
       throw createFailError(
         `webpack failure in about ${took} seconds\n${stats.toString({
           colors: true,
-          ...Stats.presetToOptions('minimal'),
+          //...Stats.presetToOptions('minimal'),
         })}`
       );
     };

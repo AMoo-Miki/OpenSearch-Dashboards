@@ -49,14 +49,13 @@ export function getWebpackConfig(bundle: Bundle, bundleRefs: BundleRefs, worker:
   const ENTRY_CREATOR = require.resolve('./entry_point_creator');
 
   const commonConfig: webpack.Configuration = {
-    node: { fs: 'empty' },
     context: bundle.contextDir,
     cache: true,
     entry: {
       [bundle.id]: ENTRY_CREATOR,
     },
 
-    devtool: worker.dist ? false : '#cheap-source-map',
+    devtool: worker.dist ? false : 'cheap-source-map',
     profile: worker.profileWebpack,
 
     output: {
@@ -68,11 +67,11 @@ export function getWebpackConfig(bundle: Bundle, bundleRefs: BundleRefs, worker:
           bundle.sourceRoot,
           info.absoluteResourcePath
         )}${info.query}`,
-      jsonpFunction: `${bundle.id}_bundle_jsonpfunction`,
+      chunkLoadingGlobal: `${bundle.id}_bundle_jsonpfunction`,
     },
 
     optimization: {
-      noEmitOnErrors: true,
+      emitOnErrors: false,
     },
 
     externals: [UiSharedDeps.externals],
@@ -229,6 +228,9 @@ export function getWebpackConfig(bundle: Bundle, bundleRefs: BundleRefs, worker:
       alias: {
         tinymath: require.resolve('tinymath/lib/tinymath.es5.js'),
         core_app_image_assets: Path.resolve(worker.repoRoot, 'src/core/public/core_app/images'),
+      },
+      fallback: {
+        fs: false,
       },
     },
 

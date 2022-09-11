@@ -49,7 +49,7 @@ exports.getWebpackConfig = ({ dev = false } = {}) => ({
     'osd-ui-shared-deps.v8.light': ['@elastic/eui/dist/eui_theme_amsterdam_light.css'],
   },
   context: __dirname,
-  devtool: dev ? '#cheap-source-map' : false,
+  devtool: dev ? 'cheap-source-map' : false,
   output: {
     path: UiSharedDeps.distDir,
     filename: '[name].js',
@@ -58,7 +58,6 @@ exports.getWebpackConfig = ({ dev = false } = {}) => ({
       `osd-ui-shared-deps/${Path.relative(REPO_ROOT, info.absoluteResourcePath)}`,
     library: '__osdSharedDeps__',
   },
-
   module: {
     noParse: [MOMENT_SRC],
     rules: [
@@ -118,7 +117,7 @@ exports.getWebpackConfig = ({ dev = false } = {}) => ({
   },
 
   optimization: {
-    noEmitOnErrors: true,
+    emitOnErrors: false,
     splitChunks: {
       cacheGroups: {
         'osd-ui-shared-deps.@elastic': {
@@ -150,13 +149,13 @@ exports.getWebpackConfig = ({ dev = false } = {}) => ({
       : [
           new CompressionPlugin({
             algorithm: 'brotliCompress',
-            filename: '[path].br',
+            filename: '[path][base].br',
             test: /\.(js|css)$/,
             cache: false,
           }),
           new CompressionPlugin({
             algorithm: 'gzip',
-            filename: '[path].gz',
+            filename: '[path][base].gz',
             test: /\.(js|css)$/,
             cache: false,
           }),

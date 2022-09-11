@@ -54,7 +54,7 @@ const STATS_WARNINGS_FILTER = new RegExp(['(export .* was not found in)'].join('
 
 export function failedStatsToErrorMessage(stats: webpack.Stats) {
   const details = stats.toString({
-    ...Stats.presetToOptions('minimal'),
+    //...Stats.presetToOptions('minimal'),
     colors: true,
     warningsFilter: STATS_WARNINGS_FILTER,
     errors: true,
