@@ -4,6 +4,9 @@
  * The OpenSearch Contributors require contributions made to
  * this file be licensed under the Apache-2.0 license or a
  * compatible open source license.
+ *
+ * Any modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
  */
 
 /*
@@ -25,16 +28,13 @@
  * under the License.
  */
 
-/*
- * Modifications Copyright OpenSearch Contributors. See
- * GitHub history for details.
- */
-
-import { normalize } from 'path';
+import { normalize, posix } from 'path';
 
 export function normalizePath(path: string) {
+  // `normalize` in path-browserify is an implementation of `posix.normalize`
+  const normalizeFunc = posix?.normalize || normalize;
   // resolve ../ within the path
-  const normalizedPath = normalize(path);
+  const normalizedPath = normalizeFunc(path);
   // strip any leading slashes and dots and replace with single leading slash
   return normalizedPath.replace(/(\.?\.?\/?)*/, '/');
 }

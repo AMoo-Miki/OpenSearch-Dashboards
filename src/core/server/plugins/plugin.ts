@@ -4,6 +4,9 @@
  * The OpenSearch Contributors require contributions made to
  * this file be licensed under the Apache-2.0 license or a
  * compatible open source license.
+ *
+ * Any modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
  */
 
 /*
@@ -25,12 +28,7 @@
  * under the License.
  */
 
-/*
- * Modifications Copyright OpenSearch Contributors. See
- * GitHub history for details.
- */
-
-import { join } from 'path';
+import { posix } from 'path';
 import typeDetect from 'type-detect';
 import { Subject } from 'rxjs';
 import { first } from 'rxjs/operators';
@@ -46,6 +44,8 @@ import {
   PluginConfigDescriptor,
 } from './types';
 import { CoreSetup, CoreStart } from '..';
+
+const { join } = posix;
 
 /**
  * Lightweight wrapper around discovered plugin that is responsible for instantiating

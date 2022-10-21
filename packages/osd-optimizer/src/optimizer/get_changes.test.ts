@@ -4,6 +4,9 @@
  * The OpenSearch Contributors require contributions made to
  * this file be licensed under the Apache-2.0 license or a
  * compatible open source license.
+ *
+ * Any modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
  */
 
 /*
@@ -25,14 +28,12 @@
  * under the License.
  */
 
-/*
- * Modifications Copyright OpenSearch Contributors. See
- * GitHub history for details.
- */
+import path from 'path';
 
 jest.mock('execa');
 
 import { getChanges } from './get_changes';
+import { standardize } from '@osd/dev-utils';
 
 const execa: jest.Mock = jest.requireMock('execa');
 
@@ -58,12 +59,16 @@ it('parses git ls-files output', async () => {
     };
   });
 
+  const rootPath = path.resolve('/foo/bar/x/osd-optimizer') + path.sep;
+  const srcPath = path.join(rootPath, 'src') + path.sep;
+  const commonPath = path.join(srcPath, 'common') + path.sep;
+
   await expect(getChanges('/foo/bar/x')).resolves.toMatchInlineSnapshot(`
     Map {
-      "/foo/bar/x/osd-optimizer/package.json" => "modified",
-      "/foo/bar/x/osd-optimizer/src/common/bundle.ts" => "modified",
-      "/foo/bar/x/osd-optimizer/src/common/bundles.ts" => "deleted",
-      "/foo/bar/x/osd-optimizer/src/get_bundle_definitions.test.ts" => "deleted",
+      "${standardize(rootPath, false, true)}package.json" => "modified",
+      "${standardize(commonPath, false, true)}bundle.ts" => "modified",
+      "${standardize(commonPath, false, true)}bundles.ts" => "deleted",
+      "${standardize(srcPath, false, true)}get_bundle_definitions.test.ts" => "deleted",
     }
   `);
 });
