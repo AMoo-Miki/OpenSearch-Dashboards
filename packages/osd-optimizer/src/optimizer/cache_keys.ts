@@ -46,7 +46,7 @@ import { getChanges } from './get_changes';
 import { OptimizerConfig } from './optimizer_config';
 
 const OPTIMIZER_DIR = dirname(require.resolve('../../package.json'));
-const RELATIVE_DIR = relativeToRepoRoot(OPTIMIZER_DIR);
+const RELATIVE_DIR = relativeToRepoRoot(OPTIMIZER_DIR)!;
 
 export function diffCacheKey(expected?: unknown, actual?: unknown) {
   const expectedJson = jsonStable(expected, {
