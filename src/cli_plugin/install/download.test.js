@@ -4,6 +4,9 @@
  * The OpenSearch Contributors require contributions made to
  * this file be licensed under the Apache-2.0 license or a
  * compatible open source license.
+ *
+ * Any modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
  */
 
 /*
@@ -25,11 +28,6 @@
  * under the License.
  */
 
-/*
- * Modifications Copyright OpenSearch Contributors. See
- * GitHub history for details.
- */
-
 import Fs from 'fs';
 import { join } from 'path';
 import http from 'http';
@@ -42,6 +40,7 @@ import del from 'del';
 import { Logger } from '../lib/logger';
 import { UnsupportedProtocolError } from '../lib/errors';
 import { download, _downloadSingle, _getFilePath, _checkFilePathDeprecation } from './download';
+import { PROCESS_WORKING_DIR } from '@osd/cross-platform';
 
 describe('opensearchDashboards cli', function () {
   describe('plugin downloader', function () {
@@ -75,14 +74,14 @@ describe('opensearchDashboards cli', function () {
     beforeEach(function () {
       sinon.stub(logger, 'log');
       sinon.stub(logger, 'error');
-      del.sync(testWorkingPath);
+      del.sync(testWorkingPath, { cwd: PROCESS_WORKING_DIR });
       Fs.mkdirSync(testWorkingPath, { recursive: true });
     });
 
     afterEach(function () {
       logger.log.restore();
       logger.error.restore();
-      del.sync(testWorkingPath);
+      del.sync(testWorkingPath, { cwd: PROCESS_WORKING_DIR });
     });
 
     describe('_downloadSingle', function () {

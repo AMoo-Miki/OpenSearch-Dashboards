@@ -4,6 +4,9 @@
  * The OpenSearch Contributors require contributions made to
  * this file be licensed under the Apache-2.0 license or a
  * compatible open source license.
+ *
+ * Any modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
  */
 
 /*
@@ -25,16 +28,12 @@
  * under the License.
  */
 
-/*
- * Modifications Copyright OpenSearch Contributors. See
- * GitHub history for details.
- */
-
 import Path from 'path';
 
 // @ts-expect-error no types available
 import * as LmdbStore from 'lmdb-store';
 import { REPO_ROOT, UPSTREAM_BRANCH } from '@osd/dev-utils';
+import { getMatchingRoot } from '@osd/cross-platform';
 
 // This is to enable parallel jobs on CI.
 const CACHE_DIR = process.env.CACHE_DIR
@@ -139,7 +138,19 @@ export class Cache {
   }
 
   private getKey(path: string) {
-    return `${this.prefix}${path}`;
+    const resolvedPath = Path.resolve(path);
+    /* Try to find the root that is the parent to `path` so we can make a nimble
+     * and unique key based on the relative path. If A root was not found, just
+     * use any of the roots; the key would just be long.
+     */
+    const pathRoot = getMatchingRoot(resolvedPath, this.pathRoots) || this.pathRoots[0];
+
+    const normalizedPath =
+      Path.sep !== '/'
+        ? Path.relative(pathRoot, resolvedPath).split(Path.sep).join('/')
+        : Path.relative(pathRoot, resolvedPath);
+
+    return `${this.prefix}${normalizedPath}`;
   }
 
   private async pruneOldKeys() {

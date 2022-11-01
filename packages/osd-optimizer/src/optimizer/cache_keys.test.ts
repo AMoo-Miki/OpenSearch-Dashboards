@@ -4,6 +4,9 @@
  * The OpenSearch Contributors require contributions made to
  * this file be licensed under the Apache-2.0 license or a
  * compatible open source license.
+ *
+ * Any modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
  */
 
 /*
@@ -25,14 +28,8 @@
  * under the License.
  */
 
-/*
- * Modifications Copyright OpenSearch Contributors. See
- * GitHub history for details.
- */
-
-import Path from 'path';
-
-import jestDiff from 'jest-diff';
+import fs from 'fs/promises';
+import { diff } from 'jest-diff';
 import { REPO_ROOT } from '@osd/utils';
 import { createAbsolutePathSerializer } from '@osd/dev-utils';
 
@@ -53,14 +50,6 @@ jest.mock('./get_mtimes.ts', () => ({
 }));
 
 jest.mock('execa');
-
-jest.mock('fs', () => {
-  const realFs = jest.requireActual('fs');
-  return {
-    ...realFs,
-    readFile: jest.fn(realFs.readFile),
-  };
-});
 
 expect.addSnapshotSerializer(createAbsolutePathSerializer());
 
@@ -85,17 +74,9 @@ jest.requireMock('execa').mockImplementation(async (cmd: string, args: string[],
 
 describe('getOptimizerCacheKey()', () => {
   it('uses latest commit, bootstrap cache, and changed files to create unique value', async () => {
-    jest
-      .requireMock('fs')
-      .readFile.mockImplementation(
-        (path: string, enc: string, cb: (err: null, file: string) => void) => {
-          expect(path).toBe(
-            Path.resolve(REPO_ROOT, 'packages/osd-optimizer/target/.bootstrap-cache')
-          );
-          expect(enc).toBe('utf8');
-          cb(null, '<bootstrap cache>');
-        }
-      );
+    const mockFSReadFileAsync = jest
+      .spyOn(fs, 'readFile')
+      .mockReturnValue(Promise.resolve('<bootstrap cache>'));
 
     const config = OptimizerConfig.create({
       repoRoot: REPO_ROOT,
@@ -124,6 +105,8 @@ describe('getOptimizerCacheKey()', () => {
               },
             }
           `);
+
+    mockFSReadFileAsync.mockRestore();
   });
 });
 
@@ -187,7 +170,7 @@ describe('diffCacheKey()', () => {
 
 describe('reformatJestDiff()', () => {
   it('reformats large jestDiff output to focus on the changed lines', () => {
-    const diff = jestDiff(
+    const jestDiff = diff(
       {
         a: ['1', '1', '1', '1', '1', '1', '1', '2', '1', '1', '1', '1', '1', '1', '1', '1', '1'],
       },
@@ -196,7 +179,7 @@ describe('reformatJestDiff()', () => {
       }
     );
 
-    expect(reformatJestDiff(diff)).toMatchInlineSnapshot(`
+    expect(reformatJestDiff(jestDiff)).toMatchInlineSnapshot(`
       "[32m- Expected[39m
       [31m+ Received[39m
 

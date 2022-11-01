@@ -4,6 +4,9 @@
  * The OpenSearch Contributors require contributions made to
  * this file be licensed under the Apache-2.0 license or a
  * compatible open source license.
+ *
+ * Any modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
  */
 
 /*
@@ -25,17 +28,12 @@
  * under the License.
  */
 
-/*
- * Modifications Copyright OpenSearch Contributors. See
- * GitHub history for details.
- */
-
 import Path from 'path';
 import Fs from 'fs';
 
 import execa from 'execa';
-import { standardize } from '@osd/cross-platform';
-import { REPO_ROOT, createStripAnsiSerializer, createReplaceSerializer } from '@osd/dev-utils';
+import { REPO_ROOT, standardize } from '@osd/cross-platform';
+import { createStripAnsiSerializer, createReplaceSerializer } from '@osd/dev-utils';
 import extract from 'extract-zip';
 import del from 'del';
 import globby from 'globby';
@@ -103,13 +101,12 @@ it('builds a generated plugin into a viable archive', async () => {
      info running @osd/optimizer
      │ info initialized, 0 bundles cached
      │ info starting worker [1 bundle]
-     │ warn worker stderr Browserslist: caniuse-lite is outdated. Please run:
-     │ warn worker stderr npx browserslist@latest --update-db
      │ succ 1 bundles compiled successfully after <time>
      info copying assets from \`public/assets\` to build
      info copying server source into the build and converting with babel
      info running yarn to install dependencies
-     info compressing plugin into [fooTestPlugin-1.0.0.zip]"
+     info compressing plugin into [fooTestPlugin-1.0.0.zip]
+     info cleaning up compression temporary artifacts"
   `);
 
   await extract(PLUGIN_ARCHIVE, { dir: TMP_DIR }, () => {});
@@ -192,13 +189,12 @@ it('builds a non-semver generated plugin into a viable archive', async () => {
      info running @osd/optimizer
      │ info initialized, 0 bundles cached
      │ info starting worker [1 bundle]
-     │ warn worker stderr Browserslist: caniuse-lite is outdated. Please run:
-     │ warn worker stderr npx browserslist@latest --update-db
      │ succ 1 bundles compiled successfully after <time>
      info copying assets from \`public/assets\` to build
      info copying server source into the build and converting with babel
      info running yarn to install dependencies
-     info compressing plugin into [fooTestPlugin-1.0.0.x.zip]"
+     info compressing plugin into [fooTestPlugin-1.0.0.x.zip]
+     info cleaning up compression temporary artifacts"
   `);
 
   await extract(PLUGIN_ARCHIVE_X, { dir: TMP_DIR }, () => {});

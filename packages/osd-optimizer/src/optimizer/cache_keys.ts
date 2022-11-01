@@ -4,6 +4,9 @@
  * The OpenSearch Contributors require contributions made to
  * this file be licensed under the Apache-2.0 license or a
  * compatible open source license.
+ *
+ * Any modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
  */
 
 /*
@@ -25,18 +28,13 @@
  * under the License.
  */
 
-/*
- * Modifications Copyright OpenSearch Contributors. See
- * GitHub history for details.
- */
-
 import Path from 'path';
 import Fs from 'fs';
 import { promisify } from 'util';
 
 import Chalk from 'chalk';
 import execa from 'execa';
-import { REPO_ROOT } from '@osd/utils';
+import { relativeToRepoRoot, REPO_ROOT } from '@osd/cross-platform';
 import stripAnsi from 'strip-ansi';
 
 import jestDiff from 'jest-diff';
@@ -48,7 +46,7 @@ import { getChanges } from './get_changes';
 import { OptimizerConfig } from './optimizer_config';
 
 const OPTIMIZER_DIR = Path.dirname(require.resolve('../../package.json'));
-const RELATIVE_DIR = Path.relative(REPO_ROOT, OPTIMIZER_DIR);
+const RELATIVE_DIR = relativeToRepoRoot(OPTIMIZER_DIR)!;
 
 export function diffCacheKey(expected?: unknown, actual?: unknown) {
   const expectedJson = jsonStable(expected, {

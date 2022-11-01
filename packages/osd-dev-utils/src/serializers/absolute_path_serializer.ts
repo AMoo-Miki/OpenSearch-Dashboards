@@ -4,6 +4,9 @@
  * The OpenSearch Contributors require contributions made to
  * this file be licensed under the Apache-2.0 license or a
  * compatible open source license.
+ *
+ * Any modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
  */
 
 /*
@@ -25,19 +28,25 @@
  * under the License.
  */
 
-/*
- * Modifications Copyright OpenSearch Contributors. See
- * GitHub history for details.
- */
-
-import { REPO_ROOT } from '@osd/utils';
+// Not importing from @osd/cross-platform to allow some complicated tests to run: suite_tracker.test.ts
+import { REPO_ROOT, REPO_ROOT_8_3 } from '@osd/utils';
 
 export function createAbsolutePathSerializer(
-  rootPath: string = REPO_ROOT,
+  rootPath: string | string[] = [REPO_ROOT, REPO_ROOT_8_3],
   replacement = '<absolute path>'
 ) {
+  const rootPaths = Array.isArray(rootPath) ? rootPath : [rootPath];
+
   return {
-    test: (value: any) => typeof value === 'string' && value.startsWith(rootPath),
-    serialize: (value: string) => value.replace(rootPath, replacement).replace(/\\/g, '/'),
+    test: (value: any) =>
+      typeof value === 'string' && rootPaths.some((path) => value.startsWith(path)),
+    serialize: (value: string) =>
+      rootPaths
+        // Replace all instances of `rootPaths` found at the beginning of the `value`
+        .reduce(
+          (result, path) => (result.startsWith(path) ? result.replace(path, replacement) : result),
+          value
+        )
+        .replace(/\\/g, '/'),
   };
 }
