@@ -4,6 +4,9 @@
  * The OpenSearch Contributors require contributions made to
  * this file be licensed under the Apache-2.0 license or a
  * compatible open source license.
+ *
+ * Any modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
  */
 
 /*
@@ -25,11 +28,6 @@
  * under the License.
  */
 const path = require('path');
-
-/*
- * Modifications Copyright OpenSearch Contributors. See
- * GitHub history for details.
- */
 
 jest.mock('fs', () => ({
   statSync: jest.fn().mockImplementation((path) => {
