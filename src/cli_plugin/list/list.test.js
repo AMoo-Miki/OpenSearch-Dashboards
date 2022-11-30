@@ -1,3 +1,5 @@
+/* eslint-disable-line @osd/eslint/require-license-header */
+
 /*
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -30,7 +32,6 @@
 
 import { join } from 'path';
 import { writeFileSync, mkdirSync } from 'fs';
-import { mkdir } from 'fs/promises';
 
 import del from 'del';
 
@@ -63,14 +64,14 @@ describe('opensearchDashboards cli', function () {
   describe('plugin lister', function () {
     const pluginDir = join(__dirname, '.test.data.list');
 
-    beforeEach(async () => {
+    beforeEach(function () {
       logger.messages.length = 0;
-      await del(pluginDir, { cwd: PROCESS_WORKING_DIR });
-      await mkdir(pluginDir, { recursive: true });
+      del.sync(pluginDir, { cwd: PROCESS_WORKING_DIR });
+      mkdirSync(pluginDir, { recursive: true });
     });
 
-    afterEach(async () => {
-      await del(pluginDir, { cwd: PROCESS_WORKING_DIR });
+    afterEach(function () {
+      del.sync(pluginDir, { cwd: PROCESS_WORKING_DIR });
     });
 
     it('list all of the folders in the plugin folder, ignoring dot prefixed plugins and regular files', function () {

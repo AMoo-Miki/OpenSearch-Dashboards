@@ -1,3 +1,5 @@
+/* eslint-disable-line @osd/eslint/require-license-header */
+
 /*
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -37,7 +39,7 @@ const readOpenSearchDashboardsPkgJson = (dir: string) => {
   try {
     const path = resolve(dir, 'package.json');
     const json = loadJsonFile.sync(path) as { [key: string]: any };
-    if (json?.name === 'opensearch-dashboards') {
+    if (json && json.name === 'opensearch-dashboards') {
       return json;
     }
   } catch (error) {

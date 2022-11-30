@@ -1,3 +1,5 @@
+/* eslint-disable-line @osd/eslint/require-license-header */
+
 /*
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -29,7 +31,7 @@
  */
 
 import { join } from 'path';
-import { mkdir, writeFile } from 'fs/promises';
+import { writeFileSync, mkdirSync } from 'fs';
 
 import sinon from 'sinon';
 import glob from 'glob-all';
@@ -47,20 +49,20 @@ describe('opensearchDashboards cli', function () {
 
     const settings = { pluginDir };
 
-    beforeEach(async () => {
+    beforeEach(function () {
       processExitStub = sinon.stub(process, 'exit');
       logger = new Logger(settings);
       sinon.stub(logger, 'log');
       sinon.stub(logger, 'error');
-      await del(pluginDir, { cwd: PROCESS_WORKING_DIR });
-      await mkdir(pluginDir, { recursive: true });
+      del.sync(pluginDir, { cwd: PROCESS_WORKING_DIR });
+      mkdirSync(pluginDir, { recursive: true });
     });
 
-    afterEach(async () => {
+    afterEach(function () {
       processExitStub.restore();
       logger.log.restore();
       logger.error.restore();
-      await del(pluginDir, { cwd: PROCESS_WORKING_DIR });
+      del.sync(pluginDir, { cwd: PROCESS_WORKING_DIR });
     });
 
     it('throw an error if the plugin is not installed.', function () {
@@ -72,18 +74,18 @@ describe('opensearchDashboards cli', function () {
       expect(process.exit.called).toBe(true);
     });
 
-    it('throw an error if the specified plugin is not a folder.', async () => {
-      await writeFile(join(pluginDir, 'foo'), 'This is a file, and not a folder.');
+    it('throw an error if the specified plugin is not a folder.', function () {
+      writeFileSync(join(pluginDir, 'foo'), 'This is a file, and not a folder.');
 
       remove(settings, logger);
       expect(logger.error.firstCall.args[0]).toMatch(/not a plugin/);
       expect(process.exit.called).toBe(true);
     });
 
-    it('delete the specified folder.', async () => {
+    it('delete the specified folder.', function () {
       settings.pluginPath = join(pluginDir, 'foo');
-      await mkdir(join(pluginDir, 'foo'), { recursive: true });
-      await mkdir(join(pluginDir, 'bar'), { recursive: true });
+      mkdirSync(join(pluginDir, 'foo'), { recursive: true });
+      mkdirSync(join(pluginDir, 'bar'), { recursive: true });
 
       remove(settings, logger);
 

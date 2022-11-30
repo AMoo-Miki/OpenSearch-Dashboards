@@ -50,7 +50,7 @@ import Crypto from 'crypto';
 
 import * as babel from '@babel/core';
 import { addHook } from 'pirates';
-import { REPO_ROOT, REPO_ROOT_8_3, UPSTREAM_BRANCH } from '@osd/dev-utils';
+import { REPO_ROOT } from '@osd/dev-utils';
 import sourceMapSupport from 'source-map-support';
 
 import { Cache } from './cache';

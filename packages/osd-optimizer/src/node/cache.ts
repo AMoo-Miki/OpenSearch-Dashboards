@@ -1,3 +1,5 @@
+/* eslint-disable-line @osd/eslint/require-license-header */
+
 /*
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -32,7 +34,7 @@ import Path from 'path';
 
 // @ts-expect-error no types available
 import * as LmdbStore from 'lmdb-store';
-import { REPO_ROOT, UPSTREAM_BRANCH } from '@osd/dev-utils';
+import { REPO_ROOT, REPO_ROOT_8_3, UPSTREAM_BRANCH } from '@osd/dev-utils';
 import { getMatchingRoot } from '@osd/cross-platform';
 
 // This is to enable parallel jobs on CI.
@@ -143,7 +145,7 @@ export class Cache {
      * and unique key based on the relative path. If A root was not found, just
      * use any of the roots; the key would just be long.
      */
-    const pathRoot = getMatchingRoot(resolvedPath, this.pathRoots) || this.pathRoots[0];
+    const pathRoot = getMatchingRoot(resolvedPath, [REPO_ROOT, REPO_ROOT_8_3]) || REPO_ROOT;
 
     const normalizedPath =
       Path.sep !== '/'

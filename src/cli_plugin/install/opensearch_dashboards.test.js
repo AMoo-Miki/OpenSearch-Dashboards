@@ -1,3 +1,5 @@
+/* eslint-disable-line @osd/eslint/require-license-header */
+
 /*
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -30,7 +32,6 @@
 
 import { join } from 'path';
 import fs from 'fs';
-import { mkdir } from 'fs/promises';
 
 import sinon from 'sinon';
 import del from 'del';
@@ -66,7 +67,7 @@ describe('opensearchDashboards cli', function () {
       describe('assertVersion', function () {
         beforeEach(async () => {
           await del(testWorkingPath, { cwd: PROCESS_WORKING_DIR });
-          await mkdir(testWorkingPath, { recursive: true });
+          fs.mkdirSync(testWorkingPath, { recursive: true });
           sinon.stub(logger, 'log');
           sinon.stub(logger, 'error');
         });

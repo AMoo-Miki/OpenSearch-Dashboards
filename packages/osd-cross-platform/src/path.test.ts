@@ -5,7 +5,7 @@
 
 import path from 'path';
 import fs from 'fs';
-import { access, rmdir, mkdir, writeFile, symlink } from 'fs/promises';
+import del from 'del';
 
 import {
   resolveToFullNameSync,
@@ -38,29 +38,28 @@ describe('Cross Platform', () => {
   describe('path', () => {
     onWindows('on Windows', () => {
       onWindowsWithShortNames('when 8.3 is supported', () => {
-        beforeAll(async () => {
+        beforeAll(() => {
           // Cleanup
           try {
             // If leftover artifacts were found, get rid of them
-            await access(tmpTestFolder);
-            await rmdir(tmpTestFolder, { recursive: true });
+            del.sync(tmpTestFolder);
           } catch (ex) {
             // Do nothing; if `rmdir` failed, let the `mkdir` below throw the error
           }
 
-          await mkdir(tmpTestFolder);
-          await mkdir(path.resolve(tmpTestFolder, longFolderName));
-          await writeFile(path.resolve(tmpTestFolder, longFolderName, longFileName), '');
-          await symlink(
+          fs.mkdirSync(tmpTestFolder);
+          fs.mkdirSync(path.resolve(tmpTestFolder, longFolderName));
+          fs.writeFileSync(path.resolve(tmpTestFolder, longFolderName, longFileName), '');
+          fs.symlinkSync(
             path.resolve(tmpTestFolder, longFolderName),
             path.resolve(tmpTestFolder, longSymlinkName),
             'junction'
           );
         });
 
-        afterAll(async () => {
+        afterAll(() => {
           try {
-            await rmdir(tmpTestFolder, { recursive: true });
+            del.sync(tmpTestFolder);
           } catch (ex) {
             // Do nothing
           }

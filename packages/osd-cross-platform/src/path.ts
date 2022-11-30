@@ -32,7 +32,7 @@ export const standardize = (
   const normal = normalize(path);
 
   // Filter out in-browser executions as well as non-windows ones
-  if (process?.platform !== 'win32') return normal;
+  if (process.platform !== 'win32') return normal;
 
   if (usePosix) return normal.replace(/\\/g, '/');
   else if (escapedBackslashes) return normal.replace(/\\/g, '\\\\');
@@ -49,12 +49,13 @@ const getFullPathSync = (path: string) => {
   if (process.platform !== 'win32') return path;
 
   try {
-    const fullName = execSync(`powershell "(Get-Item -LiteralPath '${path}').FullName"`, {
+    const psOutput = execSync(`powershell "(Get-Item -LiteralPath '${path}').FullName"`, {
       encoding: 'utf8',
-    })?.trim?.();
+    });
+    const fullName = psOutput && psOutput.trim && psOutput.trim();
 
     // Make sure we got something back
-    if (fullName?.length > 2) return fullName;
+    if (fullName && fullName.length > 2) return fullName;
   } catch (ex) {
     // Do nothing
   }
@@ -71,15 +72,16 @@ const getShortPathSync = (path: string) => {
   if (process.platform !== 'win32') return path;
 
   try {
-    const shortPath = execSync(
+    const psOutput = execSync(
       `powershell "$FSO = New-Object -ComObject Scripting.FileSystemObject; $O = (Get-Item -LiteralPath '${path}'); if ($O.PSIsContainer) { $FSO.GetFolder($O.FullName).ShortPath } else { $FSO.GetFile($O.FullName).ShortPath }"`,
       {
         encoding: 'utf8',
       }
-    )?.trim?.();
+    );
+    const shortPath = psOutput && psOutput.trim && psOutput.trim();
 
     // Make sure we got something back
-    if (shortPath?.length > 2) return shortPath;
+    if (shortPath && shortPath.length > 2) return shortPath;
   } catch (ex) {
     // Do nothing
   }

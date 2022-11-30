@@ -1,3 +1,5 @@
+/* eslint-disable-line @osd/eslint/require-license-header */
+
 /*
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -28,7 +30,6 @@
  * under the License.
  */
 
-import Fs from 'fs';
 import { join } from 'path';
 import http from 'http';
 
@@ -75,7 +76,6 @@ describe('opensearchDashboards cli', function () {
       sinon.stub(logger, 'log');
       sinon.stub(logger, 'error');
       del.sync(testWorkingPath, { cwd: PROCESS_WORKING_DIR });
-      Fs.mkdirSync(testWorkingPath, { recursive: true });
     });
 
     afterEach(function () {
