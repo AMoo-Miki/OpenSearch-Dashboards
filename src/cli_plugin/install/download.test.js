@@ -30,6 +30,7 @@
  * under the License.
  */
 
+import Fs from 'fs';
 import { join } from 'path';
 import http from 'http';
 
@@ -72,16 +73,17 @@ describe('opensearchDashboards cli', function () {
       throw new Error('expected the promise to reject');
     }
 
-    beforeEach(function () {
+    beforeEach(async () => {
       sinon.stub(logger, 'log');
       sinon.stub(logger, 'error');
-      del.sync(testWorkingPath, { cwd: PROCESS_WORKING_DIR });
+      await del(testWorkingPath, { cwd: PROCESS_WORKING_DIR });
+      Fs.mkdirSync(testWorkingPath, { recursive: true });
     });
 
-    afterEach(function () {
+    afterEach(async () => {
       logger.log.restore();
       logger.error.restore();
-      del.sync(testWorkingPath, { cwd: PROCESS_WORKING_DIR });
+      await del(testWorkingPath, { cwd: PROCESS_WORKING_DIR });
     });
 
     describe('_downloadSingle', function () {

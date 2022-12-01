@@ -1,3 +1,5 @@
+/* eslint-disable-line @osd/eslint/require-license-header */
+
 /*
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -94,7 +96,7 @@ describe('parse function', function () {
         "timeout": 0,
         "urls": Array [
           "plugin name",
-          "https://ci.opensearch.org/ci/dbc/distribution-build-opensearch-dashboards/1234/latest/linux/x64/builds/opensearch-dashboards/plugins/plugin name-1234.zip",
+          "https://ci.opensearch.org/ci/dbc/distribution-build-opensearch-dashboards/1234/latest/linux/x64/tar/builds/opensearch-dashboards/plugins/plugin name-1234.zip",
         ],
         "version": 1234,
         "workingPath": <absolute path>/plugins/.plugin.installing,
@@ -129,7 +131,7 @@ describe('parse function', function () {
         "timeout": 0,
         "urls": Array [
           "plugin name",
-          "https://ci.opensearch.org/ci/dbc/distribution-build-opensearch-dashboards/1234/latest/linux/x64/builds/opensearch-dashboards/plugins/plugin name-1234.zip",
+          "https://ci.opensearch.org/ci/dbc/distribution-build-opensearch-dashboards/1234/latest/linux/x64/tar/builds/opensearch-dashboards/plugins/plugin name-1234.zip",
         ],
         "version": 1234,
         "workingPath": <absolute path>/plugins/.plugin.installing,
@@ -185,7 +187,7 @@ describe('parse function', function () {
         "timeout": 0,
         "urls": Array [
           "plugin name",
-          "https://ci.opensearch.org/ci/dbc/distribution-build-opensearch-dashboards/1234/latest/linux/arm64/builds/opensearch-dashboards/plugins/plugin name-1234.zip",
+          "https://ci.opensearch.org/ci/dbc/distribution-build-opensearch-dashboards/1234/latest/linux/arm64/tar/builds/opensearch-dashboards/plugins/plugin name-1234.zip",
         ],
         "version": 1234,
         "workingPath": <absolute path>/plugins/.plugin.installing,
