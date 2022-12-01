@@ -1,3 +1,5 @@
+/* eslint-disable-line @osd/eslint/require-license-header */
+
 /*
  * SPDX-License-Identifier: Apache-2.0
  *
