@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "../../build/tsbuildinfo/packages/osd-numeral"
+  },
+  "include": [
+    "numeral.js.d.ts"
+  ]
+}

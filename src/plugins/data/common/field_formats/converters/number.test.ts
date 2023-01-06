@@ -44,9 +44,39 @@ describe('NumberFormat', () => {
     expect(formatter.convert(12.345678)).toBe('12.346');
   });
 
-  test('custom pattern', () => {
+  test('custom pattern: numeric values', () => {
     const formatter = new NumberFormat({ pattern: '0,0' }, getConfig);
 
-    expect(formatter.convert('12.345678')).toBe('12');
+    expect(formatter.convert(12.345678)).toBe('12');
+  });
+
+  test('custom pattern: string values and left-padding', () => {
+    const formatter = new NumberFormat({ pattern: '000000,0' }, getConfig);
+
+    expect(formatter.convert('12.345678')).toBe('000,012');
+  });
+
+  test('custom pattern: numeric zero and left-padding', () => {
+    const formatter = new NumberFormat({ pattern: '00.000' }, getConfig);
+
+    expect(formatter.convert(0)).toBe('00.000');
+  });
+
+  test('custom pattern: negative value and parentheses', () => {
+    const formatter = new NumberFormat({ pattern: '(000,0.000)' }, getConfig);
+
+    expect(formatter.convert(-12345.6)).toBe('(12,345.600)');
+  });
+
+  test('custom pattern: percentage value and signed', () => {
+    const formatter = new NumberFormat({ pattern: '+0.0[0]' }, getConfig);
+
+    expect(formatter.convert('20.12%')).toBe('+0.2');
+  });
+
+  test('custom pattern: ordinals', () => {
+    const formatter = new NumberFormat({ pattern: '0o' }, getConfig);
+
+    expect(formatter.convert('23.1')).toBe('+0.2');
   });
 });

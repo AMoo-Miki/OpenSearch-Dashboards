@@ -28,7 +28,7 @@
  * under the License.
  */
 
-import numeral from '@elastic/numeral';
+import numeral from '@osd/numeral';
 
 export type DataType = 'byte' | 'float' | 'integer' | 'time';
 

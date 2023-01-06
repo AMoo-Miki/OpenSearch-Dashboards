@@ -31,9 +31,26 @@
 import { i18n } from '@osd/i18n';
 import { schema } from '@osd/config-schema';
 import { UiSettingsParams } from 'opensearch-dashboards/server';
-// @ts-ignore untyped module
-import numeralLanguages from '@elastic/numeral/languages';
+
+import numeral from '@osd/numeral';
+import '../common/field_formats/converters/numeral_locales';
+
 import { DEFAULT_QUERY_LANGUAGE, UI_SETTINGS } from '../common';
+
+const numeralLocales = Object.keys(numeral.locales);
+// Sort locales by displayName
+const collator = new Intl.Collator('en', { sensitivity: 'base' });
+numeralLocales.sort((a, b) =>
+  collator.compare(numeral.locales[a].displayName, numeral.locales[b].displayName)
+);
+// Prepare `optionLabels`
+const numeralLocalesOptionLabels = numeralLocales.reduce(
+  (accumulator: { [key: string]: string }, locale: string) => {
+    accumulator[locale] = numeral.locales[locale].displayName;
+    return accumulator;
+  },
+  {}
+);
 
 const luceneQueryLanguageLabel = i18n.translate('data.advancedSettings.searchQueryLanguageLucene', {
   defaultMessage: 'Lucene',
@@ -54,15 +71,6 @@ const requestPreferenceOptionLabels = {
     defaultMessage: 'None',
   }),
 };
-
-// We add the `en` key manually here, since that's not a real numeral locale, but the
-// default fallback in case the locale is not found.
-const numeralLanguageIds = [
-  'en',
-  ...numeralLanguages.map((numeralLanguage: any) => {
-    return numeralLanguage.id;
-  }),
-];
 
 export function getUiSettings(): Record<string, UiSettingsParams<unknown>> {
   return {
@@ -490,10 +498,8 @@ export function getUiSettings(): Record<string, UiSettingsParams<unknown>> {
       }),
       value: 'en',
       type: 'select',
-      options: numeralLanguageIds,
-      optionLabels: Object.fromEntries(
-        numeralLanguages.map((language: Record<string, any>) => [language.id, language.name])
-      ),
+      options: numeralLocales,
+      optionLabels: numeralLocalesOptionLabels,
       description: i18n.translate('data.advancedSettings.format.formattingLocaleText', {
         defaultMessage: `{numeralLanguageLink} locale`,
         description:

@@ -28,20 +28,13 @@
  * under the License.
  */
 
-// @ts-ignore
-import numeral from '@elastic/numeral';
-// @ts-ignore
-import numeralLanguages from '@elastic/numeral/languages';
+import numeral from '@osd/numeral';
+import './numeral_locales';
+
 import { OSD_FIELD_TYPES } from '../../osd_field_types/types';
 import { FieldFormat } from '../field_format';
 import { TextContextTypeConvert } from '../types';
 import { UI_SETTINGS } from '../../constants';
-
-const numeralInst = numeral();
-
-numeralLanguages.forEach((numeralLanguage: Record<string, any>) => {
-  numeral.language(numeralLanguage.id, numeralLanguage.lang);
-});
 
 export abstract class NumeralFormat extends FieldFormat {
   static fieldType = OSD_FIELD_TYPES.NUMBER;
@@ -56,20 +49,16 @@ export abstract class NumeralFormat extends FieldFormat {
   protected getConvertedValue(val: any): string {
     if (val === -Infinity) return '-∞';
     if (val === +Infinity) return '+∞';
-    if (typeof val !== 'number') {
-      val = parseFloat(val);
-    }
 
-    if (isNaN(val)) return '';
+    if (typeof val !== 'number' && isNaN(parseFloat(val))) return '';
 
-    const previousLocale = numeral.language();
-    const defaultLocale =
-      (this.getConfig && this.getConfig(UI_SETTINGS.FORMAT_NUMBER_DEFAULT_LOCALE)) || 'en';
-    numeral.language(defaultLocale);
+    const previousLocale = numeral.locale();
+    const defaultLocale = this.getConfig?.(UI_SETTINGS.FORMAT_NUMBER_DEFAULT_LOCALE) || 'en';
+    numeral.locale(defaultLocale);
 
-    const formatted = numeralInst.set(val).format(this.param('pattern'));
+    const formatted = numeral(val).format(this.param('pattern'));
 
-    numeral.language(previousLocale);
+    numeral.locale(previousLocale);
 
     return formatted;
   }

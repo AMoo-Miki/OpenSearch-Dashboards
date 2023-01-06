@@ -56,7 +56,6 @@ Moment.tz.load(require('moment-timezone/data/packed/latest.json'));
 // big deps which are locked to a single version
 export const Rxjs = require('rxjs');
 export const RxjsOperators = require('rxjs/operators');
-export const ElasticNumeral = require('@elastic/numeral');
 export const ElasticCharts = require('@elastic/charts');
 export const ElasticEui = require('@elastic/eui');
 export const ElasticEuiLibServices = require('@elastic/eui/lib/services');
@@ -65,6 +64,7 @@ export const ElasticEuiChartsTheme = require('@elastic/eui/dist/eui_charts_theme
 export const Theme = require('./theme.ts');
 export const Lodash = require('lodash');
 export const LodashFp = require('lodash/fp');
+export const OsdNumeral = require('@osd/numeral');
 
 // runtime deps which don't need to be copied across all bundles
 export const TsLib = require('tslib');

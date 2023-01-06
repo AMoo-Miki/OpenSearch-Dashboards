@@ -63,8 +63,7 @@ exports.externals = {
    */
   rxjs: '__osdSharedDeps__.Rxjs',
   'rxjs/operators': '__osdSharedDeps__.RxjsOperators',
-  numeral: '__osdSharedDeps__.ElasticNumeral',
-  '@elastic/numeral': '__osdSharedDeps__.ElasticNumeral',
+  '@osd/numeral': '__osdSharedDeps__.OsdNumeral',
   '@elastic/charts': '__osdSharedDeps__.ElasticCharts',
   '@elastic/eui': '__osdSharedDeps__.ElasticEui',
   '@elastic/eui/lib/services': '__osdSharedDeps__.ElasticEuiLibServices',

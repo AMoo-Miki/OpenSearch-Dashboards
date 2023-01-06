@@ -30,7 +30,7 @@
 
 import React from 'react';
 import _ from 'lodash';
-import numeral from '@elastic/numeral';
+import numeral from '@osd/numeral';
 import { renderToStaticMarkup } from 'react-dom/server';
 
 import { FormattedMessage, I18nProvider } from '@osd/i18n/react';

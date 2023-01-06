@@ -32,7 +32,7 @@ import Stream from 'stream';
 import moment from 'moment-timezone';
 import { get, _ } from 'lodash';
 import queryString from 'query-string';
-import numeral from '@elastic/numeral';
+import numeral from '@osd/numeral';
 import chalk from 'chalk';
 import stringify from 'json-stringify-safe';
 import applyFiltersToKeys from './apply_filters_to_keys';
