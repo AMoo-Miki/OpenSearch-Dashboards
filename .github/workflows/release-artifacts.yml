@@ -1,0 +1,98 @@
+name: Build Release Artifacts
+
+on:
+  workflow_call:
+    inputs:
+      name:
+        required: true
+        type: string
+      ext:
+        required: true
+        type: string
+      suffix:
+        required: true
+        type: string
+      script:
+        required: true
+        type: string
+      os:
+        required: true
+        type: string
+      shell:
+        required: true
+        type: string
+
+env:
+  TEST_BROWSER_HEADLESS: 1
+  CI: 1
+  GCS_UPLOAD_PREFIX: fake
+  TEST_OPENSEARCH_DASHBOARDS_HOST: localhost
+  TEST_OPENSEARCH_DASHBOARDS_PORT: 6610
+  TEST_OPENSEARCH_TRANSPORT_PORT: 9403
+  TEST_OPENSEARCH_PORT: 9400
+  OSD_SNAPSHOT_SKIP_VERIFY_CHECKSUM: true
+
+jobs:
+  build-min-artifact:
+    runs-on: ${{ inputs.os }}
+    name: Release artifacts for ${{ inputs.name }}
+    defaults:
+      run:
+        shell: ${{ inputs.shell }}
+    steps:
+      - name: Setup JDK
+        if: runner.os == 'Windows'
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+
+      - name: Enable custom Tar
+        if: runner.os == 'Windows'
+        run: |
+          echo C:\Program Files\Git\usr\bin>>"%GITHUB_PATH%"
+
+      - name: Restore workflow cache
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: .
+          key: osd-${{ runner.os }}-${{ github.run_id }}
+
+      - name: Validate workflow cache
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: exit 1
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Setup Yarn
+        run: |
+          npm uninstall -g yarn
+          npm i -g yarn@1.22.10
+          yarn config set network-timeout 1000000 -g
+
+      - name: Prepare names
+        if: runner.os == 'Windows'
+        run: |
+          echo "VERSION=$(yarn --silent pkg-version)" >> $env:GITHUB_ENV
+          echo "ARTIFACT_BUILD_NAME=opensearch-dashboards-${{ env.VERSION }}-${{ matrix.suffix }}.${{ matrix.ext }}" >> $env:GITHUB_ENV
+
+      - name: Prepare names
+        if: runner.os != 'Windows'
+        run: |
+          echo "VERSION=$(yarn --silent pkg-version)" >> $GITHUB_ENV
+          echo "ARTIFACT_BUILD_NAME=opensearch-dashboards-${{ env.VERSION }}-${{ matrix.suffix }}.${{ matrix.ext }}" >> $GITHUB_ENV
+
+      - name: Build `${{ matrix.name }}`
+        run: yarn ${{ matrix.script }} --release
+
+      - uses: actions/upload-artifact@v3
+        if: success()
+        with:
+          name: ${{ matrix.suffix }}-${{ env.VERSION }}
+          path: target/${{ env.ARTIFACT_BUILD_NAME }}
+          retention-days: 1

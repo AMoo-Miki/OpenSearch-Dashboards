@@ -1,0 +1,113 @@
+name: Backward Compatibility Tests
+
+on:
+  workflow_call:
+    inputs:
+      version:
+        required: true
+        type: string
+      os:
+        required: true
+        type: string
+      shell:
+        required: true
+        type: string
+
+env:
+  TEST_BROWSER_HEADLESS: 1
+  CI: 1
+  GCS_UPLOAD_PREFIX: fake
+  TEST_OPENSEARCH_DASHBOARDS_HOST: localhost
+  TEST_OPENSEARCH_DASHBOARDS_PORT: 6610
+  TEST_OPENSEARCH_TRANSPORT_PORT: 9403
+  TEST_OPENSEARCH_PORT: 9400
+  OSD_SNAPSHOT_SKIP_VERIFY_CHECKSUM: true
+
+jobs:
+  backward-compatibility-tests:
+    runs-on: ${{ inputs.os }}
+    name: Backward compatibility with ${{ inputs.version }} on ${{ runner.os }}
+    defaults:
+      run:
+        shell: ${{ inputs.shell }}
+    steps:
+      - name: Setup JDK
+        if: runner.os == 'Windows'
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Setup Yarn
+        run: |
+          npm uninstall -g yarn
+          npm i -g yarn@1.22.10
+          yarn config set network-timeout 1000000 -g
+
+      - name: Enable custom Tar
+        if: runner.os == 'Windows'
+        run: |
+          echo C:\Program Files\Git\usr\bin>>"%GITHUB_PATH%"
+
+      - name: Restore workflow cache
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: .
+          key: osd-${{ runner.os }}-${{ github.run_id }}
+
+      - name: Validate workflow cache
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: exit 1
+
+      - name: Prepare references
+        if: runner.os == 'Windows'
+        run: |
+          echo "VERSION=$(yarn --silent pkg-version)" >> $env:GITHUB_ENV
+          echo "OPENSEARCH_URL=https://ci.opensearch.org/ci/dbc/distribution-build-opensearch/${{ env.VERSION }}/latest/windows/x64/zip/dist/opensearch/opensearch-${{ env.VERSION }}-windows-x64.zip" >> $env:GITHUB_ENV
+
+      - name: Prepare references
+        if: runner.os != 'Windows'
+        run: |
+          echo "VERSION=$(yarn --silent pkg-version)" >> $GITHUB_ENV
+          echo "OPENSEARCH_URL=https://ci.opensearch.org/ci/dbc/distribution-build-opensearch/${{ env.VERSION }}/latest/linux/x64/tar/dist/opensearch/opensearch-${{ env.VERSION }}-linux-x64.tar.gz" >> $GITHUB_ENV
+
+      # ToDo: make these work on Windows too
+      - name: Verify if OpenSearch is available for version
+        id: verify-opensearch-exists
+        run: |
+          if curl -I -L ${{ env.OPENSEARCH_URL }}; then
+            echo "BWC will run"
+          else
+            echo "Tests were skipped because an OpenSearch release build does not exist for this version yet!"
+            exit 0
+          fi
+
+      - name: Setting environment variable to run tests for ${{ matrix.version }}
+        run: echo "BWC_VERSIONS=${{ matrix.version }}" >> $GITHUB_ENV
+
+      - name: Download OpenSearch Dashboards
+        uses: actions/download-artifact@v3
+        id: download
+        with:
+          name: linux-x64-${{ env.VERSION }}
+
+      - name: Run tests
+        if: steps.verify-opensearch-exists.outputs.version-exists == 'true'
+        run: |
+          ./bwctest.sh -s false -o ${{ env.OPENSEARCH_URL }} -d ${{ steps.download.outputs.download-path }}/opensearch-dashboards-${{ env.VERSION }}-linux-x64.tar.gz
+
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: ${{ matrix.version }}-test-failures
+          path: |
+            ./artifacts/bwc_tmp/test/cypress/videos/without-security/*
+            ./artifacts/bwc_tmp/test/cypress/screenshots/without-security/*
+          retention-days: 1
