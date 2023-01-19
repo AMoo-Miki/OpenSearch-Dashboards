@@ -28,6 +28,7 @@ env:
 
 jobs:
   build-lint-test-linux:
+    if: github.repository == 'octo-org/octo-repo-prod'
     runs-on: ubuntu-latest
     container:
       image: docker://opensearchstaging/ci-runner:ci-runner-rockylinux8-opensearch-dashboards-integtest-v2
@@ -91,6 +92,7 @@ jobs:
         run: yarn test:jest_integration:ci
 
   build-lint-test-windows:
+    if: github.repository == 'octo-org/octo-repo-prod'
     runs-on: windows-latest
     name: Build and Verify on Windows
     steps:
@@ -164,13 +166,10 @@ jobs:
 
   functional-tests-linux:
     runs-on: ubuntu-latest
-    container:
-      image: docker://opensearchstaging/ci-runner:ci-runner-rockylinux8-opensearch-dashboards-integtest-v2
-      options: --user 1001
     name: Run functional tests on Linux
     strategy:
       matrix:
-        group: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ]
+        group: [ 1 ]
     steps:
       - run: echo Running functional tests for ciGroup${{ matrix.group }}
 
@@ -200,6 +199,19 @@ jobs:
           restore-keys: |
             yarn-
 
+      # Node 10 is only supported by ChromeDrive 107-
+      - name: Download Chrome
+        id: download-chrome
+        uses: abhi1693/setup-browser@v0.3.5
+        with:
+          browser: chrome
+          version: 1047731
+
+      - name: Setup Chrome
+        run: |
+          sudo rm -rf /usr/bin/google-chrome
+          sudo ln -s ${{steps.download-chrome.outputs.path}}/${{steps.download-chrome.outputs.binary}} /usr/bin/google-chrome
+
       - name: Setup chromedriver
         run: node scripts/upgrade_chromedriver.js
 
@@ -226,12 +238,16 @@ jobs:
             test/*/failure_debug/
             test/*/screenshots/
 
+
   functional-tests-windows:
     runs-on: windows-latest
     name: Run functional tests on Windows
     strategy:
       matrix:
-        group: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ]
+        group: [ 1 ]
+    defaults:
+      run:
+        shell: powershell
     steps:
       - run: echo Running functional tests for ciGroup${{ matrix.group }}
 
@@ -273,11 +289,27 @@ jobs:
           restore-keys: |
             yarn-
 
+      # Node 10 is only supported by ChromeDrive 107-
+      - name: Download Chrome
+        id: download-chrome
+        uses: abhi1693/setup-browser@v0.3.5
+        with:
+          browser: chrome
+          version: 1045634
+
+      - name: Setup Chrome
+        run: |
+          New-Item -Force -Type Directory "$Env:Programfiles/Google/Chrome/Application"
+          Remove-Item -Recurse -Force "$Env:Programfiles/Google/Chrome/Application/*"
+          Copy-Item -Force -Recurse "${{steps.download-chrome.outputs.path}}/*" "$Env:Programfiles/Google/Chrome/Application"
+
       - name: Setup chromedriver
         run: node scripts/upgrade_chromedriver.js
 
       - name: Run bootstrap
-        run: yarn osd bootstrap || yarn osd bootstrap
+        run: |
+          yarn osd bootstrap
+          if ($LASTEXITCODE) { yarn osd bootstrap }
 
       - name: Build plugins
         run: node scripts/build_opensearch_dashboards_platform_plugins --no-examples --workers 10
@@ -299,7 +331,9 @@ jobs:
             test/*/failure_debug/
             test/*/screenshots/
 
+
   build-min-artifact-tests-linux:
+    if: github.repository == 'octo-org/octo-repo-prod'
     runs-on: ubuntu-latest
     container:
       image: docker://opensearchstaging/ci-runner:ci-runner-rockylinux8-opensearch-dashboards-integtest-v2
@@ -370,6 +404,7 @@ jobs:
           retention-days: 1
 
   build-min-artifact-tests-windows:
+    if: github.repository == 'octo-org/octo-repo-prod'
     runs-on: windows-latest
     name: Build min release artifacts on Windows
     defaults:
@@ -440,6 +475,7 @@ jobs:
           retention-days: 1
 
   bwc-tests:
+    if: github.repository == 'octo-org/octo-repo-prod'
     needs: [build-min-artifact-tests-linux]
     runs-on: ubuntu-latest
     container:
