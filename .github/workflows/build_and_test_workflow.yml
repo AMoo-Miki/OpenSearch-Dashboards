@@ -54,9 +54,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ env.YARN_CACHE_LOCATION }}
-          key: yarn-${{ hashFiles('**/yarn.lock') }}
+          key: yarn-linux-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            yarn-
+            yarn-linux-
 
       - name: Run bootstrap
         run: yarn osd bootstrap
@@ -110,6 +110,10 @@ jobs:
           node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org'
 
+      - name: Disable Windows Defender
+        run: |
+          Set-MpPreference -DisableIntrusionPreventionSystem $true -DisableIOAVProtection $true -DisableRealtimeMonitoring $true -DisableScriptScanning $true -EnableControlledFolderAccess Disabled -EnableNetworkProtection AuditMode -Force -MAPSReporting Disabled -SubmitSamplesConsent NeverSend
+
       - name: Setup Yarn
         run: |
           npm uninstall -g yarn
@@ -125,9 +129,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ env.YARN_CACHE_LOCATION }}
-          key: yarn-${{ hashFiles('**/yarn.lock') }}
+          key: yarn-windows-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            yarn-
+            yarn-windows-
 
       - name: Run bootstrap
         run: |
@@ -188,9 +192,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ env.YARN_CACHE_LOCATION }}
-          key: yarn-${{ hashFiles('**/yarn.lock') }}
+          key: yarn-linux-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            yarn-
+            yarn-linux-
 
       # Node 10 is only supported by ChromeDriver 107 and lower
       - name: Download Chrome
@@ -229,6 +233,7 @@ jobs:
             test/*/failure_debug/
             test/*/screenshots/
 
+
   functional-tests-windows:
     runs-on: windows-latest
     name: Run functional tests on Windows
@@ -260,6 +265,10 @@ jobs:
           node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org'
 
+      - name: Disable Windows Defender
+        run: |
+          Set-MpPreference -DisableIntrusionPreventionSystem $true -DisableIOAVProtection $true -DisableRealtimeMonitoring $true -DisableScriptScanning $true -EnableControlledFolderAccess Disabled -EnableNetworkProtection AuditMode -Force -MAPSReporting Disabled -SubmitSamplesConsent NeverSend
+
       - name: Setup Yarn
         run: |
           npm uninstall -g yarn
@@ -275,9 +284,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ env.YARN_CACHE_LOCATION }}
-          key: yarn-${{ hashFiles('**/yarn.lock') }}
+          key: yarn-windows-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            yarn-
+            yarn-windows-
 
       # Node 10 is only supported by ChromeDriver 107 and lower
       - name: Download Chrome
@@ -361,9 +370,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ env.YARN_CACHE_LOCATION }}
-          key: yarn-${{ hashFiles('**/yarn.lock') }}
+          key: yarn-linux-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            yarn-
+            yarn-linux-
 
       - name: Get package version
         run: |
@@ -416,6 +425,10 @@ jobs:
           node-version-file: 'artifacts/.nvmrc'
           registry-url: 'https://registry.npmjs.org'
 
+      - name: Disable Windows Defender
+        run: |
+          Set-MpPreference -DisableIntrusionPreventionSystem $true -DisableIOAVProtection $true -DisableRealtimeMonitoring $true -DisableScriptScanning $true -EnableControlledFolderAccess Disabled -EnableNetworkProtection AuditMode -Force -MAPSReporting Disabled -SubmitSamplesConsent NeverSend
+
       - name: Setup Yarn
         run: |
           npm uninstall -g yarn
@@ -431,9 +444,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ env.YARN_CACHE_LOCATION }}
-          key: yarn-${{ hashFiles('**/yarn.lock') }}
+          key: yarn-windows-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            yarn-
+            yarn-windows-
 
       - name: Get package version
         run: |
