@@ -30,64 +30,15 @@
 
 import semver, { coerce } from 'semver';
 
-/** @private */
-interface VersionNumbers {
-  major: number;
-  minor: number;
-  patch: number;
-}
-
 /**
- * @private
- *
- * List of OpenSearch Dashboards major versions that can connect to legacy version
- * 7.10.2.
- *
- * WARNING: OpenSearchDashboards 7.x could cause conflicts.
- */
-const osdLegacyCompatibleMajorVersions = [1, 2, 3];
-
-/**
- * Checks for the compatibilitiy between OpenSearch and OpenSearchDashboards versions
- * 1. Major version differences will never work together.
- * 2. Older versions of OpenSearch won't work with newer versions of OpenSearch Dashboards.
+ * Checks for the compatibility between OpenSearch and OpenSearchDashboards versions;
+ * They are considered compatible if they are within the same major version.
  */
 export function opensearchVersionCompatibleWithOpenSearchDashboards(
   opensearchVersion: string,
   opensearchDashboardsVersion: string
 ) {
-  const opensearchVersionNumbers: VersionNumbers = {
-    major: semver.major(opensearchVersion),
-    minor: semver.minor(opensearchVersion),
-    patch: semver.patch(opensearchVersion),
-  };
-
-  const opensearchDashboardsVersionNumbers: VersionNumbers = {
-    major: semver.major(opensearchDashboardsVersion),
-    minor: semver.minor(opensearchDashboardsVersion),
-    patch: semver.patch(opensearchDashboardsVersion),
-  };
-
-  if (
-    legacyVersionCompatibleWithOpenSearchDashboards(
-      opensearchVersionNumbers,
-      opensearchDashboardsVersionNumbers
-    )
-  ) {
-    return true;
-  }
-
-  // Reject mismatching major version numbers.
-  if (opensearchVersionNumbers.major !== opensearchDashboardsVersionNumbers.major) {
-    return false;
-  }
-
-  // Reject older minor versions of OpenSearch.
-  if (opensearchVersionNumbers.minor < opensearchDashboardsVersionNumbers.minor) {
-    return false;
-  }
-
-  return true;
+  return semver.major(opensearchVersion) === semver.major(opensearchDashboardsVersion);
 }
 
 export function opensearchVersionEqualsOpenSearchDashboards(
@@ -100,26 +51,5 @@ export function opensearchVersionEqualsOpenSearchDashboards(
     nodeSemVer &&
     opensearchDashboardsSemver &&
     nodeSemVer.version === opensearchDashboardsSemver.version
-  );
-}
-
-/**
- * Verify legacy version of engines is compatible with current version
- * of OpenSearch Dashboards if OpenSearch Dashboards is 1.x.
- *
- * @private
- * @param legacyVersionNumbers semantic version of legacy engine
- * @param opensearchDashboardsVersionNumbers semantic version of application
- * @returns {boolean}
- */
-function legacyVersionCompatibleWithOpenSearchDashboards(
-  legacyVersionNumbers: VersionNumbers,
-  opensearchDashboardsVersionNumbers: VersionNumbers
-) {
-  return (
-    legacyVersionNumbers.major === 7 &&
-    legacyVersionNumbers.minor === 10 &&
-    legacyVersionNumbers.patch === 2 &&
-    osdLegacyCompatibleMajorVersions.includes(opensearchDashboardsVersionNumbers.major)
   );
 }
