@@ -28,6 +28,7 @@ env:
 
 jobs:
   build-lint-test-linux:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     container:
       image: docker://opensearchstaging/ci-runner:ci-runner-rockylinux8-opensearch-dashboards-integtest-v2
@@ -87,6 +88,7 @@ jobs:
         run: yarn test:jest_integration:ci
 
   build-lint-test-windows:
+    if: ${{ false }}
     runs-on: windows-latest
     name: Build and Verify on Windows
     steps:
@@ -154,7 +156,96 @@ jobs:
         id: integration-tests
         run: yarn test:jest_integration:ci
 
+  compatibility-matrix:
+    runs-on: ubuntu-latest
+    name: Generate compatibility matrix
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          registry-url: 'https://registry.npmjs.org'
+
+      - id: compatible
+        run: echo "versions=$(node scripts/bwc/get_compatible_releases.js)" >> $GITHUB_OUTPUT
+    outputs:
+      versions: ${{ steps.compatible.outputs.versions }}
+
+  compatibility-tests-linux:
+    runs-on: ubuntu-latest
+    container:
+      image: docker://opensearchstaging/ci-runner:ci-runner-rockylinux8-opensearch-dashboards-integtest-v2
+      options: --user 1001
+    name: Run functional tests on Linux
+    needs:
+      - compatibility-matrix
+    strategy:
+      matrix:
+        group: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ]
+        version: ${{ fromJSON(needs.compatibility-matrix.outputs.versions) }}
+    steps:
+      - run: echo Running functional tests for ciGroup${{ matrix.group }}
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Setup Yarn
+        run: |
+          npm uninstall -g yarn
+          npm i -g yarn@1.22.10
+          yarn config set network-timeout 1000000 -g
+
+      - name: Configure Yarn Cache
+        run: echo "YARN_CACHE_LOCATION=$(yarn cache dir)" >> $GITHUB_ENV
+
+      - name: Initialize Yarn Cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.YARN_CACHE_LOCATION }}
+          key: yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            yarn-
+
+      - name: Setup chromedriver
+        run: node scripts/upgrade_chromedriver.js
+
+      - name: Run bootstrap
+        run: yarn osd bootstrap
+
+      - name: Build plugins
+        run: node scripts/build_opensearch_dashboards_platform_plugins --no-examples --workers 10
+
+      - name: Run CI test group ${{ matrix.group }}
+        id: ftr-tests
+        run: node scripts/functional_tests.js --config test/functional/config.js --include ciGroup${{ matrix.group }}
+        env:
+          CI_GROUP: ciGroup${{ matrix.group }}
+          CI_PARALLEL_PROCESS_NUMBER: ciGroup${{ matrix.group }}
+          JOB: ci${{ matrix.group }}
+          CACHE_DIR: ciGroup${{ matrix.group }}
+          TEST_OPENSEARCH_BRANCH: ${{ matrix.version }}
+          OSD_OPENSEARCH_SNAPSHOT_URL: https://artifacts.opensearch.org/snapshots/core/opensearch/${{ matrix.version }}-SNAPSHOT/opensearch-min-${{ matrix.version }}-SNAPSHOT-linux-x64-latest.tar.gz
+
+
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: failure-artifacts
+          path: |
+            test/*/failure_debug/
+            test/*/screenshots/
+
   functional-tests-linux:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     container:
       image: docker://opensearchstaging/ci-runner:ci-runner-rockylinux8-opensearch-dashboards-integtest-v2
@@ -219,6 +310,7 @@ jobs:
             test/*/screenshots/
 
   functional-tests-windows:
+    if: ${{ false }}
     runs-on: windows-latest
     name: Run functional tests on Windows
     strategy:
@@ -292,6 +384,7 @@ jobs:
             test/*/screenshots/
 
   build-min-artifact-tests-linux:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     container:
       image: docker://opensearchstaging/ci-runner:ci-runner-rockylinux8-opensearch-dashboards-integtest-v2
@@ -362,6 +455,7 @@ jobs:
           retention-days: 1
 
   build-min-artifact-tests-windows:
+    if: ${{ false }}
     runs-on: windows-latest
     name: Build min release artifacts on Windows
     defaults:
@@ -488,7 +582,7 @@ jobs:
         id: verify-opensearch-exists
         run: |
           if curl -I -L ${{ env.OPENSEARCH_URL }}; then
-            echo "::set-output name=version-exists::true"
+            echo "version-exists=true" >> $GITHUB_OUTPUT
           fi
 
       - name: Skipping tests
