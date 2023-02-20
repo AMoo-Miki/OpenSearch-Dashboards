@@ -300,6 +300,7 @@
     "@types/moment-timezone": "^0.5.12",
     "@types/mustache": "^0.8.31",
     "@types/node": "^14.17.32",
+    "@types/node-fetch": "^2.6.2",
     "@types/node-forge": "^1.0.1",
     "@types/normalize-path": "^3.0.0",
     "@types/pegjs": "^0.10.1",

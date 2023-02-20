@@ -29,11 +29,15 @@
  */
 
 import { basename } from 'path';
+import fetch from 'node-fetch';
+import semver from 'semver';
 
 import { Config, Platform } from '../../lib';
 
-export function getNodeDownloadInfo(config: Config, platform: Platform) {
-  const version = config.getNodeVersion();
+let NODE_VERSION: string;
+
+export async function getNodeDownloadInfo(config: Config, platform: Platform) {
+  const version = NODE_VERSION || (await getLatestNodeVersion(config.getNodeRange()));
   const arch = platform.getNodeArch();
 
   const downloadName = platform.isWindows()
@@ -51,4 +55,19 @@ export function getNodeDownloadInfo(config: Config, platform: Platform) {
     extractDir,
     version,
   };
+}
+
+async function getLatestNodeVersion(range: string) {
+  const releaseDoc = await fetch('https://nodejs.org/dist/index.json');
+  const releaseList: [{ version: string }] = await releaseDoc.json();
+  const releases = releaseList.map(({ version }) => version.replace(/^v/, ''));
+  const maxVersion = semver.maxSatisfying(releases, range);
+
+  if (!maxVersion) {
+    throw new Error(`Cannot find a version of Node.js that satisfies ${range}.`);
+  }
+
+  NODE_VERSION = maxVersion;
+
+  return maxVersion;
 }
