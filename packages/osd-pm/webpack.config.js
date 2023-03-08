@@ -41,6 +41,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
     libraryTarget: 'commonjs2',
+    hashFunction: require('@node-rs/xxhash').Xxh64,
   },
 
   resolve: {

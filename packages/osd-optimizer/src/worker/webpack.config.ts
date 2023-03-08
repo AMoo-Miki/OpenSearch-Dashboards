@@ -32,6 +32,7 @@ import Path from 'path';
 
 import { stringifyRequest } from 'loader-utils';
 import webpack from 'webpack';
+import { Xxh64 } from '@node-rs/xxhash';
 // @ts-expect-error
 import TerserPlugin from 'terser-webpack-plugin';
 // @ts-expect-error
@@ -69,6 +70,7 @@ export function getWebpackConfig(bundle: Bundle, bundleRefs: BundleRefs, worker:
           info.absoluteResourcePath
         )}${info.query}`,
       jsonpFunction: `${bundle.id}_bundle_jsonpfunction`,
+      hashFunction: Xxh64,
     },
 
     optimization: {
