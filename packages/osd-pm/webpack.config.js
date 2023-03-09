@@ -41,11 +41,10 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
     libraryTarget: 'commonjs2',
-    hashFunction: require('@node-rs/xxhash').Xxh64,
   },
 
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: ['.ts', '.js', '.json'],
   },
 
   module: {
@@ -106,6 +105,6 @@ module.exports = {
   },
 
   watchOptions: {
-    ignored: [/node_modules/, /vendor/],
+    ignored: /(node_modules|vendor)/,
   },
 };

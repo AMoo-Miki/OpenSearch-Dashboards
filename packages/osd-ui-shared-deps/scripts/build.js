@@ -33,7 +33,7 @@ const Fs = require('fs');
 
 const { run, createFailError, CiStatsReporter } = require('@osd/dev-utils');
 const webpack = require('webpack');
-const Stats = require('webpack/lib/Stats');
+// const Stats = require('webpack/lib/Stats');
 const del = require('del');
 
 const { getWebpackConfig } = require('../webpack.config');
@@ -91,7 +91,7 @@ run(
       throw createFailError(
         `webpack failure in about ${took} seconds\n${stats.toString({
           colors: true,
-          ...Stats.presetToOptions('minimal'),
+          //...Stats.presetToOptions('minimal'),
         })}`
       );
     };

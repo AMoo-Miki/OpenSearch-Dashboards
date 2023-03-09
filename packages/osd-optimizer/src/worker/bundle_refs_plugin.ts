@@ -74,7 +74,7 @@ export class BundleRefsPlugin {
       // hook into the creation of NormalModule instances in webpack, if the import
       // statement leading to the creation of the module is pointing to a bundleRef
       // entry then create a BundleRefModule instead of a NormalModule.
-      compilationParams.normalModuleFactory.hooks.factory.tap(
+      compilationParams.normalModuleFactory.hooks.factorize.tapAsync(
         'BundleRefsPlugin/normalModuleFactory/factory',
         (wrappedFactory: ModuleFactory): ModuleFactory => (data, callback) => {
           const context = data.context;

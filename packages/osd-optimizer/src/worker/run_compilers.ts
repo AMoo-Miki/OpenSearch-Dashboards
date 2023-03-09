@@ -128,7 +128,7 @@ const observeCompiler = (
         referencedFiles.add(bundle.manifestPath);
       }
 
-      for (const module of stats.compilation.modules) {
+      for (const module of Array.from(stats.compilation.modules)) {
         if (isNormalModule(module)) {
           moduleCount += 1;
           const path = getModulePath(module);

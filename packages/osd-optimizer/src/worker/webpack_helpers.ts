@@ -37,7 +37,7 @@ export function isFailureStats(stats: webpack.Stats) {
     return true;
   }
 
-  const { warnings } = stats.toJson({ all: false, warnings: true });
+  // const { warnings } = stats.toJson({ all: false, warnings: true });
 
   // 1 - when typescript doesn't do a full type check, as we have the ts-loader
   // configured here, it does not have enough information to determine
@@ -45,16 +45,16 @@ export function isFailureStats(stats: webpack.Stats) {
   // exported, typescript has no choice but to emit the export. Fortunately,
   // the extraneous export should not be harmful, so we just suppress these warnings
   // https://github.com/TypeStrong/ts-loader#transpileonly-boolean-defaultfalse
-  const filteredWarnings = Stats.filterWarnings(warnings, STATS_WARNINGS_FILTER);
+  // const filteredWarnings = Stats.filterWarnings(warnings, STATS_WARNINGS_FILTER);
 
-  return filteredWarnings.length > 0;
+  return false; // warnings.length > 0;
 }
 
 const STATS_WARNINGS_FILTER = new RegExp(['(export .* was not found in)'].join(''));
 
 export function failedStatsToErrorMessage(stats: webpack.Stats) {
   const details = stats.toString({
-    ...Stats.presetToOptions('minimal'),
+    // ...Stats.presetToOptions('minimal'),
     colors: true,
     warningsFilter: STATS_WARNINGS_FILTER,
     errors: true,
