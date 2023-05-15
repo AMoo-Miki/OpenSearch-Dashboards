@@ -12,7 +12,6 @@ function setup_dashboards() {
   [ $SECURITY_ENABLED == "false" ] && echo "server.host: 0.0.0.0" >> config/opensearch_dashboards.yml
   echo "csp.warnLegacyBrowsers: false" >> config/opensearch_dashboards.yml
   echo "--max-old-space-size=5120" >> config/node.options
-  echo "--openssl-legacy-provider" >> config/node.options
 }
 
 # Starts OpenSearch Dashboards
