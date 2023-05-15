@@ -49,8 +49,6 @@ run(
       env.FORCE_COLOR = 'true';
     }
 
-    env.NODE_OPTIONS = '--openssl-legacy-provider ' + (env.NODE_OPTIONS || '');
-
     await procRunner.run('worker', {
       cmd: 'webpack',
       args: ['--config', WEBPACK_CONFIG_PATH],
