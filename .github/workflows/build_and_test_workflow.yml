@@ -26,6 +26,8 @@ env:
   TEST_OPENSEARCH_PORT: 9400
   OSD_SNAPSHOT_SKIP_VERIFY_CHECKSUM: true
   NODE_OPTIONS: "--max-old-space-size=6144 --dns-result-order=ipv4first"
+  # Version 112.0.5615.0
+  CHROME_VERSION: 1109208
 
 jobs:
   build-lint-test:
@@ -136,6 +138,22 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - run: echo Running functional tests for ciGroup${{ matrix.group }}
+
+      - name: Setup Chrome
+        id: setup-chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: ${{ env.CHROME_VERSION }}
+
+      - name: Set Chrome Path
+        if: matrix.os != 'windows-latest'
+        run: |
+          echo "TEST_BROWSER_BINARY_PATH=${{ steps.setup-chrome.outputs.chrome-path }}" >> $GITHUB_ENV
+
+      - name: Set Chrome Path (Windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          echo "TEST_BROWSER_BINARY_PATH=${{ steps.setup-chrome.outputs.chrome-path }}" >> $env:GITHUB_ENV
 
       - name: Configure git's autocrlf (Windows only)
         if: matrix.os == 'windows-latest'
