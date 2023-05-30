@@ -71,6 +71,8 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Adding @ZilongX and @Flyingliuhub as maintainers. ([#4137](https://github.com/opensearch-project/OpenSearch-Dashboards/pull/4137))
 - Add new MAINTAINERS to CODEOWNERS file. ([#4199](https://github.com/opensearch-project/OpenSearch-Dashboards/pull/4199))
 - Adding @BSFishy as maintainer. ([#4469](https://github.com/opensearch-project/OpenSearch-Dashboards/pull/4469))
+- Bump `oui` from `1.1.1` to `1.2.0` ([#4170](https://github.com/opensearch-project/OpenSearch-Dashboards/pull/4170))
+
 
 ### 🪛 Refactoring
 
