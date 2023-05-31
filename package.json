@@ -12,7 +12,7 @@
   ],
   "private": true,
   "version": "3.0.0",
-  "branch": "test",
+  "branch": "test-bp2",
   "types": "./opensearch_dashboards.d.ts",
   "tsdocMetadata": "./build/tsdoc-metadata.json",
   "build": {
