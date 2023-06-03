@@ -27,7 +27,7 @@
     "clean": {
       "extraPatterns": [
         "build",
-        "build-test-bp-2",
+        "build-test-bp-3",
         "data/optimize",
         "built_assets",
         ".eslintcache",
