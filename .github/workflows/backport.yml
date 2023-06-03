@@ -25,10 +25,10 @@ jobs:
       )
     steps:
       - name: Backport
-        uses: AMoo-Miki/backport@v2.2.0-rc.2
+        uses: AMoo-Miki/backport@v2.2.0-rc.3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           head_template: backport/backport-<%= number %>-to-<%= base %>
           files_to_skip: "CHANGELOG.md"
           labels_template: "<%= JSON.stringify([...labels, 'autocut']) %>"
-          failure_labels: "<%= JSON.stringify([...labels, 'failed backport']) %>"
+          failure_labels: "failed backport"
