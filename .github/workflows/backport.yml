@@ -25,7 +25,7 @@ jobs:
       )
     steps:
       - name: Backport
-        uses: AMoo-Miki/backport@v2.2.0-rc.3
+        uses: AMoo-Miki/backport@v2.2.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           head_template: backport/backport-<%= number %>-to-<%= base %>
