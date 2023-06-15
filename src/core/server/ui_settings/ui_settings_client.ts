@@ -91,6 +91,10 @@ export class UiSettingsClient implements IUiSettingsClient {
     return copiedDefaults;
   }
 
+  getDefault(key: string): unknown {
+    return this.defaults[key]?.value;
+  }
+
   async get<T = any>(key: string): Promise<T> {
     const all = await this.getAll();
     return all[key];

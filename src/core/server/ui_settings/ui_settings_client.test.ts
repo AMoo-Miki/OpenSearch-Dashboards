@@ -333,6 +333,16 @@ describe('ui settings', () => {
     });
   });
 
+  describe('#getDefault()', () => {
+    it('returns the defaults settings passed within the constructor', () => {
+      const value = chance.word();
+      const defaults = { key: { value } };
+      const { uiSettings } = setup({ defaults });
+      expect(uiSettings.getDefault('key')).toEqual(value);
+      expect(uiSettings.getDefault('unknown')).toBeUndefined();
+    });
+  });
+
   describe('#getUserProvided()', () => {
     it('pulls user configuration from OpenSearch', async () => {
       const { uiSettings, savedObjectsClient } = setup();

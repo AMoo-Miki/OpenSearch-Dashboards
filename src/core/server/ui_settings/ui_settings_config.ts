@@ -40,10 +40,15 @@ const deprecations: ConfigDeprecationProvider = ({ unused, renameFromRoot }) => 
 const configSchema = schema.object({
   overrides: schema.object(
     {
+      'theme:darkMode': schema.maybe(schema.boolean({ defaultValue: true })),
       'theme:version': schema.string({ defaultValue: 'v7' }),
     },
     { unknowns: 'allow' }
   ),
+  defaults: schema.object({
+    'theme:darkMode': schema.maybe(schema.boolean({ defaultValue: false })),
+    'theme:version': schema.maybe(schema.string({ defaultValue: 'v7' })),
+  }),
 });
 
 export type UiSettingsConfigType = TypeOf<typeof configSchema>;
