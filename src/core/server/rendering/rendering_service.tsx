@@ -107,6 +107,11 @@ export class RenderingService {
             uiSettings.getOverrideOrDefault('theme:version')) ||
           '';
 
+        const themeVersion =
+          (settings.user?.['theme:version']?.userValue ??
+            settings.defaults?.['theme:version']?.value) ||
+          false;
+
         const brandingAssignment = await this.assignBrandingConfig(
           darkMode,
           opensearchDashboardsConfig as OpenSearchDashboardsConfigType
