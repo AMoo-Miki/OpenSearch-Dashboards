@@ -99,6 +99,11 @@ export class RenderingService {
           ? Boolean(settings.user['theme:darkMode'].userValue)
           : false;
 
+        const themeVersion =
+          (settings.user?.['theme:version']?.userValue ??
+            settings.defaults?.['theme:version']?.value) ||
+          false;
+
         const brandingAssignment = await this.assignBrandingConfig(
           darkMode,
           opensearchDashboardsConfig as OpenSearchDashboardsConfigType
@@ -111,6 +116,7 @@ export class RenderingService {
           i18n: i18n.translate,
           locale: i18n.getLocale(),
           darkMode,
+          themeVersion,
           injectedMetadata: {
             version: env.packageInfo.version,
             buildNumber: env.packageInfo.buildNum,
