@@ -12,6 +12,7 @@
 
     background-color: $euiColorLightestShade;
     color: $euiTextColor;
+    font-family: var(--font-code);
 
     .ace_scrollbar {
       @include euiScrollBar;
