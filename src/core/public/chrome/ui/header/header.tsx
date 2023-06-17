@@ -138,7 +138,7 @@ export function Header({
                       navigateToApp={application.navigateToApp}
                       branding={branding}
                       basePath={basePath}
-                      /* This `theme` should match the theme of EuiHeader */
+                      /* This theme should match the theme of EuiHeader */
                       theme={headerTheme}
                     />,
                   ],
