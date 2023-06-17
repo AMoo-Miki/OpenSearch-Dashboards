@@ -53,13 +53,8 @@ const deprecations: ConfigDeprecationProvider = ({ unused, renameFromRoot }) => 
  */
 
 const configSchema = schema.object({
-  overrides: schema.object(
-    {
-      'theme:darkMode': schema.maybe(schema.boolean({ defaultValue: true })),
-      'theme:version': schema.string({ defaultValue: 'v7' }),
-    },
-    { unknowns: 'allow' }
-  ),
+  overrides: schema.object({}, { unknowns: 'allow' }),
+  // We don't explicitly need to limit to these 2; the code is written to handle all
   defaults: schema.object({
     'theme:darkMode': schema.maybe(schema.boolean({ defaultValue: false })),
     'theme:version': schema.maybe(schema.string({ defaultValue: 'v7' })),
