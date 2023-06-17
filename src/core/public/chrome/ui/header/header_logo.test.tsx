@@ -7,9 +7,11 @@ import React from 'react';
 import { BehaviorSubject } from 'rxjs';
 import { mountWithIntl } from 'test_utils/enzyme_helpers';
 import { HeaderLogo, DEFAULT_DARK_LOGO, DEFAULT_LOGO } from './header_logo';
+import { BasePath } from '../../../http/base_path';
 
 const mockProps = () => ({
   href: '/',
+  basePath: new BasePath('/base'),
   navLinks$: new BehaviorSubject([]),
   forceNavigation$: new BehaviorSubject(false),
   navigateToApp: jest.fn(),
