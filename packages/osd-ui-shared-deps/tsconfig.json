@@ -5,6 +5,7 @@
   },
   "include": [
     "index.d.ts",
-    "theme.ts"
+    "theme.ts",
+    "src/**/*"
   ]
 }

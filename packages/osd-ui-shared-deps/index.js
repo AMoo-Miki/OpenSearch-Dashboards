@@ -38,6 +38,8 @@ exports.lightCssDistFilename = 'osd-ui-shared-deps.v7.light.css';
 exports.lightV8CssDistFilename = 'osd-ui-shared-deps.v8.light.css';
 exports.darkCssDistFilename = 'osd-ui-shared-deps.v7.dark.css';
 exports.darkV8CssDistFilename = 'osd-ui-shared-deps.v8.dark.css';
+exports.cssDistFilename = 'osd-ui-shared-deps.v7.css';
+exports.cssV8CssDistFilename = 'osd-ui-shared-deps.v8.css';
 exports.externals = {
   // stateful deps
   angular: '__osdSharedDeps__.Angular',

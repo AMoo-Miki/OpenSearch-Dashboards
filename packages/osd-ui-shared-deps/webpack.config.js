@@ -47,6 +47,8 @@ exports.getWebpackConfig = ({ dev = false } = {}) => ({
     'osd-ui-shared-deps.v7.light': ['@elastic/eui/dist/eui_theme_light.css'],
     'osd-ui-shared-deps.v8.dark': ['@elastic/eui/dist/eui_theme_next_dark.css'],
     'osd-ui-shared-deps.v8.light': ['@elastic/eui/dist/eui_theme_next_light.css'],
+    'osd-ui-shared-deps.v7': ['./src/combined_theme_v7.scss'],
+    'osd-ui-shared-deps.v8': ['./src/combined_theme_v8.scss'],
   },
   context: __dirname,
   devtool: dev ? '#cheap-source-map' : false,
@@ -77,6 +79,10 @@ exports.getWebpackConfig = ({ dev = false } = {}) => ({
       {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+      {
+        test: /\.scss$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'comment-stripper', 'sass-loader'],
       },
       {
         include: [require.resolve('./theme.ts')],
