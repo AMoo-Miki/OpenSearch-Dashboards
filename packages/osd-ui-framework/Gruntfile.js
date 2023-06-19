@@ -28,6 +28,7 @@
  * under the License.
  */
 
+const { strip } = require('comment-stripper');
 const sass = require('node-sass');
 const postcss = require('postcss');
 const postcssConfig = require('@osd/optimizer/postcss.config.js');
@@ -74,7 +75,9 @@ module.exports = function (grunt) {
     Promise.all([
       uiFrameworkCompile('src/kui_light.scss', 'dist/kui_light.css'),
       uiFrameworkCompile('src/kui_dark.scss', 'dist/kui_dark.css'),
-    ]).then(done);
+    ])
+      .then(() => uiFrameworkCompile('src/kui.scss', 'dist/kui.css'))
+      .then(done);
   });
 
   function uiFrameworkCompile(src, dest) {
@@ -89,7 +92,7 @@ module.exports = function (grunt) {
           }
 
           postcss([postcssConfig])
-            .process(result.css, { from: src, to: dest })
+            .process(strip(result.css.toString('utf8')), { from: src, to: dest })
             .then((result) => {
               grunt.file.write(dest, result.css);
 
