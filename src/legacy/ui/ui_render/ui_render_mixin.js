@@ -109,21 +109,11 @@ export function uiRenderMixin(osdServer, server, config) {
 
       const styleSheetPaths = [
         `${regularBundlePath}/osd-ui-shared-deps/${UiSharedDeps.baseCssDistFilename}`,
-        ...(darkMode
-          ? [
-              themeVersion === 'v7'
-                ? `${regularBundlePath}/osd-ui-shared-deps/${UiSharedDeps.darkCssDistFilename}`
-                : `${regularBundlePath}/osd-ui-shared-deps/${UiSharedDeps.darkV8CssDistFilename}`,
-              `${basePath}/node_modules/@osd/ui-framework/dist/kui_dark.css`,
-              `${basePath}/ui/legacy_dark_theme.css`,
-            ]
-          : [
-              themeVersion === 'v7'
-                ? `${regularBundlePath}/osd-ui-shared-deps/${UiSharedDeps.lightCssDistFilename}`
-                : `${regularBundlePath}/osd-ui-shared-deps/${UiSharedDeps.lightV8CssDistFilename}`,
-              `${basePath}/node_modules/@osd/ui-framework/dist/kui_light.css`,
-              `${basePath}/ui/legacy_light_theme.css`,
-            ]),
+        themeVersion === 'v7'
+          ? `${regularBundlePath}/osd-ui-shared-deps/${UiSharedDeps.cssDistFilename}`
+          : `${regularBundlePath}/osd-ui-shared-deps/${UiSharedDeps.cssV8CssDistFilename}`,
+        `${basePath}/node_modules/@osd/ui-framework/dist/kui.css`,
+        `${basePath}/ui/legacy_theme.css`,
       ];
 
       const kpUiPlugins = osdServer.newPlatform.__internals.uiPlugins;

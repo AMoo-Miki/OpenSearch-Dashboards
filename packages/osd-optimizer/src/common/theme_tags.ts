@@ -38,9 +38,9 @@ const isArrayOfStrings = (input: unknown): input is string[] =>
   Array.isArray(input) && input.every((v) => typeof v === 'string');
 
 export type ThemeTags = readonly ThemeTag[];
-export type ThemeTag = 'v7light' | 'v7dark' | 'v8light' | 'v8dark';
-export const DEFAULT_THEMES = tags('v7light', 'v7dark');
-export const ALL_THEMES = tags('v7light', 'v7dark', 'v8light', 'v8dark');
+export type ThemeTag = 'v7light' | 'v7dark' | 'v8light' | 'v8dark' | 'v7' | 'v8';
+export const DEFAULT_THEMES = tags('v7light', 'v7dark', 'v8light', 'v8dark', 'v7', 'v8');
+export const ALL_THEMES = tags('v7light', 'v7dark', 'v8light', 'v8dark', 'v7', 'v8');
 
 export function parseThemeTags(input?: any): ThemeTags {
   if (!input) {
