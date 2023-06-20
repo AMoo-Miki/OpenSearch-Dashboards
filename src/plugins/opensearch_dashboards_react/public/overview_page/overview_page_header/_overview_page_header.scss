@@ -29,8 +29,8 @@
  */
 
 .osdOverviewPageHeader {
-  background-color: $euiPageBackgroundColor;
-  border-bottom: $euiBorderWidthThin solid $euiColorLightShade;
+  background-color: var(--eui-page-background-color);
+  border-bottom: $euiBorderWidthThin solid var(--eui-color-light-shade);
 }
 
 .osdOverviewPageHeader__inner {

@@ -43,7 +43,7 @@ $osdDefaultFontSize: 14px;
   $osdMarkdownAlphaDarkShadeReversed: rgba($euiColorEmptyShade, 0.65);
 
   &--reversed {
-    color: $euiColorLightestShade;
+    color: var(--eui-color-lightest-shade);
   }
 
   > *:first-child {

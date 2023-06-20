@@ -10,8 +10,8 @@
   .ace-tm {
     $aceBackground: tintOrShade($euiColorLightShade, 50%, 0);
 
-    background-color: $euiColorLightestShade;
-    color: $euiTextColor;
+    background-color: var(--eui-color-lightest-shade);
+    color: var(--eui-text-color);
     font-family: var(--font-code);
 
     .ace_scrollbar {
@@ -33,8 +33,8 @@
       background:
         linear-gradient(
           to left,
-          $euiColorMediumShade 0%,
-          $euiColorMediumShade 1px,
+          var(--eui-color-medium-shade) 0%,
+          var(--eui-color-medium-shade) 1px,
           transparent 1px,
           transparent 100%
         );
@@ -49,7 +49,7 @@
     }
 
     .ace_warning {
-      color: $euiColorDanger;
+      color: var(--eui-color-danger);
     }
 
     .ace_method {
@@ -68,8 +68,8 @@
     }
 
     .ace_gutter {
-      background-color: $euiColorEmptyShade;
-      color: $euiColorDarkShade;
+      background-color: var(--eui-color-empty-shade);
+      color: var(--eui-color-dark-shade);
       border-left: 1px solid $aceBackground;
     }
 
@@ -83,11 +83,11 @@
     }
 
     .ace_cursor {
-      color: $euiColorFullShade;
+      color: var(--eui-color-full-shade);
     }
 
     .ace_invisible {
-      color: $euiColorLightShade;
+      color: var(--eui-color-light-shade);
     }
 
     .ace_storage,
@@ -186,7 +186,7 @@
     }
 
     &.ace_multiselect .ace_selection.ace_start {
-      box-shadow: 0 0 3px 0 $euiColorEmptyShade;
+      box-shadow: 0 0 3px 0 var(--eui-color-empty-shade);
     }
 
     .ace_marker-layer .ace_step {
@@ -203,7 +203,7 @@
     }
 
     .ace_marker-layer .ace_selected-word {
-      background: $euiColorLightestShade;
+      background: var(--eui-color-lightest-shade);
       border: $euiBorderThin;
     }
   }

@@ -14,7 +14,7 @@
 
   &:focus {
     opacity: 1;
-    border: 2px solid $euiColorPrimary;
+    border: 2px solid var(--eui-color-primary);
     z-index: $euiZLevel1;
   }
 

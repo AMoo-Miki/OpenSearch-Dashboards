@@ -81,7 +81,11 @@
 
     &:hover,
     &:focus {
-      background-color: $embEditingModeHoverColor;
+      background-color: var(--eui-color-warning-alpha-90);
+
+      @media (prefers-color-scheme: dark) {
+        background-color: var(--eui-color-warning-alpha-70);
+      }
     }
   }
 
@@ -107,7 +111,7 @@
    */
   &.react-grid-placeholder {
     border-radius: $euiBorderRadius;
-    background: $euiColorWarning;
+    background: var(--eui-color-warning);
   }
 }
 

@@ -13,15 +13,15 @@
   padding: $euiSizeXS $euiSizeS;
   border: none;
   z-index: 5;
-  background: $euiColorFullShade;
+  background: var(--eui-color-full-shade);
   border-radius: $euiBorderRadius;
   text-align: left;
 
   &:hover {
-    background: $euiColorFullShade;
+    background: var(--eui-color-full-shade);
 
     .dshExitFullScreenButton__icon {
-      color: $euiColorEmptyShade;
+      color: var(--eui-color-empty-shade);
     }
   }
 }

@@ -9,7 +9,7 @@
     word-break: break-all;
     word-wrap: break-word;
     white-space: pre-wrap;
-    color: $euiColorFullShade;
+    color: var(--eui-color-full-shade);
     vertical-align: top;
     padding-top: 2px;
   }
@@ -19,7 +19,7 @@
   }
 
   .dscFieldName {
-    color: $euiColorDarkShade;
+    color: var(--eui-color-dark-shade);
   }
 
   td,

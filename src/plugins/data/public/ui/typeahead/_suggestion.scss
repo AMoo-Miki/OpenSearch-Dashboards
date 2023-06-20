@@ -33,9 +33,9 @@ $osdTypeaheadTypes: (
     @include euiScrollBar;
 
     border: 1px solid;
-    border-color: $euiBorderColor;
-    color: $euiTextColor;
-    background-color: $euiColorEmptyShade;
+    border-color: var(--eui-border-color);
+    color: var(--eui-text-color);
+    background-color: var(--eui-color-empty-shade);
     position: relative;
     z-index: $euiZContentMenu;
     width: 100%;
@@ -66,18 +66,18 @@ $osdTypeaheadTypes: (
     }
 
     .osdTypeahead__item.active {
-      background-color: $euiColorLightestShade;
+      background-color: var(--eui-color-lightest-shade);
 
       .osdSuggestionItem__callout {
-        background: $euiColorEmptyShade;
+        background: var(--eui-color-empty-shade);
       }
 
       .osdSuggestionItem__text {
-        color: $euiColorFullShade;
+        color: var(--eui-color-full-shade);
       }
 
       .osdSuggestionItem__type {
-        color: $euiColorFullShade;
+        color: var(--eui-color-full-shade);
       }
 
       @each $name, $color in $osdTypeaheadTypes {
@@ -109,8 +109,8 @@ $osdTypeaheadTypes: (
 
   &.osdSuggestionItem--recentSearch {
     .osdSuggestionItem__type {
-      background-color: $euiColorLightShade;
-      color: $euiColorMediumShade;
+      background-color: var(--eui-color-light-shade);
+      color: var(--eui-color-medium-shade);
     }
 
     /* stylelint-disable-next-line selector-class-pattern */
@@ -148,11 +148,11 @@ $osdTypeaheadTypes: (
   overflow: hidden;
   text-overflow: ellipsis;
   padding: $euiSizeXS $euiSizeS;
-  color: $euiTextColor;
+  color: var(--eui-text-color);
 }
 
 .osdSuggestionItem__description {
-  color: $euiColorDarkShade;
+  color: var(--eui-color-dark-shade);
   overflow: hidden;
   text-overflow: ellipsis;
   margin-left: $euiSizeXL;
@@ -165,8 +165,8 @@ $osdTypeaheadTypes: (
 
 .osdSuggestionItem__callout {
   font-family: $euiCodeFontFamily;
-  background: $euiColorLightestShade;
-  color: $euiColorFullShade;
+  background: var(--eui-color-lightest-shade);
+  color: var(--eui-color-full-shade);
   padding: 0 $euiSizeXS;
   display: inline-block;
 }

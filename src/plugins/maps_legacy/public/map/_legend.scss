@@ -5,7 +5,7 @@
   font-family: $euiFontFamily;
   font-weight: $euiFontWeightMedium;
   line-height: $euiLineHeight;
-  color: $euiColorDarkShade;
+  color: var(--eui-color-dark-shade);
   padding: $euiSizeS;
   background: transparentize($euiColorEmptyShade, 0.2);
   border-radius: $euiBorderRadius;
@@ -16,8 +16,8 @@
     display: inline-block;
     margin: 3px $euiSizeXS 0 0;
     border-radius: 50%;
-    border: 1px solid $euiColorDarkShade;
-    background: $euiColorDarkShade;
+    border: 1px solid var(--eui-color-dark-shade);
+    background: var(--eui-color-dark-shade);
   }
 }
 

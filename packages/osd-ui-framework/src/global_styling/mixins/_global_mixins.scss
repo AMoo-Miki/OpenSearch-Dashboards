@@ -130,8 +130,8 @@
 @mixin formControl($borderRadius: $kuiBorderRadius) {
   @include formControlBase;
 
-  background-color: $euiFormBackgroundColor;
-  border: 1px solid $euiFormBorderColor;
+  background-color: var(--eui-form-background-color);
+  border: 1px solid var(--eui-form-border-color);
   border-radius: $borderRadius;
   transition: border-color $kuiInputTransitionTiming;
   min-height: $kuiFormInputHeight; /* 1 */
@@ -263,7 +263,7 @@
 
 @mixin selectOnStandoutBackground {
   .kuiSelect {
-    border-color: $euiFormBackgroundColor;
+    border-color: var(--eui-form-background-color);
 
     @include kuiButtonFocus {
       @include formControlFocus;

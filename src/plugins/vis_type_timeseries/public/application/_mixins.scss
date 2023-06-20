@@ -1,5 +1,5 @@
 @mixin tvbEditorRepeatingRow {
-  background-color: $euiColorLightestShade;
+  background-color: var(--eui-color-lightest-shade);
   padding: $euiSizeS;
   margin-bottom: $euiSizeS;
 }

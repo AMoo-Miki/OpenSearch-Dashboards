@@ -29,7 +29,7 @@
  */
 
 .osdOverviewWrapper {
-  background-color: $euiColorEmptyShade;
+  background-color: var(--eui-color-empty-shade);
   display: flex;
   flex-direction: column;
   min-height: calc(100vh - #{$euiHeaderHeightCompensation});
@@ -92,7 +92,7 @@
 }
 
 .osdOverviewSolution__icon {
-  background-color: $euiColorEmptyShade !important;
+  background-color: var(--eui-color-empty-shade) !important;
   box-shadow: none !important;
   height: $euiSizeL * 2;
   padding: $euiSizeM;

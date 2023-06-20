@@ -8,11 +8,11 @@
 }
 
 .savedObjectsManagementImportSummary__createdCount {
-  color: $euiColorSuccessText;
+  color: var(--eui-color-success-text);
 }
 
 .savedObjectsManagementImportSummary__errorCount {
-  color: $euiColorDangerText;
+  color: var(--eui-color-danger-text);
 }
 
 .savedObjectsManagementImportSummary__icon {

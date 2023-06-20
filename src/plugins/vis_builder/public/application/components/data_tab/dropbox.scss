@@ -19,7 +19,7 @@
     display: grid;
     grid-gap: $euiSizeXS / 2;
     padding: $euiSizeS - ($euiSizeXS / 2) $euiSizeS $euiSizeS $euiSizeS;
-    background-color: $euiColorLightShade;
+    background-color: var(--eui-color-light-shade);
     border-radius: $euiBorderRadius;
   }
 
@@ -47,7 +47,7 @@
   }
 
   &__dropTarget {
-    color: $euiColorDarkShade;
+    color: var(--eui-color-dark-shade);
     grid-template-columns: 1fr auto;
     transform-origin: top;
     animation: pop-in $euiAnimSpeedFast $euiAnimSlightResistance forwards;

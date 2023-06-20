@@ -124,13 +124,13 @@
  * 1. Override Bootstrap.
  */
 .kuiButton--danger {
-  color: $euiColorDanger;
-  border: solid 1px $euiColorDanger;
+  color: var(--eui-color-danger);
+  border: solid 1px var(--eui-color-danger);
 
   @include kuiButtonFocus {
     @include focus($euiColorDanger);
 
-    color: $euiColorDanger;
+    color: var(--eui-color-danger);
   }
 
   @include kuiButtonHoverAndActive {
@@ -178,8 +178,8 @@
 }
 
 .kuiButton--secondary {
-  color: $euiColorPrimary !important; /* 2 */
-  border: solid 1px $euiColorPrimary;
+  color: var(--eui-color-primary) !important; /* 2 */
+  border: solid 1px var(--eui-color-primary);
 
   @include kuiButtonHoverAndActive {
     color: darken($euiColorPrimary, 10%) !important; /* 1 */

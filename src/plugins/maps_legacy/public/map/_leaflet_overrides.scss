@@ -1,7 +1,7 @@
 // SASSTODO: Create these tooltip variables in EUI
 // And/Or create a tooltip mixin
 $temp-euiTooltipBackground: tintOrShade($euiColorFullShade, 25%, 90%);
-$temp-euiTooltipText: $euiColorGhost;
+$temp-euiTooltipText: var(--eui-color-ghost);
 
 // Converted leaflet icon sprite into background svg for custom coloring (dark mode)
 /* stylelint-disable-next-line max-line-length */
@@ -15,7 +15,7 @@ $visMapLeafletSprite: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 }
 
 .leaflet-container {
-  background: $euiColorEmptyShade;
+  background: var(--eui-color-empty-shade);
 
   // the heatmap layer plugin logs an error to the console when the map is in a 0-sized container
   min-width: 1px !important;
@@ -37,12 +37,18 @@ $visMapLeafletSprite: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 .leaflet-draw-actions,
 .leaflet-control {
   a {
-    background-color: lightOrDarkTheme($euiColorEmptyShade, $euiColorLightShade); /* 1 */
-    border-color: lightOrDarkTheme($euiColorLightShade, $euiColorMediumShade) !important; /* 1 */
-    color: $euiTextColor !important; /* 1 */
+    background-color: var(--eui-color-empty-shade);
+    border-color: var(--eui-color-light-shade) !important;
+
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--eui-color-light-shade);
+      border-color: var(--eui-color-medium-shade) !important;
+    }
+
+    color: var(--eui-text-color) !important; /* 1 */
 
     &:hover {
-      background-color: $euiColorLightestShade;
+      background-color: var(--eui-color-lightest-shade);
     }
   }
 }
@@ -125,7 +131,7 @@ $visMapLeafletSprite: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 
 .leaflet-container .leaflet-control-attribution {
   background-color: transparentize($euiColorEmptyShade, 0.7);
-  color: $euiColorDarkShade;
+  color: var(--eui-color-dark-shade);
 
   // attributions are appended in blocks of <p> tags, this will allow them to display in one line
   p {

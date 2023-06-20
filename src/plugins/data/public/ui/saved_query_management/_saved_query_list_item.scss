@@ -1,6 +1,6 @@
 .osdSavedQueryListItem {
   margin-top: 0;
-  color: $euiLinkColor;
+  color: var(--eui-link-color);
 }
 
 // Can't actually target the button with classes, but styles to override

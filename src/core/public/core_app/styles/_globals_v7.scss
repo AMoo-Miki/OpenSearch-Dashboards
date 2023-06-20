@@ -1,7 +1,13 @@
-// v7light global scope
+// color-scheme-aware v7 global scope
 // ---
-// prepended to all .scss imports (from JS, when v7light theme selected)
+// prepended to all .scss imports (from JS, when v7 theme selected)
 
-// @import "@elastic/eui/src/themes/eui/eui_colors_light";
+/* stylelint-disable no-invalid-position-at-import-rule */
+
+@forward "@elastic/eui/src/themes/eui/eui_colors_light" as light-*;
+@forward "@elastic/eui/src/themes/eui/eui_colors_dark" as dark-*;
+
+$colorSchemeAwareTheme: true;
+
 @import "@elastic/eui/src/themes/eui/eui_globals";
 @import "./mixins";

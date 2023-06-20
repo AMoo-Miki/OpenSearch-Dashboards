@@ -49,7 +49,7 @@
   min-width: 200px;
   padding: 4px 12px 5px 28px;
   font-family: $kuiFontFamily; /* 1 */
-  background-color: $euiColorEmptyShade;
+  background-color: var(--eui-color-empty-shade);
   color: $kuiFontColor;
   border-radius: $kuiBorderRadius;
   font-size: 1em;

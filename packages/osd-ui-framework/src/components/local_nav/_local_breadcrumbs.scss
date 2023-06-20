@@ -9,7 +9,7 @@
   border-bottom: $euiBorderThin;
   flex-grow: 1;
   flex-basis: 100%;
-  background-color: $euiColorEmptyShade;
+  background-color: var(--eui-color-empty-shade);
 }
 
 .kuiLocalBreadcrumb {

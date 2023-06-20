@@ -27,7 +27,7 @@
 }
 
 .mtrVis__container--light {
-  color: $euiColorEmptyShade;
+  color: var(--eui-color-empty-shade);
 }
 
 .mtrVis__container-isFilterable {

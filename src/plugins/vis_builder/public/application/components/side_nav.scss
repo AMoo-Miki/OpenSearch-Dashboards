@@ -22,7 +22,7 @@
   &__header {
     padding: $euiSizeS;
     border-bottom: $euiBorderThin;
-    background-color: $euiColorEmptyShade;
+    background-color: var(--eui-color-empty-shade);
   }
 
   &__style {

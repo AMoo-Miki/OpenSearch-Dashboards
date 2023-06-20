@@ -1,6 +1,6 @@
 .tvbMarkdownEditor {
   display: flex;
-  background-color: $euiColorEmptyShade;
+  background-color: var(--eui-color-empty-shade);
   height: 500px;
 }
 
@@ -11,7 +11,7 @@
 }
 
 .tvbMarkdownEditor__editor {
-  border-right: 2px solid $euiColorLightestShade;
+  border-right: 2px solid var(--eui-color-lightest-shade);
 }
 
 .tvbMarkdownEditor__variables {

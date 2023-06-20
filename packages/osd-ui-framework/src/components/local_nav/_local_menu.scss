@@ -25,7 +25,7 @@
   &.kuiLocalMenuItem-isSelected {
     color: $kuiColorBlue;
     background-color: $localNavButtonBackgroundColor-isSelected;
-    border-color: $euiColorPrimary;
+    border-color: var(--eui-color-primary);
     z-index: 2;
 
     &:hover,

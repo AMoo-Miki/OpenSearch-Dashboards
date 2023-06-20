@@ -60,7 +60,7 @@ doc-table {
 
     dt {
       background-color: transparentize(shade($euiColorPrimary, 20%), 0.9);
-      color: $euiTextColor;
+      color: var(--eui-text-color);
       padding: ($euiSizeXS / 2) $euiSizeXS;
       margin-right: $euiSizeXS;
       word-break: normal;
@@ -116,7 +116,7 @@ doc-table {
 .table {
   // Nesting
   .table {
-    background-color: $euiColorEmptyShade;
+    background-color: var(--eui-color-empty-shade);
   }
 }
 
@@ -138,21 +138,21 @@ doc-table {
 table {
   th {
     i.fa-sort {
-      color: $euiColorLightShade;
+      color: var(--eui-color-light-shade);
     }
 
     button.fa-sort-asc,
     button.fa-sort-down,
     i.fa-sort-asc,
     i.fa-sort-down {
-      color: $euiColorPrimary;
+      color: var(--eui-color-primary);
     }
 
     button.fa-sort-desc,
     button.fa-sort-up,
     i.fa-sort-desc,
     i.fa-sort-up {
-      color: $euiColorPrimary;
+      color: var(--eui-color-primary);
     }
   }
 }

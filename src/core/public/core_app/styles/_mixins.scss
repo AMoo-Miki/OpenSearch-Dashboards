@@ -16,7 +16,7 @@
 
   line-height: $euiSizeXXL * 2;
   text-align: center;
-  background-color: $euiColorEmptyShade;
+  background-color: var(--eui-color-empty-shade);
   border-radius: 100%;
   padding: $euiSize / 2;
 
@@ -30,7 +30,7 @@
   position: relative;
   display: flex;
   flex: 0 0 $size;
-  background-color: $euiPageBackgroundColor;
+  background-color: var(--eui-page-background-color);
   align-items: center;
   justify-content: center;
   margin: 0;
@@ -46,13 +46,21 @@
   }
 
   &:hover {
-    background-color: tintOrShade($euiColorPrimary, 80%, 60%);
+    @if $colorSchemeAwareTheme {
+      background-color: tint($light-euiColorPrimary, 80%);
+
+      @media (prefers-color-scheme: dark) {
+        background-color: shade($dark-euiColorPrimary, 60%);
+      }
+    } @else {
+      background-color: tintOrShade($euiColorPrimary, 80%, 60%);
+    }
   }
 
   &:focus,
   &.active {
-    background-color: $euiColorPrimary;
-    color: $euiColorEmptyShade;
+    background-color: var(--eui-color-primary);
+    color: var(--eui-color-empty-shade);
   }
 
   &::after {
@@ -79,7 +87,7 @@
   bottom: 0;
   z-index: $euiZLevel + 1000;
   background: inherit;
-  background-color: $euiPageBackgroundColor;
+  background-color: var(--eui-page-background-color);
   opacity: 0;
   overflow: auto;
   animation: opensearchDashboardsFullScreenGraphics_FadeIn $euiAnimSpeedExtraSlow $euiAnimSlightResistance 0s forwards;
@@ -91,8 +99,7 @@
     z-index: 1;
     width: 310px;
     height: 477px;
-    /* stylelint-disable-next-line function-url-quotes */
-    content: url(lightOrDarkTheme('~core_app_image_assets/bg_top_branded.svg', '~core_app_image_assets/bg_top_branded_dark.svg'));
+    content: url("~core_app_image_assets/fullscreen_graphics_top.svg");
   }
 
   &::after {
@@ -102,8 +109,7 @@
     z-index: 1;
     width: 313px;
     height: 461px;
-    /* stylelint-disable-next-line function-url-quotes */
-    content: url(lightOrDarkTheme('~core_app_image_assets/bg_bottom_branded.svg', '~core_app_image_assets/bg_bottom_branded_dark.svg'));
+    content: url("~core_app_image_assets/fullscreen_graphics_bottom.svg");
   }
 
   @keyframes opensearchDashboardsFullScreenGraphics_FadeIn {

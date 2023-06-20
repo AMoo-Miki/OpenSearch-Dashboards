@@ -5,7 +5,7 @@
 .vbConfig {
   @include euiYScrollWithShadows;
 
-  background: $euiColorLightestShade;
+  background: var(--eui-color-lightest-shade);
   border-left: $euiBorderThin;
   position: relative;
   overflow-x: hidden;
@@ -20,7 +20,7 @@
     padding-bottom: 0;
 
     &.showDivider {
-      border-bottom: 1px solid $euiColorLightShade;
+      border-bottom: 1px solid var(--eui-color-light-shade);
     }
   }
 

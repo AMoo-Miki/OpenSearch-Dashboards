@@ -31,10 +31,10 @@
   justify-content: space-between;
 
   &-selected {
-    background-color: $euiColorLightestShade;
+    background-color: var(--eui-color-lightest-shade);
   }
 }
 
 .conHistory__reqIcon {
-  color: $euiColorMediumShade;
+  color: var(--eui-color-medium-shade);
 }

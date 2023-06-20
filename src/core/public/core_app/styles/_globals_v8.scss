@@ -1,7 +1,13 @@
-// v8light global scope
+// color-scheme-aware v8 global scope
 // ---
-// prepended to all .scss imports (from JS, when v8light theme selected)
+// prepended to all .scss imports (from JS, when v8 theme selected)
 
-// @import "@elastic/eui/src/themes/eui-next/eui_next_colors_light";
+/* stylelint-disable no-invalid-position-at-import-rule */
+
+@forward "@elastic/eui/src/themes/eui-next/eui_next_colors_light" as light-*;
+@forward "@elastic/eui/src/themes/eui-next/eui_next_colors_dark" as dark-*;
+
+$colorSchemeAwareTheme: true;
+
 @import "@elastic/eui/src/themes/eui-next/eui_next_globals";
 @import "./mixins";

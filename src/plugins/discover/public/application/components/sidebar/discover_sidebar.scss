@@ -26,11 +26,15 @@
 
 .dscFieldListHeader {
   padding: $euiSizeS $euiSizeS 0 $euiSizeS;
-  background-color: lightOrDarkTheme(tint($euiColorPrimary, 90%), $euiColorLightShade);
 }
 
+.dscFieldListHeader,
 .dscFieldList--popular {
-  background-color: lightOrDarkTheme(tint($euiColorPrimary, 90%), $euiColorLightShade);
+  background-color: tint($euiColorPrimary, 90%);
+
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--eui-color-light-shade);
+  }
 }
 
 .dscFieldChooser {
@@ -38,7 +42,7 @@
 }
 
 .dscFieldChooser__toggle {
-  color: $euiColorMediumShade;
+  color: var(--eui-color-medium-shade);
   margin-left: $euiSizeS !important;
 }
 
@@ -80,7 +84,7 @@
 
 .dscFieldSearch__toggleButton {
   width: calc(100% - #{$euiSizeS});
-  color: $euiColorPrimary;
+  color: var(--eui-color-primary);
   padding-left: $euiSizeXS;
   margin-left: $euiSizeXS;
 }
@@ -94,6 +98,6 @@
 }
 
 .dscFieldDetails {
-  color: $euiTextColor;
+  color: var(--eui-text-color);
   margin-bottom: $euiSizeS;
 }

@@ -121,7 +121,7 @@
     padding-bottom: $euiSizeXS;
 
     &.key {
-      color: $euiColorMediumShade;
+      color: var(--eui-color-medium-shade);
       max-width: $euiSize * 10;
       text-align: right;
       padding-right: $euiSizeXS;

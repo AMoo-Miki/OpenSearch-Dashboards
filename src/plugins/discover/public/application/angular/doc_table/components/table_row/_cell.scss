@@ -20,7 +20,7 @@
 
 .osdDocTableRowFilterButton {
   appearance: none;
-  background-color: $euiColorEmptyShade;
+  background-color: var(--eui-color-empty-shade);
   border: none;
   padding: 0 $euiSizeXS;
   font-size: $euiFontSizeS;

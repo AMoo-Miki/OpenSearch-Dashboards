@@ -4,6 +4,6 @@
 .kuiToolBarText {
   font-size: $kuiFontSize;
   line-height: $kuiLineHeight;
-  color: $euiColorDarkShade;
+  color: var(--eui-color-dark-shade);
   white-space: nowrap; /* 1 */
 }

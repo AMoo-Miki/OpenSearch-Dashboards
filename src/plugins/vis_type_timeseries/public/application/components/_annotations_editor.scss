@@ -1,6 +1,6 @@
 .tvbAnnotationsEditor__container {
   padding: $euiSize;
-  background-color: $euiColorLightestShade;
+  background-color: var(--eui-color-lightest-shade);
 }
 
 @include euiPanel(".tvbAnnotationsEditor");

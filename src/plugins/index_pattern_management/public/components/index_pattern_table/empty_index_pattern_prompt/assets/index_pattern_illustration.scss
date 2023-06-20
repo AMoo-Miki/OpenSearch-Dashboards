@@ -1,9 +1,9 @@
 .indexPatternIllustration {
   &__verticalStripes {
-    fill: $euiColorFullShade;
+    fill: var(--eui-color-full-shade);
   }
 
   &__dots {
-    fill: $euiColorLightShade;
+    fill: var(--eui-color-light-shade);
   }
 }

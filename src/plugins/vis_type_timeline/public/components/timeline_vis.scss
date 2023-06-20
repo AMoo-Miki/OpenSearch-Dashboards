@@ -37,7 +37,7 @@
   }
 
   .ngLegendValue {
-    color: $euiTextColor;
+    color: var(--eui-text-color);
     cursor: pointer;
 
     &:focus,
@@ -54,12 +54,12 @@
 
   .flot-tick-label {
     font-size: $euiFontSizeXS;
-    color: $euiColorDarkShade;
+    color: var(--eui-color-dark-shade);
   }
 }
 
 .timChart__legendCaption {
-  color: $euiTextColor;
+  color: var(--eui-text-color);
   white-space: nowrap;
   font-weight: $euiFontWeightBold;
 }

@@ -283,7 +283,7 @@
 
     line,
     path {
-      stroke: $euiBorderColor;
+      stroke: var(--eui-border-danger);
       fill: none;
       shape-rendering: crispEdges;
     }
@@ -321,7 +321,7 @@
 
   .slice {
     stroke-width: $euiSizeXS / 2;
-    stroke: $euiColorEmptyShade;
+    stroke: var(--eui-color-empty-shade);
 
     &:hover {
       opacity: 0.8;

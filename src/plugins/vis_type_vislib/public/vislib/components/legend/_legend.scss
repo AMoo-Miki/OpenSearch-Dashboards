@@ -13,14 +13,14 @@ $visLegendLineHeight: $euiSize;
   left: 0;
   display: flex;
   padding: $euiSizeXS;
-  background-color: $euiColorEmptyShade;
+  background-color: var(--eui-color-empty-shade);
   transition:
     opacity $euiAnimSpeedFast $euiAnimSlightResistance,
     background-color $euiAnimSpeedFast $euiAnimSlightResistance $euiAnimSpeedExtraSlow;
 
   &:focus {
     box-shadow: none;
-    background-color: $euiFocusBackgroundColor !important;
+    background-color: var(--eui-focus-background-color) !important;
   }
 }
 

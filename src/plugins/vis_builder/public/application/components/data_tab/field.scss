@@ -5,7 +5,7 @@
 .vbFieldButton {
   @include euiBottomShadowSmall;
 
-  background-color: $euiColorEmptyShade;
+  background-color: var(--eui-color-empty-shade);
   border: $euiBorderThin;
   margin-top: $euiSizeXS;
 

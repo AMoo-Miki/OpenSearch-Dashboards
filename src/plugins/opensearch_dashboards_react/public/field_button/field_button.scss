@@ -16,7 +16,11 @@
 }
 
 .osdFieldButton--isDraggable {
-  background: lightOrDarkTheme($euiColorEmptyShade, $euiColorLightestShade);
+  background: var(--eui-color-empty-shade);
+
+  @media (prefers-color-scheme: dark) {
+    background: var(--eui-color-lightest-shade);
+  }
 
   &:hover,
   &:focus,

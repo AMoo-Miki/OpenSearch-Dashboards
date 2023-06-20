@@ -64,7 +64,7 @@
 // SECTIONS
 
 .visEditorSidebar__section {
-  background-color: $euiColorEmptyShade;
+  background-color: var(--eui-color-empty-shade);
   padding: $euiSizeS;
   border-radius: $euiBorderRadius;
 
@@ -76,7 +76,11 @@
 // Collapsible section
 
 .visEditorSidebar__collapsible {
-  background-color: lightOrDarkTheme($euiPageBackgroundColor, $euiColorLightestShade);
+  background-color: var(--eui-page-background-color);
+
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--eui-color-lightest-shade);
+  }
 }
 
 .visEditorSidebar__collapsible--marginBottom {
@@ -108,7 +112,7 @@
   font-size: $euiFontSizeS;
 
   span {
-    color: $euiColorDarkShade;
+    color: var(--eui-color-dark-shade);
   }
 }
 

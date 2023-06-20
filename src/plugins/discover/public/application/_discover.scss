@@ -36,7 +36,7 @@ discover-app {
 
 .dscWrapper__content {
   padding-top: $euiSizeXS;
-  background-color: $euiColorEmptyShade;
+  background-color: var(--eui-color-empty-shade);
 
   .osd-table {
     margin-bottom: 0;
@@ -90,7 +90,7 @@ discover-app {
 
 // SASSTODO: replace the padding value with a variable
 .dscTable__footer {
-  background-color: $euiColorLightShade;
+  background-color: var(--eui-color-light-shade);
   padding: 5px 10px;
   text-align: center;
 }

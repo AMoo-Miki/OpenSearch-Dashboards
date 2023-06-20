@@ -79,12 +79,12 @@
 }
 
 .homSolutionPanel__header {
-  color: $euiColorEmptyShade;
+  color: var(--eui-color-empty-shade);
   padding: $euiSize;
 }
 
 .homSolutionPanel__icon {
-  background-color: $euiColorEmptyShade !important;
+  background-color: var(--eui-color-empty-shade) !important;
   box-shadow: none !important;
   margin: 0 auto $euiSizeS;
   padding: $euiSizeS;
@@ -106,25 +106,25 @@
 
 /* stylelint-disable-next-line no-duplicate-selectors */
 .homSolutionPanel__header {
-  background-color: $euiColorPrimary;
+  background-color: var(--eui-color-primary);
   background-repeat: no-repeat;
   background-position: top 0 left 0, bottom 0 right 0;
   background-size: $euiSizeXL * 4, $euiSizeXL * 6;
 
   .homSolutionPanel--enterpriseSearch & {
-    background-color: $euiColorSecondary;
+    background-color: var(--eui-color-secondary);
     background-position: top $euiSizeS left 0, bottom $euiSizeS right $euiSizeS;
     background-size: $euiSize * 1.25, $euiSizeXL;
   }
 
   .homSolutionPanel--observability & {
-    background-color: $euiColorAccent;
+    background-color: var(--eui-color-accent);
     background-position: top $euiSizeS right $euiSizeS;
     background-size: $euiSizeL * 1.5;
   }
 
   .homSolutionPanel--securitySolution & {
-    background-color: $euiColorDarkestShade;
+    background-color: var(--eui-color-darkest-shade);
     background-position: top $euiSizeS left $euiSizeS;
     background-size: $euiSizeL * 2;
   }

@@ -15,7 +15,7 @@ $keyframe-multiplier: 1 / $animation-multiplier;
   grid-area: workspace;
   grid-gap: $euiSizeM;
   padding: $euiSizeM;
-  background-color: $euiColorEmptyShade;
+  background-color: var(--eui-color-empty-shade);
   height: 100%;
 
   &__empty {

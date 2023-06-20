@@ -14,7 +14,7 @@
 
   &__resizeContainer {
     min-height: 0;
-    background-color: $euiColorEmptyShade;
+    background-color: var(--eui-color-empty-shade);
   }
 
   &__resizeButton {

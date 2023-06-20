@@ -6,7 +6,7 @@
   width: 100%;
   height: $euiSizeL * 10;
   line-height: normal;
-  background-color: $euiColorEmptyShade;
+  background-color: var(--eui-color-empty-shade);
   overflow: auto;
 }
 

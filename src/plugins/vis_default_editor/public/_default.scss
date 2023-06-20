@@ -12,7 +12,7 @@
  */
 
 .visEditor__collapsibleSidebar {
-  background: $euiColorLightestShade;
+  background: var(--eui-color-lightest-shade);
   min-width: $vis-editor-sidebar-min-width;
   max-width: 100%;
   position: relative;
@@ -81,7 +81,7 @@
 }
 
 .visEditor__canvas {
-  background-color: $euiColorEmptyShade;
+  background-color: var(--eui-color-empty-shade);
   display: flex;
   flex-direction: row;
   overflow: auto;

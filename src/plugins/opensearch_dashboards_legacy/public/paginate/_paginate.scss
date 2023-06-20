@@ -29,7 +29,7 @@ paginate {
 
         a {
           text-decoration: none;
-          background-color: $euiColorLightestShade;
+          background-color: var(--eui-color-lightest-shade);
           margin-left: $euiSizeXS / 2;
           padding: $euiSizeS $euiSizeM;
         }
@@ -41,7 +41,7 @@ paginate {
         &.active a {
           text-decoration: none !important;
           font-weight: $euiFontWeightBold;
-          color: $euiColorDarkShade;
+          color: var(--eui-color-dark-shade);
           cursor: default;
         }
       }

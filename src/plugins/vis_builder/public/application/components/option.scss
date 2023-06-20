@@ -1,8 +1,8 @@
 .vbOption {
-  background-color: $euiColorEmptyShade;
+  background-color: var(--eui-color-empty-shade);
   padding: $euiSizeM;
 
   & &__panel {
-    background-color: $euiColorLightestShade;
+    background-color: var(--eui-color-lightest-shade);
   }
 }
