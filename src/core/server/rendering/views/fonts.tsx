@@ -51,7 +51,7 @@ interface FontFace {
   }>;
 }
 
-const Fonts: FunctionComponent<Props> = ({ url, theme }) => {
+export const Fonts: FunctionComponent<Props> = ({ url, theme }) => {
   // For new theme
   const sourceSans3: FontFace = {
     family: 'Source Sans 3',
