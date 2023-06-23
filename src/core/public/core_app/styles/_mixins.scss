@@ -47,10 +47,10 @@
 
   &:hover {
     @if $colorSchemeAwareTheme {
-      background-color: tint($light-euiColorPrimary, 80%);
+      background-color: tint($euiColorPrimary, 80%);
 
       @media (prefers-color-scheme: dark) {
-        background-color: shade($dark-euiColorPrimary, 60%);
+        background-color: shade($euiColorPrimary, 60%);
       }
     } @else {
       background-color: tintOrShade($euiColorPrimary, 80%, 60%);

@@ -4,10 +4,10 @@
 
 /* stylelint-disable no-invalid-position-at-import-rule */
 
-@forward "@elastic/eui/src/themes/eui-next/eui_next_colors_light" as light-*;
-@forward "@elastic/eui/src/themes/eui-next/eui_next_colors_dark" as dark-*;
+@forward "@elastic/eui/src/themes/eui-amsterdam/eui_amsterdam_colors_light" as light-*;
+@forward "@elastic/eui/src/themes/eui-amsterdam/eui_amsterdam_colors_dark" as dark-*;
 
 $colorSchemeAwareTheme: true;
 
-@import "@elastic/eui/src/themes/eui-next/eui_next_globals";
+@import "@elastic/eui/src/themes/eui-amsterdam/eui_amsterdam_globals";
 @import "./mixins";

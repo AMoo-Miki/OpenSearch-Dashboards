@@ -1,7 +1,7 @@
 /* stylelint-disable no-invalid-position-at-import-rule */
 
-@import "~@elastic/eui/dist/eui_theme_next_light";
+@import "~@elastic/eui/dist/oui_theme_next_light";
 
 @media (prefers-color-scheme: dark) {
-  @import "~@elastic/eui/dist/eui_theme_next_dark";
+  @import "~@elastic/eui/dist/oui_theme_next_dark";
 }
