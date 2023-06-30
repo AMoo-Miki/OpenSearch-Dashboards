@@ -79,6 +79,10 @@ exports.getWebpackConfig = ({ dev = false } = {}) => ({
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
+        test: /\.scss$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'comment-stripper', 'sass-loader'],
+      },
+      {
         include: [require.resolve('./theme.ts')],
         use: [
           {
