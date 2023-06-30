@@ -137,6 +137,12 @@ export function getWebpackConfig(bundle: Bundle, bundleRefs: BundleRefs, worker:
                 sourceMap: !worker.dist,
               },
             },
+            {
+              loader: 'comment-stripper',
+              options: {
+                language: 'css',
+              },
+            },
           ],
         },
         {
@@ -164,6 +170,7 @@ export function getWebpackConfig(bundle: Bundle, bundleRefs: BundleRefs, worker:
                     },
                   },
                 },
+                'comment-stripper',
                 {
                   loader: 'sass-loader',
                   options: {
