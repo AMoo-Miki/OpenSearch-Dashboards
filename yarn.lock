@@ -2363,7 +2363,7 @@
 
 "@node-rs/xxhash-android-arm64@1.4.0":
   version "1.4.0"
-  resolved "https://r.cnpmjs.org/@node-rs/xxhash-android-arm64/-/xxhash-android-arm64-1.4.0.tgz#2290c53ceabda804afb4c45679613d833a6385a0"
+  resolved "https://registry.yarnpkg.com/@node-rs/xxhash-android-arm64/-/xxhash-android-arm64-1.4.0.tgz#2290c53ceabda804afb4c45679613d833a6385a0"
   integrity sha512-BZzQO5jlgsIr9HhiqTwZjYqlfVeZiu+7PaoAdNEOq+i/SjyAqv1jGSkyek4rBSAiodyNkXcbE0eQtomeN6a55w==
 
 "@node-rs/xxhash-darwin-arm64@1.4.0":
@@ -18934,4 +18934,10 @@ zip-stream@^4.1.0:
 
 zlib@^1.0.5:
   version "1.0.5"
-  resolved "https://registry.yarnpkg.com/zlib/-/zlib-1.0.5.tgz#6e7c972fc371c645a6afb03ab1476
+  resolved "https://registry.yarnpkg.com/zlib/-/zlib-1.0.5.tgz#6e7c972fc371c645a6afb03ab14769def114fcc0"
+  integrity sha1-bnyXL8NxxkWmr7A6sUdp3vEU/MA=
+
+zwitch@^1.0.0:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/zwitch/-/zwitch-1.0.5.tgz#d11d7381ffed16b742f6af7b3f223d5cd9fe9920"
+  integrity sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==
