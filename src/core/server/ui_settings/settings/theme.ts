@@ -51,12 +51,12 @@ export const getThemeSettings = (): Record<string, UiSettingsParams> => {
       }),
       value: 'v7',
       type: 'select',
-      options: ['v7', 'Cascadia (preview.1)'],
+      options: ['v7', 'Next (preview.2)'],
       description: i18n.translate('core.ui_settings.params.themeVersionText', {
         defaultMessage: `Switch between the theme used for the current and next version of OpenSearch Dashboards, A page refresh is required for the setting to be applied.`,
       }),
       requiresPageReload: true,
-      schema: schema.oneOf([schema.literal('v7'), schema.literal('Cascadia (preview.1)')]),
+      schema: schema.oneOf([schema.literal('v7'), schema.literal('Next (preview.2)')]),
     },
   };
 };

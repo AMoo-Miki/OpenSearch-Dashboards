@@ -644,7 +644,7 @@ describe('ui settings', () => {
     });
 
     it('returns the overridden value for key theme:version', async () => {
-      const opensearchDocSource = { 'theme:version': 'Cascadia (preview.1)' };
+      const opensearchDocSource = { 'theme:version': 'Next (preview.2)' };
       const overrides = { 'theme:version': 'v7' };
       const { uiSettings } = setup({ opensearchDocSource, overrides });
 
@@ -660,10 +660,10 @@ describe('ui settings', () => {
     });
 
     it('rewrites the key theme:version value without override', async () => {
-      const opensearchDocSource = { 'theme:version': 'Cascadia (preview.1)' };
+      const opensearchDocSource = { 'theme:version': 'Next (preview.2)' };
       const { uiSettings } = setup({ opensearchDocSource });
 
-      expect(await uiSettings.get('theme:version')).toBe('Cascadia (preview.1)');
+      expect(await uiSettings.get('theme:version')).toBe('Next (preview.2)');
     });
 
     it('returns the default value for an override with value null', async () => {
