@@ -36,6 +36,18 @@ module.exports = () => {
         {
           useBuiltIns: 'entry',
           modules: false,
+          targets: [
+            'Firefox > 0 and last 2 years and > 0.01%',
+            'Chrome > 0 and last 2 years and > 0.01%',
+            'Safari > 0 and last 2 years and > 0.01%',
+            'Edge > 0 and last 1 years and > 0.01%',
+            'Opera > 0 and last 2 years and > 0.01%',
+            '> 0.2%',
+            'not op_mini all',
+            'not and_uc < 100',
+            'not android < 100',
+            'not dead',
+          ],
           // Please read the explanation for this
           // in node_preset.js
           corejs: '3.2.1',
