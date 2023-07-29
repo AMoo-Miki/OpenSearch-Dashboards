@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "./target",
+    "outDir": "./target/types",
     "declaration": true,
     "sourceMap": true,
     "types": [
@@ -11,5 +11,6 @@
   },
   "include": [
     "src/**/*"
-  ]
+  ],
+  "exclude": ["target"]
 }
