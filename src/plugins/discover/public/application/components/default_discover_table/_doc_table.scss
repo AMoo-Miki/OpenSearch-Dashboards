@@ -76,6 +76,20 @@ doc-table {
   }
 }
 
+.osdDiscoverTable {
+  & > tbody > tr:not(.osdDiscoverInViewRow):not(.osdDiscoverExpandedRow) {
+    visibility: hidden;
+  }
+
+  .osdDiscoverExpandedRow {
+    background: $euiColorEmptyShade;
+
+    & > td {
+      padding: 2em;
+    }
+  }
+}
+
 .osdDocTable__row {
   td {
     position: relative;
