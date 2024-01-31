@@ -77,6 +77,8 @@ doc-table {
 }
 
 .osdDiscoverTable {
+  @include ouiCodeFont;
+
   & > tbody > tr:not(.osdDiscoverInViewRow):not(.osdDiscoverExpandedRow) {
     visibility: hidden;
   }
