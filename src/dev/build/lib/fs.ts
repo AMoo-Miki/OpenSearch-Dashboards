@@ -44,6 +44,7 @@ import del from 'del';
 import deleteEmpty from 'delete-empty';
 import tar, { ExtractOptions } from 'tar';
 import { ToolingLog } from '@osd/dev-utils';
+import { sleep } from '@osd/std';
 
 const pipelineAsync = promisify(pipeline);
 const mkdirAsync = promisify(fs.mkdir);
@@ -101,10 +102,12 @@ export async function getChildPaths(path: string) {
   return childNames.map((name) => resolve(path, name));
 }
 
-export async function deleteAll(patterns: string[], log: ToolingLog) {
+export async function deleteAll(patterns: string[], log: ToolingLog, retryTimes: number = 1) {
   if (!Array.isArray(patterns)) {
     throw new TypeError('Expected patterns to be an array');
   }
+
+  let retryTimes_ = isFinite(retryTimes) ? retryTimes : 1;
 
   if (log) {
     log.debug('Deleting patterns:', longInspect(patterns));
@@ -114,14 +117,37 @@ export async function deleteAll(patterns: string[], log: ToolingLog) {
     assertAbsolute(pattern.startsWith('!') ? pattern.slice(1) : pattern);
   }
 
-  // Doing a dry run to get a list but `rm` will do the actual deleting
-  const filesToDelete = await del(patterns, {
-    concurrency: 4,
-    dryRun: true,
-  });
+  const filesToDelete = [];
 
-  await Promise.all(filesToDelete.map((folder) => rm(folder, { force: true, recursive: true })));
+  do {
+    // Doing a dry run to get a list but `rm` will do the actual deleting
+    const filesToDelete_ = await del(patterns, {
+      concurrency: 4,
+      dryRun: true,
+    });
 
+    // Maintain only the original list so we can use it for logging
+    if (filesToDelete.length === 0) filesToDelete.push(...filesToDelete_);
+
+    try {
+      await Promise.all(
+        filesToDelete_.map((folder) => rm(folder, { force: true, recursive: true }))
+      );
+    } catch (ex) {
+      if (retryTimes_-- > 0) {
+        await sleep(1000);
+        continue;
+      }
+
+      // If out of retries, re-throw the exception
+      throw ex;
+    }
+
+    // Getting here means deleting was successful so break out of the loop
+    break;
+  } while (true);
+
+  // Show the log only on the last
   if (log) {
     log.debug('Deleted %d files/directories', filesToDelete.length);
     log.verbose('Deleted:', longInspect(filesToDelete));
