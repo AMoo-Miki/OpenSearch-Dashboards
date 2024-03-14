@@ -42,6 +42,7 @@ export class Lifecycle {
   public readonly beforeEachRunnable = new LifecyclePhase<[ItsARunnable]>();
   public readonly beforeTestSuite = new LifecyclePhase<[ItsASuite]>();
   public readonly beforeEachTest = new LifecyclePhase<[ItsATest]>();
+  public readonly afterEachTest = new LifecyclePhase<[ItsATest]>();
   public readonly afterTestSuite = new LifecyclePhase<[ItsASuite]>();
   public readonly testFailure = new LifecyclePhase<[Error, ItsATest]>();
   public readonly testHookFailure = new LifecyclePhase<[Error, ItsATest]>();

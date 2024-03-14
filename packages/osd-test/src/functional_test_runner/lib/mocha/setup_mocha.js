@@ -57,6 +57,10 @@ export async function setupMocha(lifecycle, log, config, providers) {
     await lifecycle.beforeEachTest.trigger(this.currentTest);
   });
 
+  mocha.suite.afterEach('global after each', async function () {
+    await lifecycle.afterEachTest.trigger(this.currentTest);
+  });
+
   loadTestFiles({
     mocha,
     log,

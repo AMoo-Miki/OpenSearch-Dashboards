@@ -80,6 +80,13 @@ export async function RemoteProvider({ getService }: FtrProviderContext) {
     await driver.manage().setTimeouts({ implicit: config.get('timeouts.find') });
   });
 
+  lifecycle.afterEachTest.add(async (currentTest) => {
+    log.warning(
+      '###################\nafterEachTest\n################\n',
+      JSON.stringify(currentTest)
+    );
+  });
+
   lifecycle.afterTestSuite.add(async () => {
     const { width, height } = windowSizeStack.shift()!;
     await driver.manage().window().setRect({ width, height });
