@@ -8,6 +8,7 @@ import { IUiStart, IUiSetup, QueryEnhancement, UiEnhancements } from './types';
 
 import { ConfigSchema } from '../../config';
 import { createIndexPatternSelect } from './index_pattern_select';
+import { createDashboardSelect } from './dashboard_select';
 import { createSearchBar } from './search_bar/create_search_bar';
 import { createSettings } from './settings';
 import { DataPublicPluginStart } from '../types';
@@ -61,6 +62,7 @@ export class UiService implements Plugin<IUiSetup, IUiStart> {
       isEnhancementsEnabled: this.enhancementsConfig?.enabled,
       queryEnhancements: this.queryEnhancements,
       IndexPatternSelect: createIndexPatternSelect(core.savedObjects.client),
+      DashboardSelect: createDashboardSelect(core.savedObjects.client),
       SearchBar,
       Settings,
     };

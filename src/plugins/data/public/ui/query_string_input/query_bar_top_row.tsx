@@ -78,6 +78,7 @@ export interface QueryBarTopRowProps {
   prepend?: React.ComponentProps<typeof EuiFieldText>['prepend'];
   showQueryInput?: boolean;
   showDatePicker?: boolean;
+  showUpdateButton?: boolean;
   dateRangeFrom?: string;
   dateRangeTo?: string;
   isRefreshPaused?: boolean;
@@ -451,7 +452,7 @@ export default function QueryBarTopRow(props: QueryBarTopRowProps) {
     >
       {renderQueryInput()}
       {renderSharingMetaFields()}
-      <EuiFlexItem grow={false}>{renderUpdateButton()}</EuiFlexItem>
+      {props.showUpdateButton && <EuiFlexItem grow={false}>{renderUpdateButton()}</EuiFlexItem>}
     </EuiFlexGroup>
   );
 }
@@ -459,5 +460,6 @@ export default function QueryBarTopRow(props: QueryBarTopRowProps) {
 QueryBarTopRow.defaultProps = {
   showQueryInput: true,
   showDatePicker: true,
+  showUpdateButton: true,
   showAutoRefreshOnly: false,
 };

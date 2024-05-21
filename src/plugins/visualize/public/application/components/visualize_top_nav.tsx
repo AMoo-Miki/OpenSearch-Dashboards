@@ -219,6 +219,7 @@ const TopNav = ({
       screenTitle={vis.title}
       showAutoRefreshOnly={!showDatePicker()}
       showDatePicker={showDatePicker()}
+      showUpdateButton={vis.type.options.showUpdateButton}
       showFilterBar={showFilterBar}
       showQueryInput={showQueryInput}
       showSaveQuery={services.visualizeCapabilities.saveQuery}

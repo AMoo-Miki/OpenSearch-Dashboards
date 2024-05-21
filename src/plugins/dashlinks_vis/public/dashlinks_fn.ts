@@ -28,10 +28,50 @@
  * under the License.
  */
 
-export { UiEnhancements, IUiStart, createSettings, Settings, DataSettings } from './types';
-export { IndexPatternSelectProps } from './index_pattern_select';
-export { DashboardSelectProps } from './dashboard_select';
-export { FilterLabel } from './filter_bar';
-export { QueryStringInput, QueryStringInputProps } from './query_string_input';
-export { SearchBar, SearchBarProps, StatefulSearchBarProps } from './search_bar';
-export { SuggestionsComponent } from './typeahead';
+import { i18n } from '@osd/i18n';
+import { VisRenderValue } from '../../visualizations/public';
+import {
+  ExpressionFunctionDefinition,
+  OpenSearchDashboardsDatatable,
+  Render,
+} from '../../expressions/public';
+
+interface Arguments {
+  visConfig: string;
+}
+
+interface RenderValue extends VisRenderValue {
+  visType: 'dashlinks_vis';
+}
+
+export const createDashLinksVisFn = (): ExpressionFunctionDefinition<
+  'dashlinks_vis',
+  OpenSearchDashboardsDatatable,
+  Arguments,
+  Render<RenderValue>
+> => ({
+  name: 'dashlinks_vis',
+  type: 'render',
+  inputTypes: [],
+  help: i18n.translate('dashLinks.function.help', {
+    defaultMessage: 'DashLink Panel',
+  }),
+  args: {
+    visConfig: {
+      types: ['string'],
+      default: '"{}"',
+      help: '',
+    },
+  },
+  fn(input, args) {
+    const params = JSON.parse(args.visConfig);
+    return {
+      type: 'render',
+      as: 'visualization',
+      value: {
+        visType: 'dashlinks_vis',
+        visConfig: params,
+      },
+    };
+  },
+});

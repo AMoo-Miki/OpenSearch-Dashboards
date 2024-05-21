@@ -28,10 +28,14 @@
  * under the License.
  */
 
-export { UiEnhancements, IUiStart, createSettings, Settings, DataSettings } from './types';
-export { IndexPatternSelectProps } from './index_pattern_select';
-export { DashboardSelectProps } from './dashboard_select';
-export { FilterLabel } from './filter_bar';
-export { QueryStringInput, QueryStringInputProps } from './query_string_input';
-export { SearchBar, SearchBarProps, StatefulSearchBarProps } from './search_bar';
-export { SuggestionsComponent } from './typeahead';
+import React from 'react';
+
+import { SavedObjectsClientContract } from 'src/core/public';
+import { DashboardSelect, DashboardSelectProps } from './';
+
+// Takes in stateful runtime dependencies and pre-wires them to the component
+export function createDashboardSelect(savedObjectsClient: SavedObjectsClientContract) {
+  return (props: Omit<DashboardSelectProps, 'savedObjectsClient'>) => (
+    <DashboardSelect {...props} savedObjectsClient={savedObjectsClient} />
+  );
+}

@@ -39,6 +39,7 @@ import { Vis, VisToExpressionAst, VisualizationControllerConstructor } from '../
 export interface VisTypeOptions {
   showTimePicker: boolean;
   showQueryBar: boolean;
+  showUpdateButton: boolean;
   showFilterBar: boolean;
   showIndexSelection: boolean;
   hierarchicalData: boolean;

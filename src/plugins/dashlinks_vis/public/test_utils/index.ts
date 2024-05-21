@@ -28,10 +28,8 @@
  * under the License.
  */
 
-export { UiEnhancements, IUiStart, createSettings, Settings, DataSettings } from './types';
-export { IndexPatternSelectProps } from './index_pattern_select';
-export { DashboardSelectProps } from './dashboard_select';
-export { FilterLabel } from './filter_bar';
-export { QueryStringInput, QueryStringInputProps } from './query_string_input';
-export { SearchBar, SearchBarProps, StatefulSearchBarProps } from './search_bar';
-export { SuggestionsComponent } from './typeahead';
+export { getDepsMock } from './get_deps_mock';
+export { getIndexPatternMock } from './get_index_pattern_mock';
+export { getIndexPatternsMock } from './get_index_patterns_mock';
+export { getSearchSourceMock } from './get_search_service_mock';
+export { updateComponent } from './update_component';

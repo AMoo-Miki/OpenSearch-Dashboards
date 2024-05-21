@@ -435,6 +435,7 @@ export {
   SearchBarProps,
   StatefulSearchBarProps,
   IndexPatternSelectProps,
+  DashboardSelectProps,
   QueryStringInput,
   QueryStringInputProps,
   // for BWC, keeping the old name

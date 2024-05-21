@@ -28,10 +28,17 @@
  * under the License.
  */
 
-export { UiEnhancements, IUiStart, createSettings, Settings, DataSettings } from './types';
-export { IndexPatternSelectProps } from './index_pattern_select';
-export { DashboardSelectProps } from './dashboard_select';
-export { FilterLabel } from './filter_bar';
-export { QueryStringInput, QueryStringInputProps } from './query_string_input';
-export { SearchBar, SearchBarProps, StatefulSearchBarProps } from './search_bar';
-export { SuggestionsComponent } from './typeahead';
+import React from 'react';
+import type { DashboardSelectProps } from './dashboard_select';
+
+const Fallback = () => <div />;
+
+const LazyDashboardSelect = React.lazy(() => import('./dashboard_select'));
+export const DashboardSelect = (props: DashboardSelectProps) => (
+  <React.Suspense fallback={<Fallback />}>
+    <LazyDashboardSelect {...props} />
+  </React.Suspense>
+);
+
+export * from './create_dashboard_select';
+export type { DashboardSelectProps } from './dashboard_select';

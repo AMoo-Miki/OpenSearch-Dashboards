@@ -51,6 +51,7 @@ export type TopNavMenuProps = StatefulSearchBarProps &
     showQueryBar?: boolean;
     showQueryInput?: boolean;
     showDatePicker?: boolean;
+    showUpdateButton?: boolean;
     showFilterBar?: boolean;
     showDataSourceMenu?: boolean;
     data?: DataPublicPluginStart;
@@ -163,6 +164,7 @@ TopNavMenu.defaultProps = {
   showQueryBar: true,
   showQueryInput: true,
   showDatePicker: true,
+  showUpdateButton: true,
   showFilterBar: true,
   showDataSourceMenu: false,
   screenTitle: '',
