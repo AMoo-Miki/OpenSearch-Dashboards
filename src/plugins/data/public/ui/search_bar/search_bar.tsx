@@ -70,6 +70,7 @@ export interface SearchBarOwnProps {
   showQueryInput?: boolean;
   showFilterBar?: boolean;
   showDatePicker?: boolean;
+  showUpdateButton?: boolean;
   showAutoRefreshOnly?: boolean;
   filters?: Filter[];
   // Date picker
@@ -117,6 +118,7 @@ class SearchBarUI extends Component<SearchBarProps, State> {
     showQueryBar: true,
     showFilterBar: true,
     showDatePicker: true,
+    showUpdateButton: true,
     showAutoRefreshOnly: false,
   };
 
@@ -416,6 +418,7 @@ class SearchBarUI extends Component<SearchBarProps, State> {
           isLoading={this.props.isLoading}
           prepend={this.props.showFilterBar ? savedQueryManagement : undefined}
           showDatePicker={this.props.showDatePicker}
+          showUpdateButton={this.props.showUpdateButton}
           dateRangeFrom={this.state.dateRangeFrom}
           dateRangeTo={this.state.dateRangeTo}
           isRefreshPaused={this.props.isRefreshPaused}

@@ -1,0 +1,1 @@
+Contains the DashLinks visualization allowing to place navigation menus on a dashboard.

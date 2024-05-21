@@ -3,6 +3,7 @@
     "common.ui": "src/legacy/ui",
     "console": "src/plugins/console",
     "core": "src/core",
+    "dashLinks": "src/plugins/dashlinks_vis",
     "discover": "src/plugins/discover",
     "dashboard": "src/plugins/dashboard",
     "data": "src/plugins/data",

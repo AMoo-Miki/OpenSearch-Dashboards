@@ -1,0 +1,9 @@
+.dlpContainer {
+  width: 100%;
+  margin: 0 $euiSizeXS;
+  padding: $euiSizeS;
+
+  & > .dlpWrapper {
+    max-width: 100%;
+  }
+}

@@ -28,10 +28,28 @@
  * under the License.
  */
 
-export { UiEnhancements, IUiStart, createSettings, Settings, DataSettings } from './types';
-export { IndexPatternSelectProps } from './index_pattern_select';
-export { DashboardSelectProps } from './dashboard_select';
-export { FilterLabel } from './filter_bar';
-export { QueryStringInput, QueryStringInputProps } from './query_string_input';
-export { SearchBar, SearchBarProps, StatefulSearchBarProps } from './search_bar';
-export { SuggestionsComponent } from './typeahead';
+export const getSearchSourceMock = (opensearchSearchResponse?: any) =>
+  jest.fn().mockImplementation(() => ({
+    setParent: jest.fn(),
+    setField: jest.fn(),
+    fetch: jest.fn().mockResolvedValue(
+      opensearchSearchResponse
+        ? opensearchSearchResponse
+        : {
+            aggregations: {
+              termsAgg: {
+                buckets: [
+                  {
+                    key: 'Zurich Airport',
+                    doc_count: 691,
+                  },
+                  {
+                    key: 'Xi an Xianyang International Airport',
+                    doc_count: 526,
+                  },
+                ],
+              },
+            },
+          }
+    ),
+  }));

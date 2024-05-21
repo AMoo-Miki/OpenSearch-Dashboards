@@ -76,6 +76,7 @@ const defaultOptions: VisTypeOptions = {
   showTimePicker: true,
   showQueryBar: true,
   showFilterBar: true,
+  showUpdateButton: true,
   showIndexSelection: true,
   hierarchicalData: false, // we should get rid of this i guess ?
 };

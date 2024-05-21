@@ -7,6 +7,7 @@ import { SearchInterceptor } from '../search';
 import { IndexPatternSelectProps } from './index_pattern_select';
 import { StatefulSearchBarProps } from './search_bar';
 import { Settings } from './settings';
+import { DashboardSelectProps } from './dashboard_select';
 
 export * from './settings';
 
@@ -60,6 +61,7 @@ export interface IUiStart {
   isEnhancementsEnabled: boolean;
   queryEnhancements: Map<string, QueryEnhancement>;
   IndexPatternSelect: React.ComponentType<IndexPatternSelectProps>;
+  DashboardSelect: React.ComponentType<DashboardSelectProps>;
   SearchBar: React.ComponentType<StatefulSearchBarProps>;
   Settings: Settings;
 }

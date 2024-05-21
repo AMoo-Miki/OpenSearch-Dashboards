@@ -1,0 +1,8 @@
+{
+  "id": "dashLinksVis",
+  "version": "1.0.0",
+  "opensearchDashboardsVersion": "opensearchDashboards",
+  "server": true,
+  "ui": true,
+  "requiredPlugins": ["data", "expressions", "visualizations", "visDefaultEditor", "opensearchDashboardsUtils"]
+}

@@ -10,6 +10,7 @@
     - [Client_management_design](multi-datasource/client_management_design.md)
     - [High_level_design](multi-datasource/high_level_design.md)
     - [User_stories](multi-datasource/user_stories.md)
+  - [Openapi](openapi/README.md)
   - Plugins
     - [Data_persistence](plugins/data_persistence.md)
   - Saved_objects
@@ -31,6 +32,7 @@
             - [Hooks](../src/plugins/console/public/application/hooks/README.md)
       - [Csp_handler](../src/plugins/csp_handler/README.md)
       - [Dashboard](../src/plugins/dashboard/README.md)
+      - [Dashlinks_vis](../src/plugins/dashlinks_vis/README.md)
       - [Data](../src/plugins/data/README.md)
       - [Data_explorer](../src/plugins/data_explorer/README.md)
       - [Data_source](../src/plugins/data_source/README.md)
@@ -159,6 +161,7 @@
     - [Opensearch dashboards.release notes 2.11.1](../release-notes/opensearch-dashboards.release-notes-2.11.1.md)
     - [Opensearch dashboards.release notes 2.12.0](../release-notes/opensearch-dashboards.release-notes-2.12.0.md)
     - [Opensearch dashboards.release notes 2.13.0](../release-notes/opensearch-dashboards.release-notes-2.13.0.md)
+    - [Opensearch dashboards.release notes 2.14.0](../release-notes/opensearch-dashboards.release-notes-2.14.0.md)
     - [Opensearch dashboards.release notes 2.2.0](../release-notes/opensearch-dashboards.release-notes-2.2.0.md)
     - [Opensearch dashboards.release notes 2.2.1](../release-notes/opensearch-dashboards.release-notes-2.2.1.md)
     - [Opensearch dashboards.release notes 2.3.0](../release-notes/opensearch-dashboards.release-notes-2.3.0.md)
@@ -172,6 +175,7 @@
   - scripts
     - [README](../scripts/README.md)
   - [DOCS_README](DOCS_README.md)
+  - [Theme](theme.md)
   - [CHANGELOG](../CHANGELOG.md)
   - [CODE_OF_CONDUCT](../CODE_OF_CONDUCT.md)
   - [COMMUNICATIONS](../COMMUNICATIONS.md)
