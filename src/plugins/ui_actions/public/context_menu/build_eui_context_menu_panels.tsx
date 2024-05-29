@@ -93,11 +93,11 @@ const onClick = (action: Action, context: ActionExecutionContext<object>, close:
 const wrapMainPanelItemsIntoSubmenu = (panels: Record<string, PanelDescriptor>, id: string) => {
   const panel = panels[id];
   if (!panel) return;
-  const maxItemsBeforeWrapping = 4;
+  const maxItemsBeforeWrapping = 5;
   if (!panel.items) return;
   if (panel.items.length <= maxItemsBeforeWrapping) return;
-  const visibleItems = panel.items.slice(0, 3) as ItemDescriptor[];
-  const itemsInSubmenu = panel.items.slice(3) as ItemDescriptor[];
+  const visibleItems = panel.items.slice(0, maxItemsBeforeWrapping - 1) as ItemDescriptor[];
+  const itemsInSubmenu = panel.items.slice(maxItemsBeforeWrapping - 1) as ItemDescriptor[];
   const morePanelId = panel.id + '__more';
   const more: ItemDescriptor = {
     name: txtMore,
@@ -194,6 +194,7 @@ export async function buildContextMenuForActions({
               icon: group.getIconType ? group.getIconType(context) : 'empty',
               _order: group.order || 0,
               _title: group.getDisplayName ? group.getDisplayName(context) : '',
+              className: 'embPanel__contextMenuItem',
             });
           }
         }
@@ -215,7 +216,8 @@ export async function buildContextMenuForActions({
       onClick: onClick(action, context, closeMenu),
       href: action.getHref ? await action.getHref(context) : undefined,
       _order: action.order || 0,
-      _title: action.getDisplayName(context),
+      _title: action.getDisplayName(context) as string,
+      className: 'embPanel__contextMenuItem',
     });
   });
 
