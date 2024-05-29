@@ -32,8 +32,10 @@ import {
   SavedObjectEmbeddableInput,
   PanelState,
   EmbeddableInput,
+  PanelLink,
 } from '../../../../embeddable/public';
 import { GridData } from '../../../common';
+
 export type PanelId = string;
 export type SavedObjectId = string;
 
@@ -41,4 +43,5 @@ export interface DashboardPanelState<
   TEmbeddableInput extends EmbeddableInput | SavedObjectEmbeddableInput = SavedObjectEmbeddableInput
 > extends PanelState<TEmbeddableInput> {
   readonly gridData: GridData;
+  links?: PanelLink[];
 }

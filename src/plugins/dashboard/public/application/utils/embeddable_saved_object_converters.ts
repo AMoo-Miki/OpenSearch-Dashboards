@@ -39,6 +39,7 @@ export function convertSavedDashboardPanelToPanelState(
   return {
     type: savedDashboardPanel.type,
     gridData: savedDashboardPanel.gridData,
+    links: savedDashboardPanel.links,
     explicitInput: {
       id: savedDashboardPanel.panelIndex,
       ...(savedDashboardPanel.id !== undefined && { savedObjectId: savedDashboardPanel.id }),
@@ -61,6 +62,7 @@ export function convertPanelStateToSavedDashboardPanel(
     version,
     type: panelState.type,
     gridData: panelState.gridData,
+    links: panelState.links,
     panelIndex: panelState.explicitInput.id,
     embeddableConfig: omit(panelState.explicitInput, ['id', 'savedObjectId', 'title']),
     ...(customTitle !== undefined && { title: customTitle }),

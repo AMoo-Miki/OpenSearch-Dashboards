@@ -35,6 +35,7 @@ import {
   ErrorEmbeddable,
   IEmbeddable,
 } from '../embeddables';
+import { PanelLink } from '../../../common';
 
 export interface PanelState<E extends EmbeddableInput & { id: string } = { id: string }> {
   // The type of embeddable in this panel. Will be used to find the factory in which to
@@ -45,6 +46,8 @@ export interface PanelState<E extends EmbeddableInput & { id: string } = { id: s
   // will be derived from the container's input. **Any state in here will override any state derived from
   // the container.**
   explicitInput: Partial<E> & { id: string };
+
+  links?: PanelLink[];
 }
 
 export interface ContainerOutput extends EmbeddableOutput {
@@ -69,6 +72,12 @@ export interface IContainer<
   untilEmbeddableLoaded<TEmbeddable extends IEmbeddable>(
     id: string
   ): Promise<TEmbeddable | ErrorEmbeddable>;
+
+  /**
+   * Returns the panel for the given child.
+   * @param id
+   */
+  getPanelForChild<EEI extends EmbeddableInput>(id: string): PanelState<EEI>;
 
   /**
    * Returns the input for the given child. Uses a combination of explicit input

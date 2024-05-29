@@ -90,6 +90,7 @@ import {
   ACTION_CLONE_PANEL,
   ACTION_EXPAND_PANEL,
   ACTION_REPLACE_PANEL,
+  ACTION_EDIT_PANEL_LINKS,
   ClonePanelAction,
   ClonePanelActionContext,
   createDashboardContainerByValueRenderer,
@@ -109,6 +110,8 @@ import {
   ACTION_LIBRARY_NOTIFICATION,
   LibraryNotificationActionContext,
   LibraryNotificationAction,
+  EditPanelLinksAction,
+  EditPanelLinksActionContext,
 } from './application';
 import {
   createDashboardUrlGenerator,
@@ -194,6 +197,7 @@ declare module '../../../plugins/ui_actions/public' {
   export interface ActionContextMapping {
     [ACTION_EXPAND_PANEL]: ExpandPanelActionContext;
     [ACTION_REPLACE_PANEL]: ReplacePanelActionContext;
+    [ACTION_EDIT_PANEL_LINKS]: EditPanelLinksActionContext;
     [ACTION_CLONE_PANEL]: ClonePanelActionContext;
     [ACTION_ADD_TO_LIBRARY]: AddToLibraryActionContext;
     [ACTION_UNLINK_FROM_LIBRARY]: UnlinkFromLibraryActionContext;
@@ -240,7 +244,7 @@ export class DashboardPlugin
     }
 
     const getStartServices = async () => {
-      const [coreStart, deps] = await core.getStartServices();
+      const [coreStart, deps, selfStart] = await core.getStartServices();
 
       const useHideChrome = ({ toggleChrome } = { toggleChrome: true }) => {
         React.useEffect(() => {
@@ -275,6 +279,7 @@ export class DashboardPlugin
         SavedObjectFinder: getSavedObjectFinder(coreStart.savedObjects, coreStart.uiSettings),
         ExitFullScreenButton,
         uiActions: deps.uiActions,
+        getSavedDashboardLoader: selfStart.getSavedDashboardLoader,
       };
     };
 
@@ -526,7 +531,7 @@ export class DashboardPlugin
     const { notifications } = core;
     const {
       uiActions,
-      data: { indexPatterns, search },
+      data: { indexPatterns, search, ui: dataUI },
       embeddable,
     } = plugins;
 
@@ -544,6 +549,10 @@ export class DashboardPlugin
     const clonePanelAction = new ClonePanelAction(core);
     uiActions.registerAction(clonePanelAction);
     uiActions.attachAction(CONTEXT_MENU_TRIGGER, clonePanelAction.id);
+
+    const editLinksAction = new EditPanelLinksAction(core, dataUI, notifications);
+    uiActions.registerAction(editLinksAction);
+    uiActions.attachAction(CONTEXT_MENU_TRIGGER, editLinksAction.id);
 
     if (this.dashboardFeatureFlagConfig?.allowByValueEmbeddables) {
       const addToLibraryAction = new AddToLibraryAction();

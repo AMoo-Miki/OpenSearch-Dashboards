@@ -36,6 +36,7 @@ import {
   RawSavedDashboardPanel640To720,
   RawSavedDashboardPanel730ToLatest,
 } from './bwc/types';
+import { PanelLink } from '../../embeddable/common/panel_links/types';
 
 export type SavedDashboardPanel640To720 = Pick<
   RawSavedDashboardPanel640To720,
@@ -84,4 +85,5 @@ export type SavedDashboardPanel730ToLatest = Pick<
 > & {
   readonly id?: string;
   readonly type: string;
+  readonly links?: PanelLink[];
 };

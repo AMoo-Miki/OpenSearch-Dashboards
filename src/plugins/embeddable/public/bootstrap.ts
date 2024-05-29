@@ -43,6 +43,7 @@ import {
   panelNotificationTrigger,
   PANEL_NOTIFICATION_TRIGGER,
 } from './lib';
+import { ACTION_PANEL_LINK } from './lib/actions/panel_links/panel_link_action';
 
 declare module '../../ui_actions/public' {
   export interface TriggerContextMapping {
@@ -54,6 +55,7 @@ declare module '../../ui_actions/public' {
   export interface ActionContextMapping {
     [ACTION_CUSTOMIZE_PANEL]: EmbeddableContext;
     [ACTION_ADD_PANEL]: EmbeddableContext;
+    [ACTION_PANEL_LINK]: EmbeddableContext;
     [ACTION_INSPECT_PANEL]: EmbeddableContext;
     [REMOVE_PANEL_ACTION]: EmbeddableContext;
     [ACTION_EDIT_PANEL]: EmbeddableContext;

@@ -39,6 +39,11 @@ export {
   ACTION_REPLACE_PANEL,
 } from './replace_panel_action';
 export {
+  EditPanelLinksAction,
+  EditPanelLinksActionContext,
+  ACTION_EDIT_PANEL_LINKS,
+} from './panel_links/edit_panel_links_action';
+export {
   ClonePanelAction,
   ClonePanelActionContext,
   ACTION_CLONE_PANEL,

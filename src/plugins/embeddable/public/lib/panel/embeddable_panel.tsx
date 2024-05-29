@@ -34,6 +34,7 @@ import React from 'react';
 import { Subscription } from 'rxjs';
 import { buildContextMenuForActions, UiActionsService, Action } from '../ui_actions';
 import { CoreStart, OverlayStart } from '../../../../../core/public';
+import { DataPublicPluginStart } from '../../../../data/public';
 import { toMountPoint } from '../../../../opensearch_dashboards_react/public';
 
 import { Start as InspectorStartContract } from '../inspector';
@@ -62,6 +63,7 @@ import { CustomizePanelModal } from './panel_header/panel_actions/customize_titl
 import { EmbeddableStart } from '../../plugin';
 import { EmbeddableErrorLabel } from './embeddable_error_label';
 import { EmbeddableStateTransfer, ErrorEmbeddable } from '..';
+import { PanelLinksAction } from '../actions/panel_links/panel_link_action';
 
 const sortByOrderField = (
   { order: orderA }: { order?: number },
@@ -76,6 +78,9 @@ interface Props {
   getActions: UiActionsService['getTriggerCompatibleActions'];
   getEmbeddableFactory: EmbeddableStart['getEmbeddableFactory'];
   getAllEmbeddableFactories: EmbeddableStart['getEmbeddableFactories'];
+  getEmbeddablePanel: EmbeddableStart['getEmbeddablePanel'];
+  dataUI: DataPublicPluginStart['ui'];
+  dataQuery: DataPublicPluginStart['query'];
   overlays: CoreStart['overlays'];
   notifications: CoreStart['notifications'];
   application: CoreStart['application'];
@@ -87,6 +92,7 @@ interface Props {
   // https://github.com/opensearch-project/OpenSearch-Dashboards/issues/4483
   hasBorder?: boolean;
   hasShadow?: boolean;
+  className?: string;
 }
 
 interface State {
@@ -219,7 +225,7 @@ export class EmbeddablePanel extends React.Component<Props, State> {
 
   public render() {
     const viewOnlyMode = this.state.viewMode === ViewMode.VIEW;
-    const classes = classNames('embPanel', {
+    const classes = classNames('embPanel', this.props.className, {
       'embPanel--editing': !viewOnlyMode,
       'embPanel--loading': this.state.loading,
     });
@@ -294,9 +300,30 @@ export class EmbeddablePanel extends React.Component<Props, State> {
   };
 
   private getActionContextMenuPanel = async () => {
+    const { embeddable } = this.props;
     let regularActions = await this.props.getActions(CONTEXT_MENU_TRIGGER, {
-      embeddable: this.props.embeddable,
+      embeddable,
     });
+
+    // ToDo: move into Embeddable
+    // ToDo: maybe make embeddable a Container when it really is one
+    const dynamicActions: Array<Action<EmbeddableContext>> = [];
+    const panelState = embeddable.parent?.getPanelForChild?.(embeddable.id);
+    if (Array.isArray(panelState?.links)) {
+      panelState!.links.forEach((link, idx) => {
+        dynamicActions.push(
+          new PanelLinksAction(
+            this.props.application,
+            this.props.getEmbeddableFactory,
+            this.props.getEmbeddablePanel,
+            this.props.dataQuery,
+            this.props.overlays,
+            link,
+            idx
+          )
+        );
+      });
+    }
 
     const { disabledActions } = this.props.embeddable.getInput();
     if (disabledActions) {
@@ -345,7 +372,9 @@ export class EmbeddablePanel extends React.Component<Props, State> {
       ),
     ];
 
-    const sortedActions = [...regularActions, ...extraActions].sort(sortByOrderField);
+    const sortedActions = [...regularActions, ...dynamicActions, ...extraActions].sort(
+      sortByOrderField
+    );
 
     return await buildContextMenuForActions({
       actions: sortedActions.map((action) => ({

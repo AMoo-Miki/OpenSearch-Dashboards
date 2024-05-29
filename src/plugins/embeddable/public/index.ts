@@ -101,3 +101,5 @@ export {
   EmbeddableStartDependencies,
   EmbeddablePanelHOC,
 } from './plugin';
+
+export { PanelLinkType, PanelLinkOptions, PanelLink } from '../common';

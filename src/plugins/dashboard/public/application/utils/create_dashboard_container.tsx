@@ -94,6 +94,7 @@ export const createDashboardContainer = async ({
           ...initialInput.panels,
           [incomingEmbeddable.embeddableId]: {
             gridData: initialPanelState.gridData,
+            links: initialPanelState.links,
             type: incomingEmbeddable.type,
             explicitInput: {
               ...initialPanelState.explicitInput,

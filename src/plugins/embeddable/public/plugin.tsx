@@ -112,6 +112,7 @@ export type EmbeddablePanelHOC = React.FC<{
   hideHeader?: boolean;
   hasBorder?: boolean;
   hasShadow?: boolean;
+  className?: string;
 }>;
 
 export class EmbeddablePublicPlugin implements Plugin<EmbeddableSetup, EmbeddableStart> {
@@ -175,11 +176,13 @@ export class EmbeddablePublicPlugin implements Plugin<EmbeddableSetup, Embeddabl
       hideHeader,
       hasBorder,
       hasShadow,
+      className,
     }: {
       embeddable: IEmbeddable;
       hideHeader?: boolean;
       hasBorder?: boolean;
       hasShadow?: boolean;
+      className?: string;
     }) => (
       <EmbeddablePanel
         hideHeader={hideHeader}
@@ -190,11 +193,15 @@ export class EmbeddablePublicPlugin implements Plugin<EmbeddableSetup, Embeddabl
         getActions={uiActions.getTriggerCompatibleActions}
         getEmbeddableFactory={this.getEmbeddableFactory}
         getAllEmbeddableFactories={this.getEmbeddableFactories}
+        getEmbeddablePanel={getEmbeddablePanelHoc}
+        dataUI={data.ui}
+        dataQuery={data.query}
         overlays={core.overlays}
         notifications={core.notifications}
         application={core.application}
         inspector={inspector}
         SavedObjectFinder={getSavedObjectFinder(core.savedObjects, core.uiSettings)}
+        className={className}
       />
     );
 

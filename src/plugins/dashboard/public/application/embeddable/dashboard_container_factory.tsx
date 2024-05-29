@@ -42,6 +42,12 @@ import {
 } from '../../../../embeddable/public';
 import { DashboardContainer, DashboardContainerInput } from './dashboard_container';
 import { DASHBOARD_CONTAINER_TYPE } from './dashboard_constants';
+import { SavedObjectLoader } from '../../../../saved_objects/public';
+import { SavedObjectDashboard } from '../../saved_dashboards';
+import { getAppStateDefaults } from '../utils';
+import { DashboardPanelState } from './types';
+import { SavedDashboardPanel } from '../../types';
+import { convertSavedDashboardPanelToPanelState } from '../utils/embeddable_saved_object_converters';
 
 interface StartServices {
   capabilities: CoreStart['application']['capabilities'];
@@ -54,6 +60,7 @@ interface StartServices {
   SavedObjectFinder: React.ComponentType<any>;
   ExitFullScreenButton: React.ComponentType<any>;
   uiActions: UiActionsStart;
+  getSavedDashboardLoader: () => SavedObjectLoader;
 }
 
 export type DashboardContainerFactory = EmbeddableFactory<
@@ -99,5 +106,37 @@ export class DashboardContainerFactoryDefinition
     const services = await this.getStartServices();
     const stateTransfer = services.embeddable.getStateTransfer(this.getHistory());
     return new DashboardContainer(initialInput, services, stateTransfer, parent);
+  };
+
+  public createFromSavedObject = async (
+    dashboardId: string,
+    initialInput: DashboardContainerInput,
+    parent?: Container
+  ): Promise<DashboardContainer | ErrorEmbeddable> => {
+    const services = await this.getStartServices();
+    const savedDashboard: SavedObjectDashboard = await services
+      .getSavedDashboardLoader()
+      .get(dashboardId);
+    const stateDefaults = getAppStateDefaults(savedDashboard, true);
+
+    const panels: {
+      [key: string]: DashboardPanelState;
+    } = {};
+    stateDefaults.panels.forEach((panel: SavedDashboardPanel) => {
+      panels[panel.panelIndex] = convertSavedDashboardPanelToPanelState(panel);
+    });
+
+    const stateTransfer = services.embeddable.getStateTransfer(this.getHistory());
+    return new DashboardContainer(
+      {
+        ...stateDefaults,
+        ...initialInput,
+        useMargins: true,
+        panels,
+      } as DashboardContainerInput,
+      services,
+      stateTransfer,
+      parent
+    );
   };
 }

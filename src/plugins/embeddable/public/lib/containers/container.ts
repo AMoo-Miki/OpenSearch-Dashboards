@@ -127,6 +127,13 @@ export abstract class Container<
     return this.children[id] as E;
   }
 
+  public getPanelForChild<TEmbeddableInput extends EmbeddableInput = EmbeddableInput>(
+    embeddableId: string
+  ) {
+    const panelState = this.getPanelState(embeddableId);
+    return { ...panelState } as PanelState<TEmbeddableInput>;
+  }
+
   public getInputForChild<TEmbeddableInput extends EmbeddableInput = EmbeddableInput>(
     embeddableId: string
   ): TEmbeddableInput {
