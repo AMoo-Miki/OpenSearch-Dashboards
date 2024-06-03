@@ -8,6 +8,7 @@
   "private": true,
   "sideEffects": false,
   "dependencies": {
+    "json11": "npm:@amoo_miki/json11@^2.2.5",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
