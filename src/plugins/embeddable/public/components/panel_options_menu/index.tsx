@@ -44,6 +44,7 @@ export interface PanelOptionsMenuProps {
   title?: string;
 }
 
+// ToDo: Find if this component is used anywhere.
 export const PanelOptionsMenu: React.FC<PanelOptionsMenuProps> = ({
   panelDescriptor,
   close,
@@ -95,7 +96,11 @@ export const PanelOptionsMenu: React.FC<PanelOptionsMenuProps> = ({
       anchorPosition="downRight"
       data-test-subj={open ? 'embeddablePanelContextMenuOpen' : 'embeddablePanelContextMenuClosed'}
     >
-      <EuiContextMenu initialPanelId="mainMenu" panels={panelDescriptor ? [panelDescriptor] : []} />
+      <EuiContextMenu
+        initialPanelId="mainMenu"
+        panels={panelDescriptor ? [panelDescriptor] : []}
+        size="s"
+      />
     </EuiPopover>
   );
 };
