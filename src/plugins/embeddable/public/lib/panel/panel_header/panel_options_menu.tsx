@@ -127,6 +127,7 @@ export class PanelOptionsMenu extends React.Component<PanelOptionsMenuProps, Sta
       >
         <EuiContextMenu
           initialPanelId="mainMenu"
+          size="s"
           panels={this.state.actionContextMenuPanel || []}
         />
       </EuiPopover>
