@@ -88,7 +88,7 @@ function VegaActionsMenu({ formatHJson, formatJson }: VegaActionsMenuProps) {
       panelPaddingSize="none"
       anchorPosition="downLeft"
     >
-      <EuiContextMenuPanel items={items} />
+      <EuiContextMenuPanel items={items} size="s" />
     </EuiPopover>
   );
 }
