@@ -41,7 +41,7 @@ import {
   EuiIconTip,
   EuiLoadingSpinner,
   EuiCompressedRadioGroup,
-  EuiSwitch,
+  EuiCompressedSwitch,
   EuiSwitchEvent,
 } from '@elastic/eui';
 
@@ -407,7 +407,7 @@ export class UrlPanelContent extends Component<Props, State> {
       shortUrlLabel
     );
     const switchComponent = (
-      <EuiSwitch
+      <EuiCompressedSwitch
         label={switchLabel}
         checked={this.state.useShortUrl}
         onChange={this.handleShortUrlChange}
