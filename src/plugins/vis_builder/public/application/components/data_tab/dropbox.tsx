@@ -5,7 +5,7 @@
 
 import { i18n } from '@osd/i18n';
 import {
-  EuiButtonIcon,
+  EuiSmallButtonIcon,
   EuiDragDropContext,
   EuiDraggable,
   EuiDroppable,
@@ -108,7 +108,7 @@ const DropboxComponent = ({
                       {label}
                     </a>
                   </EuiText>
-                  <EuiButtonIcon
+                  <EuiSmallButtonIcon
                     color="subdued"
                     iconType="cross"
                     aria-label="clear-field"
@@ -133,7 +133,7 @@ const DropboxComponent = ({
                   defaultMessage: 'Click or drop to add',
                 })}
               </EuiText>
-              <EuiButtonIcon
+              <EuiSmallButtonIcon
                 iconType="plusInCircle"
                 aria-label="clear-field"
                 iconSize="s"
