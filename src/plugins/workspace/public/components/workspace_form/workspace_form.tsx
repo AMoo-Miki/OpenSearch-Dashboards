@@ -13,7 +13,7 @@ import {
   EuiCompressedFieldText,
   EuiText,
   EuiColorPicker,
-  EuiTextArea,
+  EuiCompressedTextArea,
 } from '@elastic/eui';
 import { i18n } from '@osd/i18n';
 
@@ -95,7 +95,7 @@ export const WorkspaceForm = (props: WorkspaceFormProps) => {
                   'Help others understand the purpose of this workspace by providing an overview of the workspace you’re creating.',
               })}
             </EuiText>
-            <EuiTextArea
+            <EuiCompressedTextArea
               value={formData.description}
               onChange={handleDescriptionChange}
               data-test-subj="workspaceForm-workspaceDetails-descriptionInputText"
