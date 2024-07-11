@@ -9,7 +9,7 @@ import {
   EuiSpacer,
   EuiTitle,
   EuiForm,
-  EuiFormRow,
+  EuiCompressedFormRow,
   EuiFieldText,
   EuiText,
   EuiTextArea,
@@ -73,7 +73,7 @@ export const WorkspaceForm = (props: WorkspaceFormProps) => {
           <h2>{workspaceDetailsTitle}</h2>
         </EuiTitle>
         <EuiSpacer size="s" />
-        <EuiFormRow
+        <EuiCompressedFormRow
           label={i18n.translate('workspace.form.workspaceDetails.name.label', {
             defaultMessage: 'Name',
           })}
@@ -93,8 +93,8 @@ export const WorkspaceForm = (props: WorkspaceFormProps) => {
               defaultMessage: 'Enter a name',
             })}
           />
-        </EuiFormRow>
-        <EuiFormRow
+        </EuiCompressedFormRow>
+        <EuiCompressedFormRow
           label={
             <>
               Description - <i>optional</i>
@@ -121,8 +121,8 @@ export const WorkspaceForm = (props: WorkspaceFormProps) => {
               )}
             />
           </>
-        </EuiFormRow>
-        <EuiFormRow
+        </EuiCompressedFormRow>
+        <EuiCompressedFormRow
           label={i18n.translate('workspace.form.workspaceDetails.color.label', {
             defaultMessage: 'Color',
           })}
@@ -142,7 +142,7 @@ export const WorkspaceForm = (props: WorkspaceFormProps) => {
               data-test-subj="workspaceForm-workspaceDetails-colorPicker"
             />
           </div>
-        </EuiFormRow>
+        </EuiCompressedFormRow>
       </EuiPanel>
       <EuiSpacer />
       <EuiPanel>
@@ -154,7 +154,7 @@ export const WorkspaceForm = (props: WorkspaceFormProps) => {
           </h2>
         </EuiTitle>
         <EuiSpacer size="s" />
-        <EuiFormRow
+        <EuiCompressedFormRow
           label={i18n.translate('workspace.form.workspaceUseCase.name.label', {
             defaultMessage: 'Use case',
           })}
@@ -167,7 +167,7 @@ export const WorkspaceForm = (props: WorkspaceFormProps) => {
             value={formData.useCases}
             onChange={handleUseCasesChange}
           />
-        </EuiFormRow>
+        </EuiCompressedFormRow>
       </EuiPanel>
       <EuiSpacer />
       {permissionEnabled && (
