@@ -6,7 +6,7 @@
 import React, { useState } from 'react';
 import {
   EuiSmallButton,
-  EuiButtonEmpty,
+  EuiSmallButtonEmpty,
   EuiFieldPassword,
   EuiForm,
   EuiFormRow,
@@ -165,7 +165,7 @@ export const UpdateAwsCredentialModal = ({
         </EuiModalBody>
 
         <EuiModalFooter>
-          <EuiButtonEmpty
+          <EuiSmallButtonEmpty
             data-test-subj="updateStoredAwsCredentialCancelBtn"
             onClick={closeUpdateAwsCredentialModal}
           >
@@ -175,7 +175,7 @@ export const UpdateAwsCredentialModal = ({
                 defaultMessage="Cancel"
               />
             }
-          </EuiButtonEmpty>
+          </EuiSmallButtonEmpty>
           <EuiSmallButton
             type="submit"
             data-test-subj="updateStoredAwsCredentialConfirmBtn"
