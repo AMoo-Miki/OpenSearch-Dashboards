@@ -18,7 +18,7 @@ import {
   EuiCompressedFormRow,
   EuiHorizontalRule,
   EuiPanel,
-  EuiSuperSelect,
+  EuiCompressedSuperSelect,
   EuiSpacer,
   EuiText,
   EuiSuperSelectOption,
@@ -832,7 +832,7 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
             defaultMessage: 'Credential',
           })}
         >
-          <EuiSuperSelect
+          <EuiCompressedSuperSelect
             options={this.authOptions}
             valueOfSelected={this.state.auth.type}
             onChange={(value) => this.onChangeAuthType(value)}
@@ -891,7 +891,7 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
             defaultMessage: 'Service Name',
           })}
         >
-          <EuiSuperSelect
+          <EuiCompressedSuperSelect
             options={sigV4ServiceOptions}
             valueOfSelected={this.state.auth.credentials?.service}
             onChange={(value) => this.onChangeSigV4ServiceName(value)}
