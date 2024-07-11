@@ -10,8 +10,8 @@ import {
   EuiButton,
   EuiButtonEmpty,
   EuiDescribedFormGroup,
-  EuiFieldPassword,
-  EuiFieldText,
+  EuiCompressedFieldPassword,
+  EuiCompressedFieldText,
   EuiFlexGroup,
   EuiFlexItem,
   EuiForm,
@@ -715,7 +715,7 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
             error={this.state.formErrorsByField.title}
             data-test-subj="editDataSourceTitleFormRow"
           >
-            <EuiFieldText
+            <EuiCompressedFieldText
               name="dataSourceTitle"
               value={this.state.title || ''}
               placeholder={i18n.translate('dataSourcesManagement.editDataSource.titlePlaceHolder', {
@@ -734,7 +734,7 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
             )}
             data-test-subj="editDataSourceDescriptionFormRow"
           >
-            <EuiFieldText
+            <EuiCompressedFieldText
               name="dataSourceDescription"
               value={this.state.description || ''}
               placeholder={i18n.translate(
@@ -774,7 +774,7 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
             defaultMessage: 'Endpoint URL',
           })}
         >
-          <EuiFieldText
+          <EuiCompressedFieldText
             name="endpoint"
             value={this.props.existingDataSource.endpoint}
             disabled={true}
@@ -871,7 +871,7 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
           isInvalid={!!this.state.formErrorsByField.awsCredential.region.length}
           error={this.state.formErrorsByField.awsCredential.region}
         >
-          <EuiFieldText
+          <EuiCompressedFieldText
             placeholder={i18n.translate(
               'dataSourcesManagement.createDataSource.regionPlaceholder',
               {
@@ -906,7 +906,7 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
           isInvalid={!!this.state.formErrorsByField.awsCredential.accessKey.length}
           error={this.state.formErrorsByField.awsCredential.accessKey}
         >
-          <EuiFieldPassword
+          <EuiCompressedFieldPassword
             isInvalid={!!this.state.formErrorsByField.awsCredential.accessKey.length}
             placeholder={i18n.translate(
               'dataSourcesManagement.createDataSource.accessKeyPlaceholder',
@@ -935,7 +935,7 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
           isInvalid={!!this.state.formErrorsByField.awsCredential.secretKey.length}
           error={this.state.formErrorsByField.awsCredential.secretKey}
         >
-          <EuiFieldPassword
+          <EuiCompressedFieldPassword
             isInvalid={!!this.state.formErrorsByField.awsCredential.secretKey.length}
             placeholder={i18n.translate(
               'dataSourcesManagement.createDataSource.secretKeyPlaceholder',
@@ -976,7 +976,7 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
           isInvalid={!!this.state.formErrorsByField.createCredential?.username?.length}
           data-test-subj="editDatasourceUsernameFormRow"
         >
-          <EuiFieldText
+          <EuiCompressedFieldText
             name="datasourceUsername"
             placeholder={i18n.translate(
               'dataSourcesManagement.editDataSource.usernamePlaceholder',
@@ -1000,7 +1000,7 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
         >
           <EuiFlexGroup>
             <EuiFlexItem>
-              <EuiFieldPassword
+              <EuiCompressedFieldPassword
                 placeholder={i18n.translate(
                   'dataSourcesManagement.editDataSource.passwordPlaceholder',
                   {

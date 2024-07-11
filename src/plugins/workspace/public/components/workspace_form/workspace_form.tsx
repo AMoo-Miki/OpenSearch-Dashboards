@@ -10,7 +10,7 @@ import {
   EuiTitle,
   EuiForm,
   EuiCompressedFormRow,
-  EuiFieldText,
+  EuiCompressedFieldText,
   EuiText,
   EuiColorPicker,
   EuiTextArea,
@@ -69,7 +69,7 @@ export const WorkspaceForm = (props: WorkspaceFormProps) => {
           isInvalid={!!formErrors.name}
           error={formErrors.name}
         >
-          <EuiFieldText
+          <EuiCompressedFieldText
             value={formData.name}
             onChange={handleNameInputChange}
             readOnly={!!defaultValues?.reserved}

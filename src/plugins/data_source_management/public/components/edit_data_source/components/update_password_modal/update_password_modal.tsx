@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import {
   EuiSmallButton,
   EuiSmallButtonEmpty,
-  EuiFieldPassword,
+  EuiCompressedFieldPassword,
   EuiForm,
   EuiCompressedFormRow,
   EuiModal,
@@ -113,7 +113,7 @@ export const UpdatePasswordModal = ({
               })}
               isInvalid={!isNewPasswordValid}
             >
-              <EuiFieldPassword
+              <EuiCompressedFieldPassword
                 name="updatedPassword"
                 data-test-subj="updateStoredPasswordUpdatedPasswordField"
                 placeholder={i18n.translate(
@@ -138,7 +138,7 @@ export const UpdatePasswordModal = ({
               isInvalid={!!isConfirmNewPasswordValid.length}
               error={isConfirmNewPasswordValid}
             >
-              <EuiFieldPassword
+              <EuiCompressedFieldPassword
                 name="confirmUpdatedPassword"
                 data-test-subj="updateStoredPasswordConfirmUpdatedPasswordField"
                 placeholder={i18n.translate(
