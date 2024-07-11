@@ -16,7 +16,7 @@ import {
   EuiModalBody,
   EuiModalHeaderTitle,
   EuiModalFooter,
-  EuiButton,
+  EuiSmallButton,
   EuiFlexGroup,
   EuiPanel,
   EuiSelectable,
@@ -130,9 +130,9 @@ export const WorkspaceOverviewGettingStartModal = (
         </EuiFlexGroup>
       </EuiModalBody>
       <EuiModalFooter>
-        <EuiButton data-test-subj="close" onClick={onCloseModal}>
+        <EuiSmallButton data-test-subj="close" onClick={onCloseModal}>
           Close
-        </EuiButton>
+        </EuiSmallButton>
       </EuiModalFooter>
     </EuiModal>
   );

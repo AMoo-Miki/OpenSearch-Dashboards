@@ -5,7 +5,7 @@
 
 import React, { useCallback, useEffect, useState } from 'react';
 import {
-  EuiButton,
+  EuiSmallButton,
   EuiFormRow,
   EuiText,
   EuiSpacer,
@@ -134,7 +134,7 @@ export const SelectDataSourcePanel = ({
         </EuiFormRow>
       ))}
 
-      <EuiButton
+      <EuiSmallButton
         fill
         fullWidth={false}
         onClick={handleAddNewOne}
@@ -143,7 +143,7 @@ export const SelectDataSourcePanel = ({
         {i18n.translate('workspace.form.selectDataSourcePanel.addNew', {
           defaultMessage: 'Add New',
         })}
-      </EuiButton>
+      </EuiSmallButton>
     </div>
   );
 };

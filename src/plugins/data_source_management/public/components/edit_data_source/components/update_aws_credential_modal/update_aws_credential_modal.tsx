@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import {
-  EuiButton,
+  EuiSmallButton,
   EuiButtonEmpty,
   EuiFieldPassword,
   EuiForm,
@@ -176,7 +176,7 @@ export const UpdateAwsCredentialModal = ({
               />
             }
           </EuiButtonEmpty>
-          <EuiButton
+          <EuiSmallButton
             type="submit"
             data-test-subj="updateStoredAwsCredentialConfirmBtn"
             onClick={onClickUpdateAwsCredential}
@@ -186,7 +186,7 @@ export const UpdateAwsCredentialModal = ({
             {i18n.translate('dataSourcesManagement.editDataSource.updateStoredAwsCredential', {
               defaultMessage: 'Update stored aws credential',
             })}
-          </EuiButton>
+          </EuiSmallButton>
         </EuiModalFooter>
       </EuiModal>
     );
