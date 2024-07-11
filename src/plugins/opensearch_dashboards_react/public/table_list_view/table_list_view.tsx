@@ -41,7 +41,7 @@ import {
   EuiLink,
   EuiFlexGroup,
   EuiFlexItem,
-  EuiButton,
+  EuiSmallButton,
   EuiSpacer,
   EuiConfirmModal,
   EuiCallOut,
@@ -392,7 +392,7 @@ class TableListView extends React.Component<TableListViewProps, TableListViewSta
     };
 
     return (
-      <EuiButton
+      <EuiSmallButton
         color="danger"
         iconType="trash"
         onClick={onClick}
@@ -407,7 +407,7 @@ class TableListView extends React.Component<TableListViewProps, TableListViewSta
               selection.length === 1 ? this.props.entityName : this.props.entityNamePlural,
           }}
         />
-      </EuiButton>
+      </EuiSmallButton>
     );
   }
 
@@ -502,7 +502,7 @@ class TableListView extends React.Component<TableListViewProps, TableListViewSta
   renderListing() {
     const defaultCreateButton = this.props.createItem ? (
       <EuiFlexItem grow={false}>
-        <EuiButton
+        <EuiSmallButton
           onClick={this.props.createItem}
           data-test-subj="newItemButton"
           iconType="plus"
@@ -513,7 +513,7 @@ class TableListView extends React.Component<TableListViewProps, TableListViewSta
             defaultMessage="Create {entityName}"
             values={{ entityName: this.props.entityName }}
           />
-        </EuiButton>
+        </EuiSmallButton>
       </EuiFlexItem>
     ) : (
       false

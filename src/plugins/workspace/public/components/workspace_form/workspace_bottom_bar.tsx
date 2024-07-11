@@ -5,7 +5,7 @@
 
 import {
   EuiBottomBar,
-  EuiButton,
+  EuiSmallButton,
   EuiButtonEmpty,
   EuiFlexGroup,
   EuiFlexItem,
@@ -79,7 +79,7 @@ export const WorkspaceBottomBar = ({
               </EuiButtonEmpty>
               <EuiSpacer />
               {operationType === WorkspaceOperationType.Create && (
-                <EuiButton
+                <EuiSmallButton
                   fill
                   type="submit"
                   color="primary"
@@ -89,10 +89,10 @@ export const WorkspaceBottomBar = ({
                   {i18n.translate('workspace.form.bottomBar.createWorkspace', {
                     defaultMessage: 'Create workspace',
                   })}
-                </EuiButton>
+                </EuiSmallButton>
               )}
               {operationType === WorkspaceOperationType.Update && (
-                <EuiButton
+                <EuiSmallButton
                   form={formId}
                   type="submit"
                   fill
@@ -102,7 +102,7 @@ export const WorkspaceBottomBar = ({
                   {i18n.translate('workspace.form.bottomBar.saveChanges', {
                     defaultMessage: 'Save changes',
                   })}
-                </EuiButton>
+                </EuiSmallButton>
               )}
             </EuiFlexGroup>
           </EuiFlexItem>

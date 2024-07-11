@@ -4,7 +4,7 @@
  */
 
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
-import { EuiButton, EuiFormRow, EuiText, EuiSpacer } from '@elastic/eui';
+import { EuiSmallButton, EuiFormRow, EuiText, EuiSpacer } from '@elastic/eui';
 import { i18n } from '@osd/i18n';
 import { WorkspacePermissionSetting } from './types';
 import {
@@ -118,7 +118,7 @@ const UserOrGroupSection = ({
           </EuiFormRow>
         </React.Fragment>
       ))}
-      <EuiButton
+      <EuiSmallButton
         fill
         fullWidth={false}
         onClick={handleAddNewOne}
@@ -127,7 +127,7 @@ const UserOrGroupSection = ({
         {i18n.translate('workspace.form.permissionSettingPanel.addNew', {
           defaultMessage: 'Add New',
         })}
-      </EuiButton>
+      </EuiSmallButton>
     </div>
   );
 };

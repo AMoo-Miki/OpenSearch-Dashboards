@@ -13,7 +13,7 @@ import {
   EuiToolTip,
   EuiButtonIcon,
   EuiConfirmModal,
-  EuiButton,
+  EuiSmallButton,
   EuiButtonEmpty,
 } from '@elastic/eui';
 import { i18n } from '@osd/i18n';
@@ -142,7 +142,7 @@ export const Header = ({
   };
   const renderTestConnectionButton = () => {
     return (
-      <EuiButton
+      <EuiSmallButton
         type="submit"
         fill={false}
         disabled={!isFormValid}
@@ -155,7 +155,7 @@ export const Header = ({
           id="dataSourcesManagement.createDataSource.testConnectionButton"
           defaultMessage="Test connection"
         />
-      </EuiButton>
+      </EuiSmallButton>
     );
   };
 
