@@ -40,7 +40,7 @@ import {
   EuiCompressedFormRow,
   EuiIconTip,
   EuiLoadingSpinner,
-  EuiRadioGroup,
+  EuiCompressedRadioGroup,
   EuiSwitch,
   EuiSwitchEvent,
 } from '@elastic/eui';
@@ -380,7 +380,7 @@ export class UrlPanelContent extends Component<Props, State> {
         }
         helpText={generateLinkAsHelp}
       >
-        <EuiRadioGroup
+        <EuiCompressedRadioGroup
           options={this.renderExportUrlAsOptions()}
           idSelected={this.state.exportUrlAs}
           onChange={this.handleExportUrlAs}
