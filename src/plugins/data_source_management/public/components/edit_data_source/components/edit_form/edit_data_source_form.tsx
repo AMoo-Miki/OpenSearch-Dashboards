@@ -6,6 +6,7 @@
 import React from 'react';
 import {
   EuiBottomBar,
+  EuiSmallButton,
   EuiButton,
   EuiButtonEmpty,
   EuiDescribedFormGroup,
@@ -584,7 +585,7 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
   renderUpdatePasswordModal = () => {
     return (
       <>
-        <EuiButton
+        <EuiSmallButton
           onClick={this.onClickUpdatePassword}
           data-test-subj="editDatasourceUpdatePasswordBtn"
         >
@@ -594,7 +595,7 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
               defaultMessage="Update stored password"
             />
           }
-        </EuiButton>
+        </EuiSmallButton>
 
         {this.state.showUpdatePasswordModal ? (
           <UpdatePasswordModal
@@ -610,7 +611,7 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
   renderUpdateAwsCredentialModal = () => {
     return (
       <>
-        <EuiButton
+        <EuiSmallButton
           onClick={this.onClickUpdateAwsCredential}
           data-test-subj="editDatasourceUpdateAwsCredentialBtn"
         >
@@ -620,7 +621,7 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
               defaultMessage="Update stored AWS credential"
             />
           }
-        </EuiButton>
+        </EuiSmallButton>
 
         {this.state.showUpdateAwsCredentialModal ? (
           <UpdateAwsCredentialModal

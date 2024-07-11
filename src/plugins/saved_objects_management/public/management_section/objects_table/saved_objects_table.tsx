@@ -50,7 +50,7 @@ import {
   EuiModalBody,
   EuiModalFooter,
   EuiButtonEmpty,
-  EuiButton,
+  EuiSmallButton,
   EuiModalHeaderTitle,
   EuiFormRow,
   EuiFlexGroup,
@@ -877,12 +877,12 @@ export class SavedObjectsTable extends Component<SavedObjectsTableProps, SavedOb
                   </EuiButtonEmpty>
                 </EuiFlexItem>
                 <EuiFlexItem grow={false}>
-                  <EuiButton fill onClick={this.onExportAll}>
+                  <EuiSmallButton fill onClick={this.onExportAll}>
                     <FormattedMessage
                       id="savedObjectsManagement.objectsTable.exportObjectsConfirmModal.exportAllButtonLabel"
                       defaultMessage="Export all"
                     />
-                  </EuiButton>
+                  </EuiSmallButton>
                 </EuiFlexItem>
               </EuiFlexGroup>
             </EuiFlexItem>
