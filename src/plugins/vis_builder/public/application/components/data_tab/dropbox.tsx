@@ -9,7 +9,7 @@ import {
   EuiDragDropContext,
   EuiDraggable,
   EuiDroppable,
-  EuiFormRow,
+  EuiCompressedFormRow,
   EuiPanel,
   EuiText,
   DropResult,
@@ -87,7 +87,7 @@ const DropboxComponent = ({
 
   return (
     <EuiDragDropContext onDragEnd={handleDragEnd}>
-      <EuiFormRow label={boxLabel} className="dropBox" fullWidth>
+      <EuiCompressedFormRow label={boxLabel} className="dropBox" fullWidth>
         <div className="dropBox__container">
           <EuiDroppable droppableId={dropboxId}>
             {fields.map(({ id, label }, index) => (
@@ -143,7 +143,7 @@ const DropboxComponent = ({
             </EuiPanel>
           )}
         </div>
-      </EuiFormRow>
+      </EuiCompressedFormRow>
     </EuiDragDropContext>
   );
 };

@@ -37,7 +37,7 @@ import {
   EuiSpacer,
   EuiFlexItem,
   EuiForm,
-  EuiFormRow,
+  EuiCompressedFormRow,
   EuiIconTip,
   EuiLoadingSpinner,
   EuiRadioGroup,
@@ -371,7 +371,7 @@ export class UrlPanelContent extends Component<Props, State> {
       />
     ) : undefined;
     return (
-      <EuiFormRow
+      <EuiCompressedFormRow
         label={
           <FormattedMessage
             id="share.urlPanel.generateLinkAsLabel"
@@ -385,7 +385,7 @@ export class UrlPanelContent extends Component<Props, State> {
           idSelected={this.state.exportUrlAs}
           onChange={this.handleExportUrlAs}
         />
-      </EuiFormRow>
+      </EuiCompressedFormRow>
     );
   };
 
@@ -425,9 +425,9 @@ export class UrlPanelContent extends Component<Props, State> {
     );
 
     return (
-      <EuiFormRow helpText={this.state.shortUrlErrorMsg} data-test-subj="createShortUrl">
+      <EuiCompressedFormRow helpText={this.state.shortUrlErrorMsg} data-test-subj="createShortUrl">
         {this.renderWithIconTip(switchComponent, tipContent)}
-      </EuiFormRow>
+      </EuiCompressedFormRow>
     );
   };
 
@@ -453,9 +453,9 @@ export class UrlPanelContent extends Component<Props, State> {
     return (
       <React.Fragment>
         {this.props.urlParamExtensions.map(({ paramName, component: UrlParamComponent }) => (
-          <EuiFormRow key={paramName}>
+          <EuiCompressedFormRow key={paramName}>
             <UrlParamComponent setParamValue={setParamValue(paramName)} />
-          </EuiFormRow>
+          </EuiCompressedFormRow>
         ))}
       </React.Fragment>
     );
