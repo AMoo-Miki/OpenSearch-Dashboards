@@ -32,3 +32,4 @@ export const DEFAULT_MESSAGE_KEY = 'defaultMessage';
 export const DESCRIPTION_KEY = 'description';
 export const VALUES_KEY = 'values';
 export const I18N_RC = '.i18nrc.json';
+export const DEFAULT_DIRS_WITH_RC_FILES: string[] = ['src', 'examples', 'packages'];

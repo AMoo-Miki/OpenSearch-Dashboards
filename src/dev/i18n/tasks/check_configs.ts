@@ -29,14 +29,14 @@
  */
 import { resolve, join } from 'path';
 import { ListrContext } from '.';
-import { I18N_RC } from '../constants';
+import { DEFAULT_DIRS_WITH_RC_FILES, I18N_RC } from '../constants';
 import { checkConfigNamespacePrefix, arrayify } from '..';
 
 export function checkConfigs(additionalConfigPaths: string | string[] = []) {
   const root = join(__dirname, '../../../../');
-  const opensearchDashboardsRC = resolve(root, I18N_RC);
+  const defaultRCs = DEFAULT_DIRS_WITH_RC_FILES.map((value) => resolve(root, value, I18N_RC));
 
-  const configPaths = [opensearchDashboardsRC, ...arrayify(additionalConfigPaths)];
+  const configPaths = [...defaultRCs, ...arrayify(additionalConfigPaths)];
 
   return configPaths.map((configPath) => ({
     task: async (context: ListrContext) => {
