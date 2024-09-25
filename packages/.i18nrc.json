@@ -1,0 +1,6 @@
+{
+  "paths": {
+    "flot": "packages/osd-ui-shared-deps/flot_charts"
+  },
+  "translations": []
+}

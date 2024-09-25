@@ -1,0 +1,7 @@
+{
+  "paths": {
+    "embeddableExamples": "examples/embeddable_examples",
+    "uiActionsExamples": "examples/ui_action_examples"
+  },
+  "translations": []
+}
