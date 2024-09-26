@@ -400,22 +400,22 @@ export class CreateDataSourceForm extends React.Component<
   };
 
   /* Render Section header*/
-  renderSectionHeader = (i18nId: string, defaultMessage: string) => {
+  renderSectionHeader = ({ id, defaultMessage }: { id: string; defaultMessage: string }) => {
     return (
       <>
         <EuiText grow={false} size="s">
           <h2>
-            <FormattedMessage id={i18nId} defaultMessage={defaultMessage} />
+            <FormattedMessage id={id} defaultMessage={defaultMessage} />
           </h2>
         </EuiText>
       </>
     );
   };
   /* Render field label with Optional text*/
-  renderFieldLabelAsOptional = (i18nId: string, defaultMessage: string) => {
+  renderFieldLabelAsOptional = ({ id, defaultMessage }: { id: string; defaultMessage: string }) => {
     return (
       <>
-        {<FormattedMessage id={i18nId} defaultMessage={defaultMessage} />}{' '}
+        {<FormattedMessage id={id} defaultMessage={defaultMessage} />}{' '}
         <i style={{ fontWeight: 'normal' }}>
           -{' '}
           {
@@ -581,10 +581,11 @@ export class CreateDataSourceForm extends React.Component<
           {this.renderHeader()}
           <EuiForm data-test-subj="data-source-creation">
             {/* Endpoint section */}
-            {this.renderSectionHeader(
-              'dataSourceManagement.connectToDataSource.connectionDetails',
-              'Connection Details'
-            )}
+            {this.renderSectionHeader({
+              // @i18n
+              id: 'dataSourcesManagement.connectToDataSource.connectionDetails',
+              defaultMessage: 'Connection Details',
+            })}
             <EuiSpacer size="s" />
 
             {/* Title */}
@@ -613,10 +614,11 @@ export class CreateDataSourceForm extends React.Component<
 
             {/* Description */}
             <EuiCompressedFormRow
-              label={this.renderFieldLabelAsOptional(
-                'dataSourceManagement.createDataSource.description',
-                'Description'
-              )}
+              label={this.renderFieldLabelAsOptional({
+                // i18n
+                id: 'dataSourceManagement.createDataSource.description',
+                defaultMessage: 'Description',
+              })}
             >
               <EuiCompressedFieldText
                 name="dataSourceDescription"
@@ -660,10 +662,11 @@ export class CreateDataSourceForm extends React.Component<
 
             <EuiSpacer size="xl" />
 
-            {this.renderSectionHeader(
-              'dataSourceManagement.connectToDataSource.authenticationHeader',
-              'Authentication Method'
-            )}
+            {this.renderSectionHeader({
+              // @i18n
+              id: 'dataSourcesManagement.connectToDataSource.authenticationHeader',
+              defaultMessage: 'Authentication Method',
+            })}
             <EuiSpacer size="m" />
 
             <EuiCompressedFormRow>

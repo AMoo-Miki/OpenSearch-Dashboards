@@ -105,8 +105,10 @@ export const EditDataSource: React.FunctionComponent<RouteComponentProps<{ id: s
 
   const handleDisplayToastMessage = ({ id, defaultMessage, success }: ToastMessageItem) => {
     if (success) {
+      // @i18n-disable-next-line
       toasts.addSuccess(i18n.translate(id, { defaultMessage }));
     } else {
+      // @i18n-disable-next-line
       toasts.addWarning(i18n.translate(id, { defaultMessage }));
     }
   };

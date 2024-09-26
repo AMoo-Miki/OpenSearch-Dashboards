@@ -671,10 +671,10 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
   };
 
   /* Render field label with Optional text*/
-  renderFieldLabelAsOptional = (i18nId: string, defaultMessage: string) => {
+  renderFieldLabelAsOptional = ({ id, defaultMessage }: { id: string; defaultMessage: string }) => {
     return (
       <>
-        {<FormattedMessage id={i18nId} defaultMessage={defaultMessage} />}{' '}
+        {<FormattedMessage id={id} defaultMessage={defaultMessage} />}{' '}
         <i style={{ fontWeight: 'normal' }}>
           -{' '}
           {
@@ -752,10 +752,11 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
           </EuiCompressedFormRow>
           {/* Description */}
           <EuiCompressedFormRow
-            label={this.renderFieldLabelAsOptional(
-              'dataSourceManagement.editDataSource.description',
-              'Description'
-            )}
+            label={this.renderFieldLabelAsOptional({
+              // @i18n
+              id: 'dataSourceManagement.editDataSource.description',
+              defaultMessage: 'Description',
+            })}
             data-test-subj="editDataSourceDescriptionFormRow"
           >
             <EuiCompressedFieldText
