@@ -49,7 +49,7 @@ const TableCellUI = ({
             size="xs"
             onClick={() => onFilter?.(columnId, fieldMapping, '+')}
             iconType="plusInCircle"
-            aria-label={i18n.translate('discover.filterForValueLabel', {
+            aria-label={i18n.translate('discover.filterForValue', {
               defaultMessage: 'Filter for value',
             })}
             data-test-subj="filterForValue"

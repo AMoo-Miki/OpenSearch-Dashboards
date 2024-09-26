@@ -228,15 +228,14 @@ function EditorUI({ initialTextValue, dataSourceId }: EditorProps) {
     });
   }, [sendCurrentRequestToOpenSearch, openDocumentation]);
 
-  const toolTipButtonDiasbled = dataSourceId === undefined;
-  const sendLabel =
-    dataSourceId === undefined
-      ? i18n.translate('console.sendRequestButtonTooltip.withoutDataSourceId', {
-          defaultMessage: 'Select a data source',
-        })
-      : i18n.translate('console.sendRequestButtonTooltip', {
-          defaultMessage: 'Send request',
-        });
+  const toolTipButtonDisabled = dataSourceId === undefined;
+  const sendLabel = toolTipButtonDisabled
+    ? i18n.translate('console.sendRequestButtonTooltip.withoutDataSourceId', {
+        defaultMessage: 'Select a data source',
+      })
+    : i18n.translate('console.sendRequestButtonTooltip', {
+        defaultMessage: 'Send request',
+      });
 
   return (
     <div style={abs} className="conApp">
@@ -254,7 +253,7 @@ function EditorUI({ initialTextValue, dataSourceId }: EditorProps) {
                 data-test-subj="sendRequestButton"
                 aria-label={sendLabel}
                 className="conApp__editorActionButton conApp__editorActionButton--success"
-                disabled={toolTipButtonDiasbled}
+                disabled={toolTipButtonDisabled}
               >
                 <EuiIcon type="play" />
               </button>

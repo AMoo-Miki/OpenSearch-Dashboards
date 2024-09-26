@@ -70,7 +70,8 @@ export function QueryResult(props: { queryStatus: QueryStatus }) {
         data-test-subj="queryResultLoading"
       >
         {i18n.translate('data.query.languageService.queryResults.completeTime', {
-          defaultMessage: `Loading ${time} s`,
+          defaultMessage: 'Loading {time} s',
+          values: { time },
         })}
       </EuiButtonEmpty>
     );
@@ -80,18 +81,20 @@ export function QueryResult(props: { queryStatus: QueryStatus }) {
     let message;
     if (!props.queryStatus.elapsedMs) {
       message = i18n.translate('data.query.languageService.queryResults.completeTime', {
-        defaultMessage: `Completed`,
+        defaultMessage: 'Completed',
       });
     } else if (props.queryStatus.elapsedMs < 1000) {
       message = i18n.translate(
         'data.query.languageService.queryResults.completeTimeInMiliseconds',
         {
-          defaultMessage: `Completed in ${props.queryStatus.elapsedMs} ms`,
+          defaultMessage: 'Completed in {timeMS} ms',
+          values: { timeMS: props.queryStatus.elapsedMs },
         }
       );
     } else {
       message = i18n.translate('data.query.languageService.queryResults.completeTimeInSeconds', {
-        defaultMessage: `Completed in ${(props.queryStatus.elapsedMs / 1000).toFixed(1)} s`,
+        defaultMessage: 'Completed in {time} s',
+        values: { time: (props.queryStatus.elapsedMs / 1000).toFixed(1) },
       });
     }
 
