@@ -71,7 +71,7 @@ export const defaultAuthType = AuthType.UsernamePasswordType;
 
 export const noAuthCredentialOption = {
   value: AuthType.NoAuth,
-  inputDisplay: i18n.translate('dataSourceManagement.credentialSourceOptions.NoAuthentication', {
+  inputDisplay: i18n.translate('dataSourcesManagement.credentialSourceOptions.NoAuthentication', {
     defaultMessage: 'No authentication',
   }),
 };
@@ -86,7 +86,7 @@ export const noAuthCredentialAuthMethod = {
 
 export const usernamePasswordCredentialOption = {
   value: AuthType.UsernamePasswordType,
-  inputDisplay: i18n.translate('dataSourceManagement.credentialSourceOptions.UsernamePassword', {
+  inputDisplay: i18n.translate('dataSourcesManagement.credentialSourceOptions.UsernamePassword', {
     defaultMessage: 'Username & Password',
   }),
 };
@@ -104,7 +104,7 @@ export const usernamePasswordAuthMethod = {
 
 export const sigV4CredentialOption = {
   value: AuthType.SigV4,
-  inputDisplay: i18n.translate('dataSourceManagement.credentialSourceOptions.AwsSigV4', {
+  inputDisplay: i18n.translate('dataSourcesManagement.credentialSourceOptions.AwsSigV4', {
     defaultMessage: 'AWS SigV4',
   }),
 };
@@ -112,13 +112,13 @@ export const sigV4CredentialOption = {
 export const sigV4ServiceOptions = [
   {
     value: SigV4ServiceName.OpenSearch,
-    inputDisplay: i18n.translate('dataSourceManagement.SigV4ServiceOptions.OpenSearch', {
+    inputDisplay: i18n.translate('dataSourcesManagement.SigV4ServiceOptions.OpenSearch', {
       defaultMessage: 'Amazon OpenSearch Service',
     }),
   },
   {
     value: SigV4ServiceName.OpenSearchServerless,
-    inputDisplay: i18n.translate('dataSourceManagement.SigV4ServiceOptions.OpenSearchServerless', {
+    inputDisplay: i18n.translate('dataSourcesManagement.SigV4ServiceOptions.OpenSearchServerless', {
       defaultMessage: 'Amazon OpenSearch Serverless',
     }),
   },

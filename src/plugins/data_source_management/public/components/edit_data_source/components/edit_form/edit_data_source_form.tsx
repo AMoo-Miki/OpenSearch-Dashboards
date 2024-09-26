@@ -394,7 +394,8 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
         this.setFormValuesForEditMode();
       } catch (e) {
         this.props.displayToastMessage({
-          id: 'dataSourcesManagement.editDataSource.editDataSourceFailMsg',
+          // @i18n
+          id: 'dataSourceManagement.editDataSource.editDataSourceFailMsg',
           defaultMessage: 'Updating the Data Source failed with some errors.',
         });
       } finally {
@@ -463,14 +464,16 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
       await this.props.handleTestConnection(formValues);
 
       this.props.displayToastMessage({
-        id: 'dataSourcesManagement.editDataSource.testConnectionSuccessMsg',
+        // @i18n
+        id: 'dataSourceManagement.editDataSource.testConnectionSuccessMsg',
         defaultMessage:
           'Connecting to the endpoint using the provided authentication method was successful.',
         success: true,
       });
     } catch (e) {
       this.props.displayToastMessage({
-        id: 'dataSourcesManagement.editDataSource.testConnectionFailMsg',
+        // @i18n
+        id: 'dataSourceManagement.editDataSource.testConnectionFailMsg',
         defaultMessage:
           'Failed Connecting to the endpoint using the provided authentication method.',
       });
@@ -514,13 +517,15 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
     try {
       await this.props.handleSubmit(updateAttributes);
       this.props.displayToastMessage({
-        id: 'dataSourcesManagement.editDataSource.updatePasswordSuccessMsg',
+        // @i18n
+        id: 'dataSourceManagement.editDataSource.updatePasswordSuccessMsg',
         defaultMessage: 'Password updated successfully.',
         success: true,
       });
     } catch (e) {
       this.props.displayToastMessage({
-        id: 'dataSourcesManagement.editDataSource.updatePasswordFailMsg',
+        // @i18n
+        id: 'dataSourceManagement.editDataSource.updatePasswordFailMsg',
         defaultMessage: 'Updating the stored password failed with some errors.',
       });
     }
@@ -547,13 +552,15 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
     try {
       await this.props.handleSubmit(updateAttributes);
       this.props.displayToastMessage({
-        id: 'dataSourcesManagement.editDataSource.updatePasswordSuccessMsg',
+        // @i18n
+        id: 'dataSourceManagement.editDataSource.updatePasswordSuccessMsg',
         defaultMessage: 'Password updated successfully.',
         success: true,
       });
     } catch (e) {
       this.props.displayToastMessage({
-        id: 'dataSourcesManagement.editDataSource.updatePasswordFailMsg',
+        // @i18n
+        id: 'dataSourceManagement.editDataSource.updatePasswordFailMsg',
         defaultMessage: 'Updating the stored password failed with some errors.',
       });
     }

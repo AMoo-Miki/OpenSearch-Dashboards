@@ -193,16 +193,19 @@ export const AssociatedObjectsDetailsFlyout = ({
     <EuiEmptyPrompt
       title={
         <h2>
-          {i18n.translate('datasources.associatedObjectsFlyout.noAccelerationTitle', {
+          {i18n.translate('dataSourcesManagement.associatedObjectsFlyout.noAccelerationTitle', {
             defaultMessage: ACCE_NO_DATA_TITLE,
           })}
         </h2>
       }
       body={
         <p>
-          {i18n.translate('datasources.associatedObjectsFlyout.noAccelerationDescription', {
-            defaultMessage: ACCE_NO_DATA_DESCRIPTION,
-          })}
+          {i18n.translate(
+            'dataSourcesManagement.associatedObjectsFlyout.noAccelerationDescription',
+            {
+              defaultMessage: ACCE_NO_DATA_DESCRIPTION,
+            }
+          )}
         </p>
       }
       actions={
@@ -221,9 +224,12 @@ export const AssociatedObjectsDetailsFlyout = ({
           iconType="popout"
           iconSide="left"
         >
-          {i18n.translate('datasources.associatedObjectsFlyout.createAccelerationButton', {
-            defaultMessage: CREATE_ACCELERATION_DESCRIPTION,
-          })}
+          {i18n.translate(
+            'dataSourcesManagement.associatedObjectsFlyout.createAccelerationButton',
+            {
+              defaultMessage: CREATE_ACCELERATION_DESCRIPTION,
+            }
+          )}
         </EuiButton>
       }
     />

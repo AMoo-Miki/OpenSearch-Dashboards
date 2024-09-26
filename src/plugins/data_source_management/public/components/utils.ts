@@ -142,7 +142,7 @@ export const fetchDataSourceConnections = async (
     );
   } catch (error) {
     notifications?.toasts.addDanger(
-      i18n.translate('dataSource.fetchDataSourceConnections', {
+      i18n.translate('dataSourcesManagement.fetchDataSourceConnections', {
         defaultMessage: 'Cannot fetch data sources',
       })
     );
@@ -242,7 +242,7 @@ export function handleNoAvailableDataSourceError(props: HandleNoAvailableDataSou
   changeState();
   if (callback) callback([]);
   notifications.add({
-    title: i18n.translate('dataSource.noAvailableDataSourceError', { defaultMessage }),
+    title: i18n.translate('dataSourcesManagement.noAvailableDataSourceError', { defaultMessage }),
     text: toMountPoint(getManageDataSourceButton(application)),
     color: 'warning',
   });
@@ -455,7 +455,7 @@ export const handleDataSourceFetchError = (
   changeState({ showError: true });
   if (callback) callback([]);
   notifications.add({
-    title: i18n.translate('dataSource.fetchDataSourceError', {
+    title: i18n.translate('dataSourcesManagement.fetchDataSourceError', {
       defaultMessage: 'Failed to fetch data sources',
     }),
     text: toMountPoint(getReloadButton()),

@@ -41,7 +41,7 @@ export const NoDataSource: React.FC<DataSourceDropDownHeaderProps> = ({
     <EuiButtonIcon
       className="euiHeaderLink"
       data-test-subj="dataSourceEmptyMenuHeaderLink"
-      aria-label={i18n.translate('dataSourceEmpty.dataSourceEmptyMenuHeaderLink', {
+      aria-label={i18n.translate('dataSourcesManagement.dataSourceEmptyMenuHeaderLink', {
         defaultMessage: 'dataSourceEmptyMenuHeaderLink',
       })}
       iconType={() => <EmptyIcon />}

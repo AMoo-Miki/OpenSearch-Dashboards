@@ -120,7 +120,7 @@ export class DataSourceSelectable extends React.Component<
     const dsOption = dataSourceOptions.find((ds) => ds.id === id);
     if (!dsOption) {
       this.props.notifications.addWarning(
-        i18n.translate('dataSource.fetchDataSourceError', {
+        i18n.translate('dataSourcesManagement.fetchDataSourceError', {
           defaultMessage: 'Data source with ID {id} is not available',
           values: { id },
         })

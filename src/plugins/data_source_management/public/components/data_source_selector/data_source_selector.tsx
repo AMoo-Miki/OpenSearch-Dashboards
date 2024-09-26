@@ -22,7 +22,7 @@ import './data_source_selector.scss';
 import { DataSourceOption } from '../data_source_menu/types';
 
 export const LocalCluster: DataSourceOption = {
-  label: i18n.translate('dataSource.localCluster', {
+  label: i18n.translate('dataSourcesManagement.localCluster', {
     defaultMessage: 'Local cluster',
   }),
   id: '',
@@ -92,7 +92,7 @@ export class DataSourceSelector extends React.Component<
     // Invalid/filtered out datasource
     if (!dataSource) {
       this.props.notifications.addWarning(
-        i18n.translate('dataSource.fetchDataSourceError', {
+        i18n.translate('dataSourcesManagement.fetchDataSourceError', {
           defaultMessage: 'Data source with id is not available',
         })
       );
@@ -190,7 +190,7 @@ export class DataSourceSelector extends React.Component<
       this.handleDefaultDataSource(dataSourceOptions, fetchedDataSources, defaultDataSource);
     } catch (err) {
       this.props.notifications.addWarning(
-        i18n.translate('dataSource.fetchDataSourceError', {
+        i18n.translate('dataSourcesManagement.fetchDataSourceError', {
           defaultMessage: 'Unable to fetch existing data sources',
         })
       );
@@ -223,14 +223,14 @@ export class DataSourceSelector extends React.Component<
         isClearable={this.props.isClearable}
         aria-label={
           placeholderText
-            ? i18n.translate('dataSourceSelectorComboBoxAriaLabel', {
+            ? i18n.translate('dataSourcesManagement.dataSourceSelectorComboBoxAriaLabel', {
                 defaultMessage: placeholderText,
               })
             : 'dataSourceSelectorCombobox'
         }
         placeholder={
           placeholderText
-            ? i18n.translate('dataSourceSelectorComboBoxPlaceholder', {
+            ? i18n.translate('dataSourcesManagement.dataSourceSelectorComboBoxPlaceholder', {
                 defaultMessage: placeholderText,
               })
             : ''
@@ -242,7 +242,7 @@ export class DataSourceSelector extends React.Component<
         prepend={
           this.props.removePrepend
             ? undefined
-            : i18n.translate('dataSourceSelectorComboBoxPrepend', {
+            : i18n.translate('dataSourcesManagement.dataSourceSelectorComboBoxPrepend', {
                 defaultMessage: 'Data source',
               })
         }

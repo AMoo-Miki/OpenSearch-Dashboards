@@ -65,6 +65,7 @@ export const CreateDataSourceWizard: React.FunctionComponent<CreateDataSourceWiz
       }
     } catch (e) {
       handleDisplayToastMessage({
+        // @i18n
         id: 'dataSourcesManagement.createDataSource.existingDatasourceNames',
         defaultMessage: 'Unable to fetch some resources.',
       });
@@ -90,6 +91,7 @@ export const CreateDataSourceWizard: React.FunctionComponent<CreateDataSourceWiz
     } catch (e) {
       setIsLoading(false);
       handleDisplayToastMessage({
+        // @i18n
         id: 'dataSourcesManagement.createDataSource.createDataSourceFailMsg',
         defaultMessage: 'Creation of the Data Source failed with some errors.',
       });
@@ -102,6 +104,7 @@ export const CreateDataSourceWizard: React.FunctionComponent<CreateDataSourceWiz
     try {
       await testConnection(http, attributes);
       handleDisplayToastMessage({
+        // @i18n
         id: 'dataSourcesManagement.createDataSource.testConnectionSuccessMsg',
         defaultMessage:
           'Connecting to the endpoint using the provided authentication method was successful.',
@@ -109,6 +112,7 @@ export const CreateDataSourceWizard: React.FunctionComponent<CreateDataSourceWiz
       });
     } catch (e) {
       handleDisplayToastMessage({
+        // @i18n
         id: 'dataSourcesManagement.createDataSource.testConnectionFailMsg',
         defaultMessage:
           'Failed Connecting to the endpoint using the provided authentication method.',

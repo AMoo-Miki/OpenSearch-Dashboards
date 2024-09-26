@@ -90,7 +90,8 @@ export const DataSourceTable = ({ history }: RouteComponentProps) => {
       .catch(() => {
         setDataSources([]);
         handleDisplayToastMessage({
-          id: 'dataSourcesManagement.dataSourceListing.fetchDataSourceFailMsg',
+          // @i18n
+          id: 'dataSourceManagement.dataSourceListing.fetchDataSourceFailMsg',
           defaultMessage: 'Error occurred while fetching the records for Data sources.',
         });
       })
@@ -270,7 +271,8 @@ export const DataSourceTable = ({ history }: RouteComponentProps) => {
       })
       .catch(() => {
         handleDisplayToastMessage({
-          id: 'dataSourcesManagement.dataSourceListing.deleteDataSourceFailMsg',
+          // @i18n
+          id: 'dataSourceManagement.dataSourceListing.deleteDataSourceFailMsg',
           defaultMessage:
             'Error occurred while deleting selected records for Data sources. Please try it again',
         });
@@ -290,7 +292,8 @@ export const DataSourceTable = ({ history }: RouteComponentProps) => {
       }
     } catch (e) {
       handleDisplayToastMessage({
-        id: 'dataSourcesManagement.editDataSource.setDefaultDataSourceFailMsg',
+        // @i18n
+        id: 'dataSourceManagement.editDataSource.setDefaultDataSourceFailMsg',
         defaultMessage: 'Unable to find a default datasource. Please set a new default datasource.',
       });
     } finally {

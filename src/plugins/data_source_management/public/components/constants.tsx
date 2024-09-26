@@ -8,7 +8,7 @@ import { DataSourceOption } from './data_source_menu/types';
 import { DatasourceType } from '../types';
 
 export const LocalCluster: DataSourceOption = {
-  label: i18n.translate('dataSource.localCluster', {
+  label: i18n.translate('dataSourcesManagement.localCluster', {
     defaultMessage: 'Local cluster',
   }),
   id: '',

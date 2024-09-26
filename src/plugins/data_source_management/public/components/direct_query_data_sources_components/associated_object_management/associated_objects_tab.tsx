@@ -117,13 +117,16 @@ export const AssociatedObjectsTab: React.FC<AssociatedObjectsTabProps> = (props)
   };
 
   const AssociatedObjectsHeader = () => {
-    const panelTitle = i18n.translate('datasources.associatedObjectsTab.panelTitle', {
+    const panelTitle = i18n.translate('dataSourcesManagement.associatedObjectsTab.panelTitle', {
       defaultMessage: ASSC_OBJ_PANEL_TITLE,
     });
 
-    const panelDescription = i18n.translate('datasources.associatedObjectsTab.panelDescription', {
-      defaultMessage: ASSC_OBJ_PANEL_DESCRIPTION,
-    });
+    const panelDescription = i18n.translate(
+      'dataSourcesManagement.associatedObjectsTab.panelDescription',
+      {
+        defaultMessage: ASSC_OBJ_PANEL_DESCRIPTION,
+      }
+    );
 
     const LastUpdatedText = () => {
       return (
