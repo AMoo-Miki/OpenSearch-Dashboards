@@ -33,7 +33,7 @@ import { assignConfigFromPath, arrayify } from '..';
 
 export function mergeConfigs(additionalConfigPaths: string | string[] = []) {
   const root = join(__dirname, '../../../../');
-  const opensearchDashboardsRC = resolve(root, '.i18nrc.json');
+  const opensearchDashboardsRC = resolve(root, 'src/.i18nrc.json');
 
   const configPaths = [opensearchDashboardsRC, ...arrayify(additionalConfigPaths)];
 
