@@ -65,12 +65,12 @@ const addOrUpdateGroup = (
   const groupType = metadata.ui.groupType;
   let groupName =
     metadata.ui.typeLabel ||
-    i18n.translate('dataExplorer.dataSourceSelector.defaultGroupTitle', {
+    i18n.translate('data.dataSourceSelector.defaultGroupTitle', {
       defaultMessage: 'Default Group',
     });
 
   if (dataSource.getType() !== 'DEFAULT_INDEX_PATTERNS') {
-    groupName += i18n.translate('dataExplorer.dataSourceSelector.redirectionHint', {
+    groupName += i18n.translate('data.dataSourceSelector.redirectionHint', {
       defaultMessage: ' - Opens in Log Explorer',
     });
   }

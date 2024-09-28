@@ -69,7 +69,7 @@ export function QueryResult(props: { queryStatus: QueryStatus }) {
         isLoading
         data-test-subj="queryResultLoading"
       >
-        {i18n.translate('data.query.languageService.queryResults.completeTime', {
+        {i18n.translate('data.query.languageService.queryResults.loadTime', {
           defaultMessage: 'Loading {time} s',
           values: { time },
         })}
@@ -80,7 +80,7 @@ export function QueryResult(props: { queryStatus: QueryStatus }) {
   if (props.queryStatus.status === ResultStatus.READY) {
     let message;
     if (!props.queryStatus.elapsedMs) {
-      message = i18n.translate('data.query.languageService.queryResults.completeTime', {
+      message = i18n.translate('data.query.languageService.queryResults.completeNoTime', {
         defaultMessage: 'Completed',
       });
     } else if (props.queryStatus.elapsedMs < 1000) {
