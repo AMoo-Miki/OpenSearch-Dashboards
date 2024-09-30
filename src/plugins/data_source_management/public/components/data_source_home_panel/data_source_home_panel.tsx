@@ -104,7 +104,7 @@ export const DataSourceHomePanel: React.FC<DataSourceHomePanelProps> = ({
 
   const description = {
     description: featureFlagStatus
-      ? i18n.translate('dataSourcesManagement.dataSourcesTable.description', {
+      ? i18n.translate('dataSourcesManagement.dataSourcesTable.descriptionWithDataSource', {
           defaultMessage: 'Create and manage data source connections.',
         })
       : i18n.translate('dataSourcesManagement.dataSourcesTable.description', {
