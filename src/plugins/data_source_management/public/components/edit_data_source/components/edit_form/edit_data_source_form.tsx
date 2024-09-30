@@ -35,8 +35,8 @@ import {
   AuthType,
   DataSourceAttributes,
   DataSourceManagementContextValue,
+  DataSourceManagementToastMessageItem,
   sigV4ServiceOptions,
-  ToastMessageItem,
   UsernamePasswordTypedContent,
 } from '../../../../types';
 import { context as contextType } from '../../../../../../opensearch_dashboards_react/public';
@@ -62,7 +62,7 @@ export interface EditDataSourceProps {
   handleTestConnection: (formValues: DataSourceAttributes) => Promise<void>;
   onDeleteDataSource?: () => Promise<void>;
   onSetDefaultDataSource: () => Promise<void>;
-  displayToastMessage: (info: ToastMessageItem) => void;
+  displayToastMessage: (info: DataSourceManagementToastMessageItem) => void;
   canManageDataSource: boolean;
 }
 export interface EditDataSourceState {
@@ -395,9 +395,9 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
         this.setFormValuesForEditMode();
       } catch (e) {
         this.props.displayToastMessage({
-          // @i18n
-          id: 'dataSourceManagement.editDataSource.editDataSourceFailMsg',
-          defaultMessage: 'Updating the Data Source failed with some errors.',
+          message: i18n.translate('dataSourcesManagement.editDataSource.editDataSourceFailMsg', {
+            defaultMessage: 'Updating the Data Source failed with some errors.',
+          }),
         });
       } finally {
         this.setState({ isLoading: false });
@@ -465,18 +465,18 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
       await this.props.handleTestConnection(formValues);
 
       this.props.displayToastMessage({
-        // @i18n
-        id: 'dataSourceManagement.editDataSource.testConnectionSuccessMsg',
-        defaultMessage:
-          'Connecting to the endpoint using the provided authentication method was successful.',
+        message: i18n.translate('dataSourcesManagement.editDataSource.testConnectionSuccessMsg', {
+          defaultMessage:
+            'Connecting to the endpoint using the provided authentication method was successful.',
+        }),
         success: true,
       });
     } catch (e) {
       this.props.displayToastMessage({
-        // @i18n
-        id: 'dataSourceManagement.editDataSource.testConnectionFailMsg',
-        defaultMessage:
-          'Failed Connecting to the endpoint using the provided authentication method.',
+        message: i18n.translate('dataSourcesManagement.editDataSource.testConnectionFailMsg', {
+          defaultMessage:
+            'Failed Connecting to the endpoint using the provided authentication method.',
+        }),
       });
     } finally {
       this.setState({ isLoading: false });
@@ -518,16 +518,16 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
     try {
       await this.props.handleSubmit(updateAttributes);
       this.props.displayToastMessage({
-        // @i18n
-        id: 'dataSourceManagement.editDataSource.updatePasswordSuccessMsg',
-        defaultMessage: 'Password updated successfully.',
+        message: i18n.translate('dataSourcesManagement.editDataSource.updatePasswordSuccessMsg', {
+          defaultMessage: 'Password updated successfully.',
+        }),
         success: true,
       });
     } catch (e) {
       this.props.displayToastMessage({
-        // @i18n
-        id: 'dataSourceManagement.editDataSource.updatePasswordFailMsg',
-        defaultMessage: 'Updating the stored password failed with some errors.',
+        message: i18n.translate('dataSourcesManagement.editDataSource.updatePasswordFailMsg', {
+          defaultMessage: 'Updating the stored password failed with some errors.',
+        }),
       });
     }
   };
@@ -553,16 +553,16 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
     try {
       await this.props.handleSubmit(updateAttributes);
       this.props.displayToastMessage({
-        // @i18n
-        id: 'dataSourceManagement.editDataSource.updatePasswordSuccessMsg',
-        defaultMessage: 'Password updated successfully.',
+        message: i18n.translate('dataSourcesManagement.editDataSource.updatePasswordSuccessMsg', {
+          defaultMessage: 'Password updated successfully.',
+        }),
         success: true,
       });
     } catch (e) {
       this.props.displayToastMessage({
-        // @i18n
-        id: 'dataSourceManagement.editDataSource.updatePasswordFailMsg',
-        defaultMessage: 'Updating the stored password failed with some errors.',
+        message: i18n.translate('dataSourcesManagement.editDataSource.updatePasswordFailMsg', {
+          defaultMessage: 'Updating the stored password failed with some errors.',
+        }),
       });
     }
   };
@@ -671,24 +671,6 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
     );
   };
 
-  /* Render field label with Optional text*/
-  renderFieldLabelAsOptional = ({ id, defaultMessage }: { id: string; defaultMessage: string }) => {
-    return (
-      <>
-        {<FormattedMessage id={id} defaultMessage={defaultMessage} />}{' '}
-        <i style={{ fontWeight: 'normal' }}>
-          -{' '}
-          {
-            <FormattedMessage
-              id="dataSourcesManagement.editDataSource.optionalText"
-              defaultMessage="optional"
-            />
-          }
-        </i>
-      </>
-    );
-  };
-
   /* Render Connection Details Panel */
   renderConnectionDetailsSection = () => {
     return (
@@ -755,7 +737,7 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
           <EuiCompressedFormRow
             label={
               <FormattedMessage
-                id="dataSourceManagement.editDataSource.descriptionOptional"
+                id="dataSourcesManagement.editDataSource.descriptionOptional"
                 defaultMessage="Description {optionalLabel}"
                 values={{ optionalLabel: <DataSourceOptionalLabelSuffix /> }}
               />

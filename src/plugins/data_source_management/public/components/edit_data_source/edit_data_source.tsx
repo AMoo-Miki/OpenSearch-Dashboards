@@ -10,7 +10,11 @@ import { EuiSpacer } from '@elastic/eui';
 import { i18n } from '@osd/i18n';
 import { FormattedMessage } from '@osd/i18n/react';
 import { useOpenSearchDashboards } from '../../../../opensearch_dashboards_react/public';
-import { DataSourceManagementContext, DataSourceTableItem, ToastMessageItem } from '../../types';
+import {
+  DataSourceManagementContext,
+  DataSourceManagementToastMessageItem,
+  DataSourceTableItem,
+} from '../../types';
 import {
   deleteDataSourceById,
   getDataSourceById,
@@ -81,9 +85,9 @@ export const EditDataSource: React.FunctionComponent<RouteComponentProps<{ id: s
     } catch (e) {
       setDataSource(defaultDataSource);
       handleDisplayToastMessage({
-        // @i18n
-        id: 'dataSourceManagement.editDataSource.fetchDataSourceFailMsg',
-        defaultMessage: 'Unable to find the Data Source.',
+        message: i18n.translate('dataSourcesManagement.editDataSource.fetchDataSourceFailMsg', {
+          defaultMessage: 'Unable to find the Data Source.',
+        }),
       });
       props.history.push('');
     } finally {
@@ -103,13 +107,14 @@ export const EditDataSource: React.FunctionComponent<RouteComponentProps<{ id: s
     await fetchDataSourceDetailsByID();
   };
 
-  const handleDisplayToastMessage = ({ id, defaultMessage, success }: ToastMessageItem) => {
+  const handleDisplayToastMessage = ({
+    message,
+    success,
+  }: DataSourceManagementToastMessageItem) => {
     if (success) {
-      // @i18n-disable-next-line
-      toasts.addSuccess(i18n.translate(id, { defaultMessage }));
+      toasts.addSuccess(message);
     } else {
-      // @i18n-disable-next-line
-      toasts.addWarning(i18n.translate(id, { defaultMessage }));
+      toasts.addWarning(message);
     }
   };
 
@@ -126,9 +131,10 @@ export const EditDataSource: React.FunctionComponent<RouteComponentProps<{ id: s
     } catch (e) {
       setIsLoading(false);
       handleDisplayToastMessage({
-        // @i18n
-        id: 'dataSourceManagement.editDataSource.deleteDataSourceFailMsg',
-        defaultMessage: 'Unable to delete the Data Source due to some errors. Please try it again.',
+        message: i18n.translate('dataSourcesManagement.editDataSource.deleteDataSourceFailMsg', {
+          defaultMessage:
+            'Unable to delete the Data Source due to some errors. Please try it again.',
+        }),
       });
     }
   };
@@ -141,9 +147,13 @@ export const EditDataSource: React.FunctionComponent<RouteComponentProps<{ id: s
     } catch (e) {
       setIsLoading(false);
       handleDisplayToastMessage({
-        // @i18n
-        id: 'dataSourceManagement.editDataSource.setDefaultDataSourceFailMsg',
-        defaultMessage: 'Unable to find a default datasource. Please set a new default datasource.',
+        message: i18n.translate(
+          'dataSourcesManagement.editDataSource.setDefaultDataSourceFailMsg',
+          {
+            defaultMessage:
+              'Unable to find a default datasource. Please set a new default datasource.',
+          }
+        ),
       });
     }
   };

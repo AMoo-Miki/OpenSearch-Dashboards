@@ -590,7 +590,7 @@ export class CreateDataSourceForm extends React.Component<
             <EuiCompressedFormRow
               label={
                 <FormattedMessage
-                  id="dataSourceManagement.createDataSource.descriptionOptional"
+                  id="dataSourcesManagement.createDataSource.descriptionOptional"
                   defaultMessage="Description {optionalLabel}"
                   values={{ optionalLabel: <DataSourceOptionalLabelSuffix /> }}
                 />
