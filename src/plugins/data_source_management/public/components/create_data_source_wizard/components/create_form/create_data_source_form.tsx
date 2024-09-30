@@ -47,6 +47,7 @@ import {
   getDefaultAuthMethod,
   isValidUrl,
 } from '../../../utils';
+import { DataSourceOptionalLabelSuffix } from '../../../data_source_optional_label_suffix';
 
 export interface CreateDataSourceProps {
   useNewUX: boolean;
@@ -399,24 +400,6 @@ export class CreateDataSourceForm extends React.Component<
     );
   };
 
-  /* Render field label with Optional text*/
-  renderFieldLabelAsOptional = ({ id, defaultMessage }: { id: string; defaultMessage: string }) => {
-    return (
-      <>
-        {<FormattedMessage id={id} defaultMessage={defaultMessage} />}{' '}
-        <i style={{ fontWeight: 'normal' }}>
-          -{' '}
-          {
-            <FormattedMessage
-              id="dataSourcesManagement.createDataSource.optionalText"
-              defaultMessage="optional"
-            />
-          }
-        </i>
-      </>
-    );
-  };
-
   /* Render create new credentials*/
   renderCreateNewCredentialsForm = (type: AuthType) => {
     switch (type) {
@@ -605,11 +588,13 @@ export class CreateDataSourceForm extends React.Component<
 
             {/* Description */}
             <EuiCompressedFormRow
-              label={this.renderFieldLabelAsOptional({
-                // i18n
-                id: 'dataSourceManagement.createDataSource.description',
-                defaultMessage: 'Description',
-              })}
+              label={
+                <FormattedMessage
+                  id="dataSourceManagement.createDataSource.descriptionOptional"
+                  defaultMessage="Description {optionalLabel}"
+                  values={{ optionalLabel: <DataSourceOptionalLabelSuffix /> }}
+                />
+              }
             >
               <EuiCompressedFieldText
                 name="dataSourceDescription"

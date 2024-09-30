@@ -49,6 +49,7 @@ import {
 import { UpdatePasswordModal } from '../update_password_modal';
 import { UpdateAwsCredentialModal } from '../update_aws_credential_modal';
 import { extractRegisteredAuthTypeCredentials, getDefaultAuthMethod } from '../../../utils';
+import { DataSourceOptionalLabelSuffix } from '../../../data_source_optional_label_suffix';
 
 export interface EditDataSourceProps {
   navigation: NavigationPublicPluginStart;
@@ -752,11 +753,13 @@ export class EditDataSourceForm extends React.Component<EditDataSourceProps, Edi
           </EuiCompressedFormRow>
           {/* Description */}
           <EuiCompressedFormRow
-            label={this.renderFieldLabelAsOptional({
-              // @i18n
-              id: 'dataSourceManagement.editDataSource.description',
-              defaultMessage: 'Description',
-            })}
+            label={
+              <FormattedMessage
+                id="dataSourceManagement.editDataSource.descriptionOptional"
+                defaultMessage="Description {optionalLabel}"
+                values={{ optionalLabel: <DataSourceOptionalLabelSuffix /> }}
+              />
+            }
             data-test-subj="editDataSourceDescriptionFormRow"
           >
             <EuiCompressedFieldText
