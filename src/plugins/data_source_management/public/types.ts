@@ -57,9 +57,17 @@ export interface DataSourceTableItem {
   relatedConnections?: DataSourceTableItem[];
 }
 
+/**
+ * @deprecated Use `DataSourceManagementToastMessageItem` instead.
+ */
 export interface ToastMessageItem {
   id: string;
   defaultMessage: string;
+  success?: boolean;
+}
+
+export interface DataSourceManagementToastMessageItem {
+  message: string;
   success?: boolean;
 }
 
