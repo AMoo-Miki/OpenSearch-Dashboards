@@ -36,6 +36,7 @@ export {
   arrayify,
   writeFileAsync,
   readFileAsync,
+  accessAsync,
   normalizePath,
   ErrorReporter,
   FailReporter,

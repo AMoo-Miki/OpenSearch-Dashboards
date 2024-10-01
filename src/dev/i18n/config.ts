@@ -31,7 +31,7 @@
 import { resolve, dirname } from 'path';
 
 // @ts-ignore
-import { normalizePath, readFileAsync } from '.';
+import { normalizePath, readFileAsync, accessAsync } from '.';
 
 export interface I18nConfig {
   paths: Record<string, string[]>;
@@ -40,7 +40,19 @@ export interface I18nConfig {
   prefix?: string;
 }
 
-export async function checkConfigNamespacePrefix(configPath: string) {
+export async function checkConfigNamespacePrefix(
+  configPath: string,
+  failOnNotFound: boolean = true
+) {
+  if (failOnNotFound === false) {
+    try {
+      await accessAsync(resolve(configPath));
+    } catch (ex) {
+      // If the file doesn't exist, return silently
+      return;
+    }
+  }
+
   const { prefix, paths } = JSON.parse(await readFileAsync(resolve(configPath)));
   for (const [namespace] of Object.entries(paths)) {
     if (prefix && prefix !== namespace.split('.')[0]) {
@@ -51,8 +63,18 @@ export async function checkConfigNamespacePrefix(configPath: string) {
 
 export async function assignConfigFromPath(
   config: I18nConfig = { exclude: [], translations: [], paths: {} },
-  configPath: string
+  configPath: string,
+  failOnNotFound: boolean = true
 ) {
+  if (failOnNotFound === false) {
+    try {
+      await accessAsync(resolve(configPath));
+    } catch (ex) {
+      // If the file doesn't exist, return the untouched config
+      return config;
+    }
+  }
+
   const additionalConfig: I18nConfig = {
     paths: {},
     exclude: [],
