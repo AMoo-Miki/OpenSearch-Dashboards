@@ -170,7 +170,6 @@ jobs:
         run: yarn notice:validate
 
       - name: Check i18n
-        if: false # Temporarily disabled until all i18n errors are fixed
         id: i18n-check
         run: yarn i18n:check
 
