@@ -56,6 +56,7 @@ export interface IntegrateOptions {
   ignoreIncompatible: boolean;
   ignoreUnused: boolean;
   ignoreMissing: boolean;
+  ignoreMissingFormats?: boolean;
   config: I18nConfig;
   log: ToolingLog;
 }
@@ -210,7 +211,7 @@ export async function integrateLocaleFiles(
   options: IntegrateOptions
 ) {
   const localizedMessages = JSON.parse((await readFileAsync(options.sourceFileName)).toString());
-  if (!localizedMessages.formats) {
+  if (!localizedMessages.formats && !options.ignoreMissingFormats) {
     throw createFailError(`Locale file should contain formats object.`);
   }
 
