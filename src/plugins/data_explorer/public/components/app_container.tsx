@@ -11,6 +11,8 @@ import {
   EuiPageBody,
   EuiResizableContainer,
   useIsWithinBreakpoints,
+  useEuiTour,
+  EuiStatelessTourStep,
 } from '@elastic/eui';
 import { Suspense } from 'react';
 import classNames from 'classnames';
@@ -25,6 +27,22 @@ import { IDataPluginServices } from '../../../data/public';
 import { QUERY_ENHANCEMENT_ENABLED_SETTING } from './constants';
 import { DISCOVER_LOAD_EVENT, NEW_DISCOVER_LOAD_EVENT, trackUiMetric } from '../ui_metric';
 
+const discoverTourConfig = [
+  {
+    step: 1,
+  },
+  {
+    step: 2,
+  },
+];
+
+const discoverTourInitialState = {
+  currentTourStep: 1,
+  isTourActive: true,
+  tourPopoverWidth: 450,
+  tourSubtitle: 'Tour OpenSearch Discover',
+};
+
 export const AppContainer = React.memo(
   ({ view, params }: { view?: View; params: AppMountParameters }) => {
     const isMobile = useIsWithinBreakpoints(['xs', 's', 'm']);
@@ -36,6 +54,11 @@ export const AppContainer = React.memo(
 
     const topLinkRef = useRef<HTMLDivElement>(null);
     const datePickerRef = useRef<HTMLDivElement>(null);
+
+    const discoverTour = useEuiTour(
+      discoverTourConfig as EuiStatelessTourStep[],
+      discoverTourInitialState
+    );
 
     if (!view) {
       return <NoView />;
@@ -97,7 +120,7 @@ export const AppContainer = React.memo(
                       mode={['collapsible', { position: 'top' }]}
                       paddingSize="none"
                     >
-                      <Sidebar>
+                      <Sidebar discoverTour={discoverTour}>
                         <MemoizedPanel {...params} />
                       </Sidebar>
                     </EuiResizablePanel>

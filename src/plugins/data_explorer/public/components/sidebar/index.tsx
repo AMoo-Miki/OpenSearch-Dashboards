@@ -3,8 +3,15 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { FC, useCallback, useEffect, useState } from 'react';
-import { EuiPageSideBar, EuiSplitPanel } from '@elastic/eui';
+import React, { ReactChild, FC, useCallback, useEffect, useState } from 'react';
+import {
+  EuiPageSideBar,
+  EuiSplitPanel,
+  useEuiTour,
+  EuiTourStep,
+  EuiSpacer,
+  EuiSmallButton,
+} from '@elastic/eui';
 import { i18n } from '@osd/i18n';
 import {
   DataSource,
@@ -18,7 +25,12 @@ import { DataExplorerServices } from '../../types';
 import { setIndexPattern, useTypedDispatch, useTypedSelector } from '../../utils/state_management';
 import './index.scss';
 
-export const Sidebar: FC = ({ children }) => {
+interface Props {
+  discoverTour: ReturnType<typeof useEuiTour>;
+  children?: ReactChild;
+}
+
+export const Sidebar: FC<Props> = ({ children, discoverTour }) => {
   const { indexPattern: indexPatternId } = useTypedSelector((state) => state.metadata);
   const dispatch = useTypedDispatch();
   const [selectedSources, setSelectedSources] = useState<DataSourceOption[]>([]);
@@ -124,6 +136,8 @@ export const Sidebar: FC = ({ children }) => {
     dataSources.dataSourceService.reload();
   }, [dataSources.dataSourceService]);
 
+  const [[discoverTourStepProps], discoverTourAction] = discoverTour;
+
   return (
     <EuiPageSideBar className="deSidebar" sticky>
       <EuiSplitPanel.Outer
@@ -138,20 +152,41 @@ export const Sidebar: FC = ({ children }) => {
           color="transparent"
           className="deSidebar_dataSource"
         >
-          {isEnhancementEnabled ? (
-            <DatasetSelector onSubmit={handleDatasetSubmit} />
-          ) : (
-            <DataSourceSelectable
-              dataSources={activeDataSources}
-              dataSourceOptionList={dataSourceOptionList}
-              setDataSourceOptionList={setDataSourceOptionList}
-              onDataSourceSelect={handleSourceSelection}
-              selectedSources={selectedSources}
-              onGetDataSetError={handleGetDataSetError}
-              onRefresh={memorizedReload}
-              fullWidth
-            />
-          )}
+          <EuiTourStep
+            {...discoverTourStepProps}
+            title={'Data selector'}
+            content={
+              <div>
+                <p>This is a neat thing. You enter queries here.</p>
+                <EuiSpacer />
+                <EuiSmallButton iconType="arrowLeft" onClick={discoverTourAction.decrementStep}>
+                  Previous
+                </EuiSmallButton>
+                <EuiSmallButton
+                  iconType="arrowRight"
+                  color="primary"
+                  onClick={discoverTourAction.incrementStep}
+                >
+                  Next
+                </EuiSmallButton>
+              </div>
+            }
+          >
+            {isEnhancementEnabled ? (
+              <DatasetSelector onSubmit={handleDatasetSubmit} />
+            ) : (
+              <DataSourceSelectable
+                dataSources={activeDataSources}
+                dataSourceOptionList={dataSourceOptionList}
+                setDataSourceOptionList={setDataSourceOptionList}
+                onDataSourceSelect={handleSourceSelection}
+                selectedSources={selectedSources}
+                onGetDataSetError={handleGetDataSetError}
+                onRefresh={memorizedReload}
+                fullWidth
+              />
+            )}
+          </EuiTourStep>
         </EuiSplitPanel.Inner>
         <EuiSplitPanel.Inner paddingSize="none" color="transparent" className="eui-yScroll">
           {children}
