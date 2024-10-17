@@ -29,6 +29,7 @@
  */
 
 import { InjectedIntl, injectI18n } from '@osd/i18n/react';
+import { useEuiTour } from '@elastic/eui';
 import classNames from 'classnames';
 import { compact, get, isEqual } from 'lodash';
 import React, { Component } from 'react';
@@ -93,6 +94,7 @@ export interface SearchBarOwnProps {
   onRefresh?: (payload: { dateRange: TimeRange }) => void;
   indicateNoData?: boolean;
   queryStatus?: QueryStatus;
+  guidedTour?: ReturnType<typeof useEuiTour>;
 }
 
 export type SearchBarProps = SearchBarOwnProps & SearchBarInjectedDeps;
@@ -517,6 +519,7 @@ class SearchBarUI extends Component<SearchBarProps, State> {
           dataTestSubj={this.props.dataTestSubj}
           indicateNoData={this.props.indicateNoData}
           datePickerRef={this.props.datePickerRef}
+          guidedTour={this.props.guidedTour}
         />
       );
     }
@@ -552,6 +555,7 @@ class SearchBarUI extends Component<SearchBarProps, State> {
           datePickerRef={this.props.datePickerRef}
           savedQueryManagement={searchBarMenu(false, true)}
           queryStatus={this.props.queryStatus}
+          guidedTour={this.props.guidedTour}
         />
       );
     }

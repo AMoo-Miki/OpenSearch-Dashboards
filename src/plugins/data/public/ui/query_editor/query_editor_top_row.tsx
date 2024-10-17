@@ -11,6 +11,7 @@ import {
   EuiSuperDatePicker,
   OnRefreshProps,
   prettyDuration,
+  useEuiTour,
 } from '@elastic/eui';
 import classNames from 'classnames';
 import React, { useState } from 'react';
@@ -55,6 +56,7 @@ export interface QueryEditorTopRowProps {
   datePickerRef?: React.RefObject<HTMLDivElement>;
   savedQueryManagement?: any;
   queryStatus?: QueryStatus;
+  guidedTour?: ReturnType<typeof useEuiTour>;
 }
 
 // Needed for React.lazy
@@ -188,6 +190,7 @@ export default function QueryEditorTopRow(props: QueryEditorTopRowProps) {
           filterBar={props.filterBar}
           savedQueryManagement={props.savedQueryManagement}
           queryStatus={props.queryStatus}
+          guidedTour={props.guidedTour}
         />
       </EuiFlexItem>
     );

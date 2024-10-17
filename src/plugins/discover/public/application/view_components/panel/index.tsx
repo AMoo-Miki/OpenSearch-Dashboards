@@ -106,6 +106,7 @@ export default function DiscoverPanel(props: ViewProps) {
 
   return (
     <DiscoverSidebar
+      guidedTour={props.guidedTour}
       columns={columns || []}
       fieldCounts={fetchState.fieldCounts || {}}
       hits={fetchState.rows || []}

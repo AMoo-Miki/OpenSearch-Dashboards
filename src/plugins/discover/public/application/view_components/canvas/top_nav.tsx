@@ -6,7 +6,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Query, TimeRange } from 'src/plugins/data/common';
 import { createPortal } from 'react-dom';
-import { EuiButtonIcon, EuiFlexGroup, EuiFlexItem, EuiToolTip } from '@elastic/eui';
+import { EuiButtonIcon, EuiFlexGroup, EuiFlexItem, EuiToolTip, useEuiTour } from '@elastic/eui';
 import { i18n } from '@osd/i18n';
 import { AppMountParameters } from '../../../../../../core/public';
 import {
@@ -32,6 +32,7 @@ export interface TopNavProps {
     setHeaderActionMenu: AppMountParameters['setHeaderActionMenu'];
     onQuerySubmit: (payload: { dateRange: TimeRange; query?: Query }, isUpdate?: boolean) => void;
     optionalRef?: Record<string, React.RefObject<HTMLDivElement>>;
+    guidedTour?: ReturnType<typeof useEuiTour>;
   };
   showSaveQuery: boolean;
   isEnhancementsEnabled?: boolean;
@@ -177,6 +178,7 @@ export const TopNav = ({ opts, showSaveQuery, isEnhancementsEnabled }: TopNavPro
         groupActions={showActionsInGroup}
         screenTitle={screenTitle}
         queryStatus={queryStatus}
+        guidedTour={opts.guidedTour}
       />
     </>
   );

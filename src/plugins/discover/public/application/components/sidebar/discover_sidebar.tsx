@@ -39,6 +39,13 @@ import {
   EuiPanel,
   EuiSplitPanel,
   EuiButtonEmpty,
+  useEuiTour,
+  EuiTourStep,
+  EuiText,
+  EuiSpacer,
+  EuiFlexGroup,
+  EuiFlexItem,
+  EuiSmallButton,
 } from '@elastic/eui';
 import { I18nProvider } from '@osd/i18n/react';
 import { DiscoverField } from './discover_field';
@@ -97,6 +104,7 @@ export interface DiscoverSidebarProps {
    */
   selectedIndexPattern?: IndexPattern;
   isEnhancementsEnabledOverride: boolean;
+  guidedTour?: ReturnType<typeof useEuiTour>;
 }
 
 export function DiscoverSidebar(props: DiscoverSidebarProps) {
@@ -196,9 +204,61 @@ export function DiscoverSidebar(props: DiscoverSidebarProps) {
     [fields, onAddField, onReorderFields, popularFields, unpopularFields]
   );
 
+  // Step 1
+  const [[guidedTourStepProps], guidedTourAction] = props.guidedTour || [[]];
+
   if (!selectedIndexPattern || !fields) {
     return null;
   }
+
+  const selectedFieldList =
+    fields.length > 0 ? (
+      <FieldList
+        category="selected"
+        fields={selectedFields}
+        getDetailsByField={getDetailsByField}
+        shortDotsEnabled={shortDotsEnabled}
+        title={i18n.translate('discover.fieldChooser.filter.selectedFieldsTitle', {
+          defaultMessage: 'Selected fields',
+        })}
+        {...props}
+      />
+    ) : null;
+
+  const sideBarSelectedFieldList =
+    selectedFieldList && guidedTourStepProps && guidedTourAction ? (
+      <EuiTourStep
+        {...guidedTourStepProps}
+        minWidth={false}
+        title={'Fields panel'}
+        display="block"
+        content={
+          <div>
+            <EuiText grow={false}>
+              Select fields to explore in the field selector panel. You can drag them into the query
+              editor as well.
+            </EuiText>
+            <EuiSpacer />
+            <EuiFlexGroup justifyContent="flexStart" responsive={false} gutterSize="s">
+              <EuiFlexItem grow={false}>
+                <EuiSmallButton
+                  iconType="arrowRight"
+                  color="primary"
+                  fill
+                  onClick={guidedTourAction.incrementStep}
+                >
+                  Next
+                </EuiSmallButton>
+              </EuiFlexItem>
+            </EuiFlexGroup>
+          </div>
+        }
+      >
+        {selectedFieldList}
+      </EuiTourStep>
+    ) : (
+      selectedFieldList
+    );
 
   return (
     <I18nProvider>
@@ -238,16 +298,7 @@ export function DiscoverSidebar(props: DiscoverSidebarProps) {
           <EuiSplitPanel.Inner className="eui-yScroll" paddingSize="none">
             {fields.length > 0 && (
               <>
-                <FieldList
-                  category="selected"
-                  fields={selectedFields}
-                  getDetailsByField={getDetailsByField}
-                  shortDotsEnabled={shortDotsEnabled}
-                  title={i18n.translate('discover.fieldChooser.filter.selectedFieldsTitle', {
-                    defaultMessage: 'Selected fields',
-                  })}
-                  {...props}
-                />
+                {sideBarSelectedFieldList}
                 {popularFields.length > 0 && (
                   <FieldList
                     category="popular"

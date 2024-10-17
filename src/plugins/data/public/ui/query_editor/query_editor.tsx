@@ -11,8 +11,12 @@ import {
   EuiCompressedFieldText,
   EuiFlexGroup,
   EuiFlexItem,
+  EuiSmallButton,
+  EuiSpacer,
   EuiText,
+  EuiTourStep,
   PopoverAnchorPosition,
+  useEuiTour,
 } from '@elastic/eui';
 import classNames from 'classnames';
 import { isEqual } from 'lodash';
@@ -63,6 +67,7 @@ export interface QueryEditorProps {
   prepend?: React.ComponentProps<typeof EuiCompressedFieldText>['prepend'];
   savedQueryManagement?: any;
   queryStatus?: QueryStatus;
+  guidedTour?: ReturnType<typeof useEuiTour>;
 }
 
 interface Props extends QueryEditorProps {
@@ -344,6 +349,9 @@ export default class QueryEditorUI extends Component<Props, State> {
     const useQueryEditor =
       this.props.query.language !== 'kuery' && this.props.query.language !== 'lucene';
 
+    // Step 3
+    const [[, , guidedTourStepProps], guidedTourAction] = this.props.guidedTour || [[]];
+
     const languageSelector = (
       <QueryLanguageSelector
         query={this.props.query}
@@ -352,6 +360,46 @@ export default class QueryEditorUI extends Component<Props, State> {
         appName={this.services.appName}
       />
     );
+
+    const editorLanguageSelector =
+      guidedTourStepProps && guidedTourAction ? (
+        <EuiTourStep
+          {...guidedTourStepProps}
+          minWidth={false}
+          title={'Language selector'}
+          display="block"
+          content={
+            <div>
+              <EuiText grow={false}>
+                Choose to update the language you want to work in– PPL, Spark SQL, OpenSearch SQL
+                for the query editor or filter through Lucene or PPL.
+              </EuiText>
+              <EuiSpacer />
+              <EuiFlexGroup justifyContent="flexStart" responsive={false} gutterSize="s">
+                <EuiFlexItem grow={false}>
+                  <EuiSmallButton iconType="arrowLeft" onClick={guidedTourAction.decrementStep}>
+                    Previous
+                  </EuiSmallButton>
+                </EuiFlexItem>
+                <EuiFlexItem grow={false}>
+                  <EuiSmallButton
+                    iconType="arrowRight"
+                    color="primary"
+                    fill
+                    onClick={guidedTourAction.incrementStep}
+                  >
+                    Next
+                  </EuiSmallButton>
+                </EuiFlexItem>
+              </EuiFlexGroup>
+            </div>
+          }
+        >
+          {languageSelector}
+        </EuiTourStep>
+      ) : (
+        languageSelector
+      );
 
     const baseInputProps = {
       languageId: this.props.query.language,
@@ -458,7 +506,7 @@ export default class QueryEditorUI extends Component<Props, State> {
               ? languageEditor.TopBar.Collapsed()
               : languageEditor.TopBar.Expanded && languageEditor.TopBar.Expanded()}
           </div>
-          {languageSelector}
+          {editorLanguageSelector}
           <div className="osdQueryEditor__querycontrols">
             <EuiFlexGroup responsive={false} gutterSize="s" alignItems="center">
               <div

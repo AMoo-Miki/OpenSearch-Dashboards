@@ -11,6 +11,9 @@ import {
   EuiTourStep,
   EuiSpacer,
   EuiSmallButton,
+  EuiFlexGroup,
+  EuiFlexItem,
+  EuiText,
 } from '@elastic/eui';
 import { i18n } from '@osd/i18n';
 import {
@@ -26,11 +29,11 @@ import { setIndexPattern, useTypedDispatch, useTypedSelector } from '../../utils
 import './index.scss';
 
 interface Props {
-  discoverTour: ReturnType<typeof useEuiTour>;
+  guidedTour?: ReturnType<typeof useEuiTour>;
   children?: ReactChild;
 }
 
-export const Sidebar: FC<Props> = ({ children, discoverTour }) => {
+export const Sidebar: FC<Props> = ({ children, guidedTour }) => {
   const { indexPattern: indexPatternId } = useTypedSelector((state) => state.metadata);
   const dispatch = useTypedDispatch();
   const [selectedSources, setSelectedSources] = useState<DataSourceOption[]>([]);
@@ -136,7 +139,63 @@ export const Sidebar: FC<Props> = ({ children, discoverTour }) => {
     dataSources.dataSourceService.reload();
   }, [dataSources.dataSourceService]);
 
-  const [[discoverTourStepProps], discoverTourAction] = discoverTour;
+  // Step 2
+  const [[, guidedTourStepProps], guidedTourAction] = guidedTour || [[]];
+
+  const sourceSelector = isEnhancementEnabled ? (
+    <DatasetSelector onSubmit={handleDatasetSubmit} />
+  ) : (
+    <DataSourceSelectable
+      dataSources={activeDataSources}
+      dataSourceOptionList={dataSourceOptionList}
+      setDataSourceOptionList={setDataSourceOptionList}
+      onDataSourceSelect={handleSourceSelection}
+      selectedSources={selectedSources}
+      onGetDataSetError={handleGetDataSetError}
+      onRefresh={memorizedReload}
+      fullWidth
+    />
+  );
+
+  const sideBarSourceSelector =
+    guidedTourStepProps && guidedTourAction ? (
+      <EuiTourStep
+        {...guidedTourStepProps}
+        minWidth={false}
+        title={'Data selector'}
+        display="block"
+        content={
+          <div>
+            <EuiText grow={false}>
+              You can select data from readily available sources in your workspace and choose the
+              enhanced data selector for more options.
+            </EuiText>
+            <EuiSpacer />
+            <EuiFlexGroup justifyContent="flexStart" responsive={false} gutterSize="s">
+              <EuiFlexItem grow={false}>
+                <EuiSmallButton iconType="arrowLeft" onClick={guidedTourAction.decrementStep}>
+                  Previous
+                </EuiSmallButton>
+              </EuiFlexItem>
+              <EuiFlexItem grow={false}>
+                <EuiSmallButton
+                  iconType="arrowRight"
+                  color="primary"
+                  fill
+                  onClick={guidedTourAction.incrementStep}
+                >
+                  Next
+                </EuiSmallButton>
+              </EuiFlexItem>
+            </EuiFlexGroup>
+          </div>
+        }
+      >
+        {sourceSelector}
+      </EuiTourStep>
+    ) : (
+      sourceSelector
+    );
 
   return (
     <EuiPageSideBar className="deSidebar" sticky>
@@ -152,41 +211,7 @@ export const Sidebar: FC<Props> = ({ children, discoverTour }) => {
           color="transparent"
           className="deSidebar_dataSource"
         >
-          <EuiTourStep
-            {...discoverTourStepProps}
-            title={'Data selector'}
-            content={
-              <div>
-                <p>This is a neat thing. You enter queries here.</p>
-                <EuiSpacer />
-                <EuiSmallButton iconType="arrowLeft" onClick={discoverTourAction.decrementStep}>
-                  Previous
-                </EuiSmallButton>
-                <EuiSmallButton
-                  iconType="arrowRight"
-                  color="primary"
-                  onClick={discoverTourAction.incrementStep}
-                >
-                  Next
-                </EuiSmallButton>
-              </div>
-            }
-          >
-            {isEnhancementEnabled ? (
-              <DatasetSelector onSubmit={handleDatasetSubmit} />
-            ) : (
-              <DataSourceSelectable
-                dataSources={activeDataSources}
-                dataSourceOptionList={dataSourceOptionList}
-                setDataSourceOptionList={setDataSourceOptionList}
-                onDataSourceSelect={handleSourceSelection}
-                selectedSources={selectedSources}
-                onGetDataSetError={handleGetDataSetError}
-                onRefresh={memorizedReload}
-                fullWidth
-              />
-            )}
-          </EuiTourStep>
+          {sideBarSourceSelector}
         </EuiSplitPanel.Inner>
         <EuiSplitPanel.Inner paddingSize="none" color="transparent" className="eui-yScroll">
           {children}

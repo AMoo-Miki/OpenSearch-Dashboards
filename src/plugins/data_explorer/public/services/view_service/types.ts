@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { useEuiTour } from '@elastic/eui';
 import { Slice } from '@reduxjs/toolkit';
 import { LazyExoticComponent } from 'react';
 import { AppMountParameters } from '../../../../../core/public';
@@ -18,7 +19,9 @@ export interface DefaultViewState<T = unknown> {
   root?: Partial<RootState>;
 }
 
-export type ViewProps = AppMountParameters;
+export type ViewProps = AppMountParameters & {
+  guidedTour?: ReturnType<typeof useEuiTour>;
+};
 
 export interface ViewDefinition<T = any> {
   readonly id: string;

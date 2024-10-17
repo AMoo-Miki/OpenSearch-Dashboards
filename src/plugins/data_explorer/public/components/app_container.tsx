@@ -27,7 +27,7 @@ import { IDataPluginServices } from '../../../data/public';
 import { QUERY_ENHANCEMENT_ENABLED_SETTING } from './constants';
 import { DISCOVER_LOAD_EVENT, NEW_DISCOVER_LOAD_EVENT, trackUiMetric } from '../ui_metric';
 
-const discoverTourConfig = [
+const guidedTourConfig = [
   {
     step: 1,
   },
@@ -36,7 +36,7 @@ const discoverTourConfig = [
   },
 ];
 
-const discoverTourInitialState = {
+const guidedTourInitialState = {
   currentTourStep: 1,
   isTourActive: true,
   tourPopoverWidth: 450,
@@ -55,9 +55,9 @@ export const AppContainer = React.memo(
     const topLinkRef = useRef<HTMLDivElement>(null);
     const datePickerRef = useRef<HTMLDivElement>(null);
 
-    const discoverTour = useEuiTour(
-      discoverTourConfig as EuiStatelessTourStep[],
-      discoverTourInitialState
+    const guidedTour = useEuiTour(
+      guidedTourConfig as EuiStatelessTourStep[],
+      guidedTourInitialState
     );
 
     if (!view) {
@@ -110,7 +110,7 @@ export const AppContainer = React.memo(
         >
           {/* TODO: improve fallback state */}
           <Suspense fallback={<div>Loading...</div>}>
-            <Context {...params}>
+            <Context {...params} guidedTour={guidedTour}>
               <EuiResizableContainer direction={isMobile ? 'vertical' : 'horizontal'}>
                 {(EuiResizablePanel, EuiResizableButton) => (
                   <>
@@ -120,8 +120,8 @@ export const AppContainer = React.memo(
                       mode={['collapsible', { position: 'top' }]}
                       paddingSize="none"
                     >
-                      <Sidebar discoverTour={discoverTour}>
-                        <MemoizedPanel {...params} />
+                      <Sidebar guidedTour={guidedTour}>
+                        <MemoizedPanel {...params} guidedTour={guidedTour} />
                       </Sidebar>
                     </EuiResizablePanel>
                     <EuiResizableButton />
@@ -133,7 +133,7 @@ export const AppContainer = React.memo(
                       paddingSize="none"
                     >
                       <EuiPageBody className="deLayout__canvas">
-                        <MemoizedCanvas {...params} />
+                        <MemoizedCanvas {...params} guidedTour={guidedTour} />
                       </EuiPageBody>
                     </EuiResizablePanel>
                   </>
