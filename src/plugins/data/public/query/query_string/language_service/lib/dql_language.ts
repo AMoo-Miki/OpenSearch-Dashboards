@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { i18n } from '@osd/i18n';
 import { LanguageConfig } from '../types';
 import { ISearchInterceptor } from '../../../../search';
 
@@ -27,33 +28,47 @@ export const getDQLLanguageConfig = (
     supportedAppNames: ['discover', 'dashboards', 'visualize', 'data-explorer'],
     sampleQueries: [
       {
-        title: 'The title field contains the word wind.',
+        title: i18n.translate('data.dqlLanguage.sampleQuery.titleContainsWind', {
+          defaultMessage: 'The title field contains the word wind.',
+        }),
         query: 'title: wind',
       },
       {
-        title: 'The title field contains the word wind or the word windy.',
+        title: i18n.translate('data.dqlLanguage.sampleQuery.titleContainsWindOrWindy', {
+          defaultMessage: 'The title field contains the word wind or the word windy.',
+        }),
         query: 'title: (wind OR windy)',
       },
       {
-        title: 'The title field contains the phrase wind rises.',
+        title: i18n.translate('data.dqlLanguage.sampleQuery.titleContainsPhraseWindRises', {
+          defaultMessage: 'The title field contains the phrase wind rises.',
+        }),
         query: 'title: "wind rises"',
       },
       {
-        title: 'The title.keyword field exactly matches The wind rises.',
+        title: i18n.translate('data.dqlLanguage.sampleQuery.titleKeywordExactMatch', {
+          defaultMessage: 'The title.keyword field exactly matches The wind rises.',
+        }),
         query: 'title.keyword: The wind rises',
       },
       {
-        title:
-          'Any field that starts with title (for example, title and title.keyword) contains the word wind',
+        title: i18n.translate('data.dqlLanguage.sampleQuery.titleFieldsContainWind', {
+          defaultMessage:
+            'Any field that starts with title (for example, title and title.keyword) contains the word wind',
+        }),
         query: 'title*: wind',
       },
       {
-        title:
-          'The field that starts with article and ends with title contains the word wind. Matches the field article title.',
+        title: i18n.translate('data.dqlLanguage.sampleQuery.articleTitleContainsWind', {
+          defaultMessage:
+            'The field that starts with article and ends with title contains the word wind. Matches the field article title.',
+        }),
         query: 'article*title: wind',
       },
       {
-        title: 'Documents in which the field description exists.',
+        title: i18n.translate('data.dqlLanguage.sampleQuery.descriptionFieldExists', {
+          defaultMessage: 'Documents in which the field description exists.',
+        }),
         query: 'description:*',
       },
     ],
