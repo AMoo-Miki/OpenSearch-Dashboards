@@ -37,7 +37,7 @@ export interface EditorEnhancements {
 
 export interface SampleQuery {
   title: string;
-  query: Query;
+  query: string;
 }
 
 export interface LanguageConfig {

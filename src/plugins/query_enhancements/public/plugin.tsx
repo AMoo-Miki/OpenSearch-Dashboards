@@ -101,6 +101,33 @@ export class QueryEnhancementsPlugin
       editorSupportedAppNames: ['discover'],
       supportedAppNames: ['discover', 'data-explorer'],
       hideDatePicker: true,
+      sampleQueries: [
+        {
+          title: 'The title field contains the word wind.',
+          query: `SELECT * FROM your_table WHERE title LIKE '%wind%'`,
+        },
+        {
+          title: 'The title field contains the word wind or the word windy.',
+          query: `SELECT * FROM your_table WHERE title LIKE '%wind%' OR title LIKE '%windy%';`,
+        },
+        {
+          title: 'The title field contains the phrase wind rises.',
+          query: `SELECT * FROM your_table WHERE title LIKE '%wind rises%'`,
+        },
+        {
+          title: 'The title.keyword field exactly matches The wind rises.',
+          query: `SELECT * FROM your_table WHERE title = 'The wind rises'`,
+        },
+        {
+          title:
+            'Any field that starts with title (for example, title and title.keyword) contains the word wind',
+          query: `SELECT * FROM your_table WHERE title LIKE '%wind%' OR title = 'wind'`,
+        },
+        {
+          title: 'Documents in which the field description exists.',
+          query: `SELECT * FROM your_table WHERE description IS NOT NULL AND description != '';`,
+        },
+      ],
     };
     queryString.getLanguageService().registerLanguage(sqlLanguageConfig);
 

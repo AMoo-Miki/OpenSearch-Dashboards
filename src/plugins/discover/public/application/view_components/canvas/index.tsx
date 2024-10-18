@@ -38,12 +38,12 @@ export default function DiscoverCanvas({ setHeaderActionMenu, history, optionalR
       uiSettings,
       capabilities,
       chrome: { setHeaderVariant },
-      data: {
-        query: { queryString, savedQueries },
-      },
+      data: { query: queryStart },
     },
   } = useOpenSearchDashboards<DiscoverViewServices>();
-  const datasetService = queryString.getDatasetService();
+  const datasetService = queryStart.queryString.getDatasetService();
+  const savedQuery = queryStart.savedQueries;
+  const languageService = queryStart.queryString.getLanguageService();
   const { columns } = useSelector((state) => {
     const stateColumns = state.discover.columns;
 
@@ -153,8 +153,9 @@ export default function DiscoverCanvas({ setHeaderActionMenu, history, optionalR
       {fetchState.status === ResultStatus.NO_RESULTS && (
         <DiscoverNoResults
           datasetService={datasetService}
+          savedQuery={savedQuery}
+          languageService={languageService}
           query={query}
-          savedQueryService={savedQueries}
           timeFieldName={timeField}
           queryLanguage={''}
         />
@@ -162,8 +163,9 @@ export default function DiscoverCanvas({ setHeaderActionMenu, history, optionalR
       {fetchState.status === ResultStatus.ERROR && (
         <DiscoverNoResults
           datasetService={datasetService}
+          savedQuery={savedQuery}
+          languageService={languageService}
           query={query}
-          savedQueryService={savedQueries}
           timeFieldName={timeField}
           queryLanguage={''}
         />

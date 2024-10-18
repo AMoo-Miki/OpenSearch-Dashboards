@@ -38,14 +38,22 @@ import {
   EuiTabbedContent,
   EuiCodeBlock,
   EuiSpacer,
+  EuiFlexGroup,
+  EuiFlexItem,
 } from '@elastic/eui';
 import { i18n } from '@osd/i18n';
 import { Query } from '../../../../../data/common';
-import { DatasetServiceContract, SavedQuery, SavedQueryService } from '../../../../../data/public';
+import {
+  DatasetServiceContract,
+  LanguageServiceContract,
+  SavedQuery,
+  SavedQueryService,
+} from '../../../../../data/public/';
 
 interface Props {
   datasetService: DatasetServiceContract;
-  savedQueryService: SavedQueryService;
+  savedQuery: SavedQueryService;
+  languageService: LanguageServiceContract;
   query: Query | undefined;
   timeFieldName?: string;
   queryLanguage?: string;
@@ -53,7 +61,8 @@ interface Props {
 
 export const DiscoverNoResults = ({
   datasetService,
-  savedQueryService,
+  savedQuery,
+  languageService,
   query,
   timeFieldName,
   queryLanguage,
@@ -179,12 +188,14 @@ export const DiscoverNoResults = ({
 
   useEffect(() => {
     const fetchSavedQueries = async () => {
-      const { queries: savedQueryItems } = await savedQueryService.findSavedQueries('', 1000);
-      setSavedQueries(savedQueryItems);
+      const { queries: savedQueryItems } = await savedQuery.findSavedQueries('', 1000);
+      setSavedQueries(
+        savedQueryItems.filter((sq) => query?.language === sq.attributes.query.language)
+      );
     };
 
     fetchSavedQueries();
-  }, [setSavedQueries, savedQueryService]);
+  }, [setSavedQueries, query, savedQuery]);
 
   const tabs = useMemo(() => {
     const buildSampleQueryBlock = (sampleTitle: string, sampleQuery: string) => {
@@ -207,67 +218,86 @@ export const DiscoverNoResults = ({
         )
       );
     }
+    if (query && languageService.getLanguage(query?.language)?.sampleQueries) {
+      sampleQueries.push(...(languageService.getLanguage(query.language)!.sampleQueries ?? []));
+    }
 
     return [
-      {
-        id: 'sample_queries',
-        name: i18n.translate('discover.emptyPrompt.sampleQueries.title', {
-          defaultMessage: 'Sample Queries',
-        }),
-        content: (
-          <Fragment>
-            <EuiSpacer />
-            {sampleQueries.map((sampleQuery) =>
-              buildSampleQueryBlock(sampleQuery.title, sampleQuery.query)
-            )}
-          </Fragment>
-        ),
-      },
-      {
-        id: 'saved_queries',
-        name: i18n.translate('discover.emptyPrompt.savedQueries.title', {
-          defaultMessage: 'Saved Queries',
-        }),
-        content: (
-          <Fragment>
-            <EuiSpacer />
-            {savedQueries.map((savedQuery) =>
-              buildSampleQueryBlock(savedQuery.id, savedQuery.attributes.query.query as string)
-            )}
-          </Fragment>
-        ),
-      },
+      ...(sampleQueries.length > 0
+        ? [
+            {
+              id: 'sample_queries',
+              name: i18n.translate('discover.emptyPrompt.sampleQueries.title', {
+                defaultMessage: 'Sample Queries',
+              }),
+              content: (
+                <Fragment>
+                  <EuiSpacer size="s" />
+                  {sampleQueries
+                    .slice(0, 5)
+                    .map((sampleQuery) =>
+                      buildSampleQueryBlock(sampleQuery.title, sampleQuery.query)
+                    )}
+                </Fragment>
+              ),
+            },
+          ]
+        : []),
+      ...(savedQueries.length > 0
+        ? [
+            {
+              id: 'saved_queries',
+              name: i18n.translate('discover.emptyPrompt.savedQueries.title', {
+                defaultMessage: 'Saved Queries',
+              }),
+              content: (
+                <Fragment>
+                  <EuiSpacer />
+                  {savedQueries.map((sq) =>
+                    buildSampleQueryBlock(sq.id, sq.attributes.query.query as string)
+                  )}
+                </Fragment>
+              ),
+            },
+          ]
+        : []),
     ];
-  }, [datasetService, query, savedQueries]);
+  }, [datasetService, languageService, query, savedQueries]);
 
   return (
     <I18nProvider>
       <EuiPanel hasBorder={false} hasShadow={false} color="transparent">
-        <EuiEmptyPrompt
-          iconType="alert"
-          iconColor="default"
-          data-test-subj="discoverNoResults"
-          title={
-            <EuiText size="s">
-              <h2>
-                {i18n.translate('discover.emptyPrompt.title', {
-                  defaultMessage: 'No Results',
-                })}
-              </h2>
-            </EuiText>
-          }
-          body={
-            <EuiText size="s" data-test-subj="discoverNoResultsTimefilter">
-              <p>
-                {i18n.translate('discover.emptyPrompt.body', {
-                  defaultMessage:
-                    'Try selecting a different data source, expanding your time range or modifying the query & filters.',
-                })}
-              </p>
-            </EuiText>
-          }
-        />
-        <EuiTabbedContent tabs={tabs} />
+        <EuiFlexGroup alignItems="center" justifyContent="center">
+          <EuiFlexItem grow={false}>
+            <EuiPanel hasBorder={true}>
+              <EuiEmptyPrompt
+                iconType="alert"
+                iconColor="default"
+                data-test-subj="discoverNoResults"
+                title={
+                  <EuiText size="s">
+                    <h2>
+                      {i18n.translate('discover.emptyPrompt.title', {
+                        defaultMessage: 'No Results',
+                      })}
+                    </h2>
+                  </EuiText>
+                }
+                body={
+                  <EuiText size="s" data-test-subj="discoverNoResultsTimefilter">
+                    <p>
+                      {i18n.translate('discover.emptyPrompt.body', {
+                        defaultMessage:
+                          'Try selecting a different data source, expanding your time range or modifying the query & filters.',
+                      })}
+                    </p>
+                  </EuiText>
+                }
+              />
+              <EuiTabbedContent tabs={tabs} />
+            </EuiPanel>
+          </EuiFlexItem>
+        </EuiFlexGroup>
       </EuiPanel>
     </I18nProvider>
   );
