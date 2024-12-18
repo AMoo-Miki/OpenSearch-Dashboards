@@ -24,6 +24,7 @@ export const uiSettings: Record<string, UiSettingsParams> = {
     description: i18n.translate('home.ui_settings.useNewHomePage.description', {
       defaultMessage: 'Try the new home page',
     }),
+    controlsFeature: true,
     schema: schema.boolean(),
     requiresPageReload: true,
   },
