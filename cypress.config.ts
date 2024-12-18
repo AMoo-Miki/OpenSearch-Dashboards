@@ -45,6 +45,9 @@ function setupNodeEvents(
   on: Cypress.PluginEvents,
   config: Cypress.PluginConfigOptions
 ): Cypress.PluginConfigOptions {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  require('@cypress/code-coverage/task')(on, config);
+
   const { webpackOptions } = webpackPreprocessor.defaultOptions;
 
   /**
