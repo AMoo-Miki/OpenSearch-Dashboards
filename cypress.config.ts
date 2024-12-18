@@ -32,6 +32,9 @@ module.exports = defineConfig({
     DATASOURCE_MANAGEMENT_ENABLED: false,
     ML_COMMONS_DASHBOARDS_ENABLED: true,
     WAIT_FOR_LOADER_BUFFER_MS: 0,
+    codeCoverage: {
+      url: 'http://localhost:5601/__coverage__',
+    },
   },
   e2e: {
     baseUrl: 'http://localhost:5601',
