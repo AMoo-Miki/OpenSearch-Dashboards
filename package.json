@@ -57,7 +57,7 @@
     "test:ftr": "scripts/use_node scripts/functional_tests",
     "test:ftr:server": "scripts/use_node scripts/functional_tests_server",
     "test:ftr:runner": "scripts/use_node scripts/functional_test_runner",
-    "test:cypress12": "env TZ=America/Los_Angeles NO_COLOR=1 yarn cypress run --spec cypress/integration/dashboard_sanity_test.spec.js",
+    "test:cypress12": "env TZ=America/Los_Angeles NO_COLOR=1 yarn cypress run",
     "checkLicenses": "scripts/use_node scripts/check_licenses --dev",
     "notice:validate": "scripts/use_node scripts/notice --validate",
     "notice:generate": "scripts/use_node scripts/notice",
