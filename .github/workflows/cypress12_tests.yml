@@ -109,5 +109,6 @@ jobs:
         id: upload-code-coverage
         uses: codecov/codecov-action@v5
         with:
+          token: ${{ secrets.CODECOV_TOKEN }}
           directory: ./coverage
           flags: cypress12
