@@ -96,7 +96,7 @@ jobs:
           npm i osd-launcher -g
           osd-launcher -os 3.0.0 --no-security --no-build --no-plugins -p dummy --destination ~/
           /bin/bash -c ~/OpenSearch-v3.0.0/bin/opensearch &
-          /bin/bash -c 'node scripts/opensearch_dashboards --dev --no-base-path --no-watch --opensearch.ignoreVersionMismatch=true --opensearch.ssl.verificationMode=none --savedObjects.maxImportPayloadBytes=10485760 --server.maxPayloadBytes=1759977 --logging.json=false --data.search.aggs.shardDelay.enabled=true --csp.warnLegacyBrowsers=false --uiSettings.overrides["query:enhancements:enabled"]=false' &
+          /bin/bash -c 'node scripts/opensearch_dashboards --dev --no-base-path --no-watch --opensearch.ignoreVersionMismatch=true --opensearch.ssl.verificationMode=none --savedObjects.maxImportPayloadBytes=10485760 --server.maxPayloadBytes=1759977 --logging.json=false --data.search.aggs.shardDelay.enabled=true --csp.warnLegacyBrowsers=false --uiSettings.overrides["query:enhancements:enabled"]=true' &
 
       - name: Wait for 60 seconds
         run: sleep 60s
