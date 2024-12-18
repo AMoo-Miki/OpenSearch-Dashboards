@@ -88,8 +88,16 @@ jobs:
       - name: Run OpenSearch
         run: |
           npm i osd-launcher -g
-          osd-launcher -os 3.0.0 --no-security
-          /bin/bash -c OpenSearch-v3.0.0/bin/opensearch &
+          osd-launcher -os 3.0.0 --no-security --no-build --no-plugins --destination ~/
+          /bin/bash -c ~/OpenSearch-v3.0.0/bin/opensearch &
+          /bin/bash -c 'node scripts/opensearch_dashboards --dev --no-base-path --no-watch --opensearch.ignoreVersionMismatch=true --opensearch.ssl.verificationMode=none --savedObjects.maxImportPayloadBytes=10485760 --server.maxPayloadBytes=1759977 --logging.json=false --data.search.aggs.shardDelay.enabled=true --csp.warnLegacyBrowsers=false --uiSettings.overrides["query:enhancements:enabled"]=false'
 
       - name: Run cypress@12 tests
-        run:
+        run: yarn test:cypress12
+
+      - name: Upload Code Coverage
+        id: upload-code-coverage
+        uses: codecov/codecov-action@v5
+        with:
+          directory: ./coverage
+          flags: cypress12
