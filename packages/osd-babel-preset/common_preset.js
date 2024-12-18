@@ -29,6 +29,12 @@
  */
 
 const plugins = [
+  [
+    'istanbul',
+    {
+      exclude: ['**/public/framework/redux/store/**', '**/bootstrap/osd_bundles_loader_source.js'],
+    },
+  ],
   require.resolve('@babel/plugin-transform-class-properties'),
   require.resolve('@babel/plugin-transform-private-methods'),
   require.resolve('babel-plugin-add-module-exports'),
