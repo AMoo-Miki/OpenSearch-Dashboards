@@ -47,6 +47,30 @@ const validate = {
 
 export function registerGetRoute(router: IRouter) {
   router.get(
+    { path: '/api/opensearch-dashboards/settings/features', validate },
+    async (context, request, response) => {
+      try {
+        const uiSettingsClient = context.core.uiSettings.client;
+        const { scope } = request.query;
+        return response.ok({
+          body: {
+            settings: await uiSettingsClient.getFeatureControllers(scope),
+          },
+        });
+      } catch (error) {
+        if (SavedObjectsErrorHelpers.isSavedObjectsClientError(error)) {
+          return response.customError({
+            body: error,
+            statusCode: error.output.statusCode,
+          });
+        }
+
+        throw error;
+      }
+    }
+  );
+
+  router.get(
     { path: '/api/opensearch-dashboards/settings', validate },
     async (context, request, response) => {
       try {

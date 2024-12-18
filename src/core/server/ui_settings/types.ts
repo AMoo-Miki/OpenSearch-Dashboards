@@ -78,6 +78,11 @@ export interface IUiSettingsClient {
    */
   getAll: <T = any>(scope?: UiSettingScope) => Promise<Record<string, T>>;
   /**
+   * Retrieves a set of all uiSettings values that control features.
+   * @experimental
+   */
+  getFeatureControllers: <T = any>(scope?: UiSettingScope) => Promise<Record<string, T>>;
+  /**
    * Retrieves a set of all uiSettings values set by the user.
    */
   getUserProvided: <T = any>(

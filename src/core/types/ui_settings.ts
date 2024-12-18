@@ -93,6 +93,8 @@ export interface UiSettingsParams<T = unknown> {
   preferBrowserSetting?: boolean;
   /** a flag indicating that value cannot be changed */
   readonly?: boolean;
+  /** a flag indicating that the setting controls a feature's state */
+  controlsFeature?: boolean;
   /** defines a type of UI element {@link UiSettingsType} */
   type?: UiSettingsType;
   /** optional deprecation information. Used to generate a deprecation warning. */

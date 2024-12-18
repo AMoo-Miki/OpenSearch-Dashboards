@@ -143,6 +143,16 @@ export class UiSettingsClient implements IUiSettingsClient {
     }, {} as Record<string, T>);
   }
 
+  async getFeatureControllers<T = any>(scope?: UiSettingScope) {
+    const raw = await this.getRaw(scope);
+
+    return Object.keys(raw).reduce((all, key) => {
+      const item = raw[key];
+      if (item.controlsFeature) all[key] = ('userValue' in item ? item.userValue : item.value) as T;
+      return all;
+    }, {} as Record<string, T>);
+  }
+
   async getUserProvided<T = unknown>(scope?: UiSettingScope): Promise<UserProvided<T>> {
     let userProvided: UserProvided<T> = {};
     if (scope) {

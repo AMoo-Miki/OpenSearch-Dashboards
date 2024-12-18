@@ -43,6 +43,7 @@ const createClientMock = () => {
     getDefault: jest.fn(),
     get: jest.fn(),
     getAll: jest.fn(),
+    getFeatureControllers: jest.fn(),
     getUserProvided: jest.fn(),
     setMany: jest.fn(),
     set: jest.fn(),
