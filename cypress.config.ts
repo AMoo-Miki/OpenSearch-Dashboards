@@ -3,10 +3,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-/* eslint-disable no-console */
-
 import { setTimeout } from 'timers/promises';
 import { defineConfig } from 'cypress';
+import codeCoverageTask from '@cypress/code-coverage/task';
 import webpackPreprocessor from '@cypress/webpack-preprocessor';
 import fetch from 'node-fetch';
 
@@ -55,6 +54,8 @@ function setupNodeEvents(
 ): Cypress.PluginConfigOptions {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   require('@cypress/code-coverage/task')(on, config);
+   */
+  codeCoverageTask(on, config);
 
   const { webpackOptions } = webpackPreprocessor.defaultOptions;
 
