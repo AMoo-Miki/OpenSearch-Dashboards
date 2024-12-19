@@ -3,11 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { setTimeout } from 'timers/promises';
 import { defineConfig } from 'cypress';
 import codeCoverageTask from '@cypress/code-coverage/task';
 import webpackPreprocessor from '@cypress/webpack-preprocessor';
-import fetch from 'node-fetch';
+import { read as readDashboardsConfig } from './cypress/scripts/dashboards_config';
 
 module.exports = defineConfig({
   defaultCommandTimeout: 60000,
@@ -51,10 +50,7 @@ module.exports = defineConfig({
 function setupNodeEvents(
   on: Cypress.PluginEvents,
   config: Cypress.PluginConfigOptions
-): Cypress.PluginConfigOptions {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  require('@cypress/code-coverage/task')(on, config);
-   */
+): Promise<Cypress.PluginConfigOptions> {
   codeCoverageTask(on, config);
 
   const { webpackOptions } = webpackPreprocessor.defaultOptions;
@@ -81,28 +77,7 @@ function setupNodeEvents(
     })
   );
 
-  on('before:run', async (details) => {
-    const startTime = Date.now();
-    do {
-      const resp = await fetch('https://miki.osd.aws.barahmand.com/api/status');
-
-      if (resp.status === 200) {
-        console.log('OpenSearch Dashboards is configured without security');
-        Cypress.env('SECURITY_ENABLED', false);
-        Cypress.config('testIsolation', true);
-        break;
-      }
-
-      if (resp.status === 401) {
-        console.log('OpenSearch Dashboards is configured with security');
-        Cypress.env('SECURITY_ENABLED', true);
-        break;
-      }
-
-      console.log('Waiting for OpenSearch Dashboards to be ready...');
-      await setTimeout(15000);
-    } while (Date.now() - startTime < 60000);
-  });
+  await readDashboardsConfig(config);
 
   return config;
 }
