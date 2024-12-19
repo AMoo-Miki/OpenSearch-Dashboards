@@ -37,7 +37,7 @@ module.exports = defineConfig({
     // This value is automatically determined at runtime
     SECURITY_ENABLED: false,
     codeCoverage: {
-      url: 'http://localhost:5601/__coverage__',
+      url: '/__coverage__',
     },
   },
   e2e: {
