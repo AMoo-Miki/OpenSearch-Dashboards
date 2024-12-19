@@ -47,7 +47,7 @@ module.exports = defineConfig({
   },
 });
 
-function setupNodeEvents(
+async function setupNodeEvents(
   on: Cypress.PluginEvents,
   config: Cypress.PluginConfigOptions
 ): Promise<Cypress.PluginConfigOptions> {
