@@ -6,13 +6,13 @@
 /**
  * Helper function to describe conditional test suites, based on features enabled in OSD
  *
- * @param {string} featureName - The name of feature to be checked.
+ * @param {string[] | string} featureNames - The name of feature to be checked.
  * Based on the status of the feature, the suite will be described.
  *
  * @returns {Mocha.SuiteFunction & { describe: Mocha.SuiteFunction, not: Mocha.SuiteFunction & { describe: Mocha.SuiteFunction }}}
  */
 
-const ifEnabled = (featureName) => {
+const ifEnabled = (featureNames) => {
   /**
    * Describes a "suite" that should be executed if the feature is enabled.
    * @type {Mocha.SuiteFunction & { not: Mocha.SuiteFunction & {describe: Mocha.SuiteFunction}}}
@@ -20,12 +20,17 @@ const ifEnabled = (featureName) => {
   const describer = (name, fn, options = {}) => {
     const { skip = false, only = false, condition = true, not = false } = options;
 
-    if (
-      skip ||
-      !condition ||
-      (!not && !Cypress.env(`${featureName}_ENABLED`)) ||
-      (not && Cypress.env(`${featureName}_ENABLED`))
-    ) {
+    let shouldSkip = skip || !condition;
+    if (!shouldSkip) {
+      const allFeaturesAreEnabled = (Array.isArray(featureNames)
+        ? featureNames
+        : [featureNames]
+      ).every((name) => Cypress.env(`${name}_ENABLED`));
+
+      shouldSkip = not ? allFeaturesAreEnabled : !allFeaturesAreEnabled;
+    }
+
+    if (shouldSkip) {
       describe.skip(name, fn);
     } else if (only) {
       // eslint-disable-next-line mocha/no-exclusive-tests

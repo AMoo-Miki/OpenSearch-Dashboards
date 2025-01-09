@@ -20,8 +20,9 @@ const CONNECTION_RETRY_INTERVAL = 15000;
 const checkSecurity = async (config: Cypress.PluginConfigOptions) => {
   const startTime = Date.now();
   do {
+    const apiStatusUrl = new URL('/api/status', config.baseUrl);
     // Not catching to allow Cypress to fail
-    const resp = await fetch(config.baseUrl, { timeout: CONNECTION_TIMEOUT });
+    const resp = await fetch(apiStatusUrl, { timeout: CONNECTION_TIMEOUT });
 
     if (resp.status === 200) {
       console.log('OpenSearch Dashboards is configured without security.');
@@ -80,6 +81,8 @@ const checkPlugins = async (config: Cypress.PluginConfigOptions) => {
           .replace(/([A-Z])/g, '_$1')
           .toUpperCase();
         config.env[`${envName}_ENABLED`] = true;
+
+        console.log(`${envName} is enabled.`);
       });
 
       return;
