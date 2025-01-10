@@ -40,7 +40,8 @@ const verifyTableFieldFilterActions = (datasetType, language, shouldExist) => {
   selectDataset(datasetType, language);
   setDateRange(datasetType, language);
 
-  cy.getElementByTestId('docTable').get('tbody tr').should('have.length.above', 3); // To ensure it waits until a full table is loaded into the DOM, instead of a bug where table only has 1 hit.
+  // To ensure it waits until a full table is loaded into the DOM, instead of a bug where table only has 1 hit.
+  cy.getElementByTestId('docTable').get('tbody tr').should('have.length.above', 3);
 
   const shouldText = shouldExist ? 'exist' : 'not.exist';
   dataExplorer.getDocTableField(0, 0).within(() => {
@@ -54,7 +55,8 @@ const verifyTableFieldFilterActions = (datasetType, language, shouldExist) => {
   }
 };
 const verifyExpandedTableFilterActions = (datasetType, language, isFilterButtonsEnabled) => {
-  // Check if the first expanded Doc Table Field's first row's Filter For, Filter Out and Exists Filter buttons are disabled.
+  // Check if the first expanded Doc Table Field's first row's Filter For, Filter Out and Exists Filter buttons are
+  // disabled.
   const verifyFirstExpandedFieldFilterForFilterOutFilterExistsButtons = () => {
     const shouldText = isFilterButtonsEnabled ? 'be.enabled' : 'be.disabled';
     dataExplorer.getExpandedDocTableRow(0, 0).within(() => {
@@ -65,12 +67,15 @@ const verifyExpandedTableFilterActions = (datasetType, language, isFilterButtons
   };
 
   /**
-   * Check the Filter For or Out buttons in the expandedDocumentRowNumberth field in the expanded Document filters the correct value.
+   * Check the Filter For or Out buttons in the expandedDocumentRowNumberth field in the expanded Document filters the
+   * correct value.
    * @param {string} filterButton For or Out
    * @param {number} docTableRowNumber Integer starts from 0 for the first row
    * @param {number} expandedDocumentRowNumber Integer starts from 0 for the first row
-   * @param {string} expectedQueryHitsWithoutFilter expected number of hits in string after the filter is removed Note you should add commas when necessary e.g. 9,999
-   * @param {string} expectedQueryHitsAfterFilterApplied expected number of hits in string after the filter is applied. Note you should add commas when necessary e.g. 9,999
+   * @param {string} expectedQueryHitsWithoutFilter expected number of hits in string after the filter is removed Note
+   *   you should add commas when necessary e.g. 9,999
+   * @param {string} expectedQueryHitsAfterFilterApplied expected number of hits in string after the filter is applied.
+   *   Note you should add commas when necessary e.g. 9,999
    * @example verifyDocTableFirstExpandedFieldFirstRowFilterForButtonFiltersCorrectField('for', 0, 0, '10,000', '1');
    */
   const verifyDocTableFirstExpandedFieldFirstRowFilterForOutButtonFiltersCorrectField = (
@@ -116,8 +121,10 @@ const verifyExpandedTableFilterActions = (datasetType, language, isFilterButtons
    * Check the first expanded Doc Table Field's first row's Exists Filter button filters the correct Field.
    * @param {number} docTableRowNumber Integer starts from 0 for the first row
    * @param {number} expandedDocumentRowNumber Integer starts from 0 for the first row
-   * @param {string} expectedQueryHitsWithoutFilter expected number of hits in string after the filter is removed Note you should add commas when necessary e.g. 9,999
-   * @param {string} expectedQueryHitsAfterFilterApplied expected number of hits in string after the filter is applied. Note you should add commas when necessary e.g. 9,999
+   * @param {string} expectedQueryHitsWithoutFilter expected number of hits in string after the filter is removed Note
+   *   you should add commas when necessary e.g. 9,999
+   * @param {string} expectedQueryHitsAfterFilterApplied expected number of hits in string after the filter is applied.
+   *   Note you should add commas when necessary e.g. 9,999
    */
   const verifyDocTableFirstExpandedFieldFirstRowExistsFilterButtonFiltersCorrectField = (
     docTableRowNumber,
@@ -153,7 +160,9 @@ const verifyExpandedTableFilterActions = (datasetType, language, isFilterButtons
   selectDataset(datasetType, language);
   setDateRange(datasetType, language);
 
-  cy.getElementByTestId('docTable').get('tbody tr').should('have.length.above', 3); // To ensure it waits until a full table is loaded into the DOM, instead of a bug where table only has 1 hit.
+  // To ensure it waits until a full table is loaded into the DOM, instead of a bug where table only has 1 hit.
+  cy.getElementByTestId('docTable').get('tbody tr').should('have.length.above', 3);
+
   dataExplorer.toggleDocTableRow(0);
   verifyFirstExpandedFieldFilterForFilterOutFilterExistsButtons();
   dataExplorer.verifyDocTableFirstExpandedFieldFirstRowToggleColumnButtonHasIntendedBehavior();
@@ -181,66 +190,68 @@ const verifyExpandedTableFilterActions = (datasetType, language, isFilterButtons
     );
   }
 };
-describe('filter for value spec', () => {
-  before(() => {
-    // Load test data
-    cy.setupTestData(
-      SECONDARY_ENGINE.url,
-      ['cypress/fixtures/query_enhancements/data-logs-1/data_logs_small_time_1.mapping.json'],
-      ['cypress/fixtures/query_enhancements/data-logs-1/data_logs_small_time_1.data.ndjson']
-    );
+ifEnabled('SECURITY').not('filter for value spec', () => {
+  ifEnabled('WORKSPACE').describe('filter for value spec', () => {
+    before(() => {
+      // Load test data
+      cy.setupTestData(
+        SECONDARY_ENGINE.url,
+        ['cypress/fixtures/query_enhancements/data-logs-1/data_logs_small_time_1.mapping.json'],
+        ['cypress/fixtures/query_enhancements/data-logs-1/data_logs_small_time_1.data.ndjson']
+      );
 
-    // Add data source
-    cy.addDataSource({
-      name: `${DATASOURCE_NAME}`,
-      url: `${SECONDARY_ENGINE.url}`,
-      authType: 'no_auth',
+      // Add data source
+      cy.addDataSource({
+        name: `${DATASOURCE_NAME}`,
+        url: `${SECONDARY_ENGINE.url}`,
+        authType: 'no_auth',
+      });
+      // Create workspace
+      cy.deleteWorkspaceByName(`${workspace}`);
+      cy.visit('/app/home');
+      cy.createInitialWorkspaceWithDataSource(`${DATASOURCE_NAME}`, `${workspace}`);
+      cy.wait(2000);
+      cy.createWorkspaceIndexPatterns({
+        url: `${BASE_PATH}`,
+        workspaceName: `${workspace}`,
+        indexPattern: INDEX_NAME,
+        timefieldName: 'timestamp',
+        indexPatternHasTimefield: true,
+        dataSource: DATASOURCE_NAME,
+        isEnhancement: true,
+      });
     });
-    // Create workspace
-    cy.deleteWorkspaceByName(`${workspace}`);
-    cy.visit('/app/home');
-    cy.createInitialWorkspaceWithDataSource(`${DATASOURCE_NAME}`, `${workspace}`);
-    cy.wait(2000);
-    cy.createWorkspaceIndexPatterns({
-      url: `${BASE_PATH}`,
-      workspaceName: `${workspace}`,
-      indexPattern: INDEX_NAME,
-      timefieldName: 'timestamp',
-      indexPatternHasTimefield: true,
-      dataSource: DATASOURCE_NAME,
-      isEnhancement: true,
+
+    beforeEach(() => {
+      cy.navigateToWorkSpaceSpecificPage({
+        url: BASE_PATH,
+        workspaceName: `${workspace}`,
+        page: 'discover',
+        isEnhancement: true,
+      });
+      cy.getElementByTestId(NEW_SEARCH_BUTTON).click();
     });
-  });
 
-  beforeEach(() => {
-    cy.navigateToWorkSpaceSpecificPage({
-      url: BASE_PATH,
-      workspaceName: `${workspace}`,
-      page: 'discover',
-      isEnhancement: true,
+    after(() => {
+      cy.deleteWorkspaceByName(`${WORKSPACE_NAME}`);
+      cy.deleteDataSourceByName(`${DATASOURCE_NAME}`);
+      // TODO: Modify deleteIndex to handle an array of index and remove hard code
+      cy.deleteIndex(INDEX_PATTERN_NAME);
     });
-    cy.getElementByTestId(NEW_SEARCH_BUTTON).click();
-  });
 
-  after(() => {
-    cy.deleteWorkspaceByName(`${WORKSPACE_NAME}`);
-    cy.deleteDataSourceByName(`${DATASOURCE_NAME}`);
-    // TODO: Modify deleteIndex to handle an array of index and remove hard code
-    cy.deleteIndex(INDEX_PATTERN_NAME);
-  });
+    const testCases = [
+      { name: 'table field', verifyFn: verifyTableFieldFilterActions },
+      { name: 'expanded table', verifyFn: verifyExpandedTableFilterActions },
+    ];
 
-  const testCases = [
-    { name: 'table field', verifyFn: verifyTableFieldFilterActions },
-    { name: 'expanded table', verifyFn: verifyExpandedTableFilterActions },
-  ];
-
-  testCases.forEach(({ name, verifyFn }) => {
-    describe(`filter actions in ${name}`, () => {
-      Object.entries(DATASET_CONFIGS).forEach(([type, config]) => {
-        describe(`${type} dataset`, () => {
-          config.languages.forEach(({ name: language, isFilterButtonsEnabled }) => {
-            it(`${language}`, () => {
-              verifyFn(type, language, isFilterButtonsEnabled);
+    testCases.forEach(({ name, verifyFn }) => {
+      describe(`filter actions in ${name}`, () => {
+        Object.entries(DATASET_CONFIGS).forEach(([type, config]) => {
+          describe(`${type} dataset`, () => {
+            config.languages.forEach(({ name: language, isFilterButtonsEnabled }) => {
+              it(`${language}`, () => {
+                verifyFn(type, language, isFilterButtonsEnabled);
+              });
             });
           });
         });
