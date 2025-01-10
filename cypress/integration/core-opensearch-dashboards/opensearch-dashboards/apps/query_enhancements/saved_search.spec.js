@@ -22,7 +22,7 @@ import {
 } from './utils/saved_search';
 
 export const runSavedSearchTests = () => {
-  describe('saved search', () => {
+  ifEnabled(['WORKSPACE', '!SECURITY']).describe('saved search', () => {
     beforeEach(() => {
       // Load test data
       cy.setupTestData(
